@@ -1,0 +1,14 @@
+﻿Compilazione avviata 26/09/2014 17:24:22.
+     1>Progetto "C:\Users\ridge\Desktop\tesina_SDEM-master\tesina_SDEM.vcxproj" sul nodo 2 (destinazioni: Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\ridge\desktop\tesina_sdem-master\main.cpp(59): warning C4244: '+=': conversione da 'double' a 'int'. Possibile perdita di dati.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ridge\Desktop\tesina_SDEM-master\Debug\tesina_SDEM.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ridge\Desktop\tesina_SDEM-master\Debug\tesina_SDEM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ridge\Desktop\tesina_SDEM-master\Debug\tesina_SDEM.lib" /MACHINE:X86 Debug\main.obj
+         tesina_SDEM.vcxproj -> C:\Users\ridge\Desktop\tesina_SDEM-master\Debug\tesina_SDEM.exe
+     1>Compilazione progetto "C:\Users\ridge\Desktop\tesina_SDEM-master\tesina_SDEM.vcxproj" (destinazioni: Build) completata.
+
+Compilazione completata.
+
+Tempo trascorso 00:00:01.93
