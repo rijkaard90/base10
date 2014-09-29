@@ -19,20 +19,23 @@ struct coppia {
 	bool operator> (const coppia& c) const { return _prob > c._prob; }
 };
 
+void encode(int start, int size, unsigned& low, unsigned& range){
+	int total = 10;
+	// adjust the range based on the symbol interval
+	range /= total;
+	low += start * range;
+	range *= size;
+}
+
 void encode_symbol(byte b,vector<coppia>& x,unsigned& low,unsigned& range){
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
 			encode(it->_start, it->_prob,low,range);
-			break;
+			return;
 		}
 	cout << "symbol not found!";
 }
-//da finire
-void encode(int start, int size, unsigned& low, unsigned& range){
-	int total = 10;
 
-
-}
 int main(){
 	array<unsigned int, 256> myarray;
 	vector<coppia> coppie;
@@ -45,23 +48,21 @@ int main(){
 		*it = 0;
 	}
 	//calcolo le ricorrenze di ogni simbolo
-	char tmp;
-	unsigned int tot= 0;//numero totali simboli letti dallo stream
-	while (is.get(tmp)){
+	unsigned int tot = 0;//numero totali simboli letti dallo stream
+	byte tmp;
+	while (is.get(reinterpret_cast<char&>(tmp))){
 		tot++;
-		unsigned char a = (unsigned char)tmp;
-		myarray[a]++;
+		myarray[tmp]++;
 	}
- 
+
 	for (int i = 0; i<256; ++i)
-		if (myarray[i] != 0){
-			//cout << i << '\t' << myarray[i] << '\n';
+		if (myarray[i] != 0)
 			coppie.push_back(coppia(i, myarray[i] / (double)tot * 10));
-		}
+			//cout << i << '\t' << myarray[i] << '\n';
 
 	sort(coppie.begin(), coppie.end(), greater<coppia>());
 	//dopo aver ordinato il vector posso assegnare l'inizio del range per ogni simbolo
-	int prob_range = 0;
+	double prob_range = 0;
 	for (auto it = coppie.begin(); it != coppie.end(); ++it){
 		it->_start = prob_range;
 		prob_range += it->_prob;
@@ -77,5 +78,6 @@ int main(){
 	byte b;
 	while (is.get(reinterpret_cast<char&>(b)))
 		encode_symbol(b,coppie,low,range);
+	cout << "low: " << low << "\t top: " << range+low << "\n";
 
 }
