@@ -5,7 +5,7 @@
 #include<array>
 #include<vector>
 #include<algorithm>
-#include <functional>
+#include<functional>
 
 using namespace std;
 typedef unsigned char byte;
