@@ -5,7 +5,7 @@
 #include<array>
 #include<vector>
 #include<algorithm>
-#include <functional>
+#include<functional>
 
 //scopo grana in bocca oh yeah la cum
 
