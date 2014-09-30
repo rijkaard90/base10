@@ -6,6 +6,7 @@
 #include<vector>
 #include<algorithm>
 #include<functional>
+#include<math.h>
 
 //scopo grana in bocca oh yeah la cum
 
@@ -27,12 +28,19 @@ void encode(int start, int size, unsigned& low, unsigned& range){
 	range /= total;
 	low += start * range;
 	range *= size;
+	//modifica per range bassi disponibili
+	if (range - low < 100){
+		range *= 10;
+		low *= 10;
+	}
 }
 
 void encode_symbol(byte b,vector<coppia>& x,unsigned& low,unsigned& range){
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
 			encode(it->_start, it->_prob,low,range);
+			//verifica di ogni passaggio
+			cout << "low: " << low << "\t top: " << range + low << "\n";
 			return;
 		}
 	cout << "symbol not found!";
@@ -73,13 +81,13 @@ int main(){
 	}
 
 	/* prova encoding aabaz di wikipedia*/
-	unsigned range = 100000;
+	unsigned range = pow(10.0, 10.0); 
 	unsigned low = 0;
 	is.clear(); // Disattivo l'EOF precedente
 	is.seekg(ios_base::beg); // Torno all'inizio
 	byte b;
 	while (is.get(reinterpret_cast<char&>(b)))
 		encode_symbol(b,coppie,low,range);
-	cout << "low: " << low << "\t top: " << range+low << "\n";
+	cout << "finale " << "low: " << low << "\t top: " << range+low << "\n";
 
 }
