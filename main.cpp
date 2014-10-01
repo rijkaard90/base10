@@ -52,6 +52,12 @@ void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
 	cout << "symbol not found!";
 }
 
+/*iteratore da copiare
+for (auto it = myarray.begin(); it != myarray.end(); ++it){
+*it = 0;
+}
+*/
+
 void syntax() {
 	cout << "Syntax:" << endl;
 	cout << "Range encoding <input filename> <output filename>" << endl;
@@ -77,16 +83,9 @@ int main(int argc, char *argv[]){
 	if (!os) return -1;
 
 	//mi assicuro che l'array sia inizializzato a zero
-	myarray.fill(0); // più veloce
-	/*for (auto it = myarray.begin(); it != myarray.end(); ++it){
-		*it = 0;
-<<<<<<< HEAD
-	}
-	/* SPUNTONI DA TOGLIERE
-=======
-	}*/
+	myarray.fill(0);
 
->>>>>>> origin/master
+	/* SPUNTONI DA TOGLIERE
 	//calcolo le ricorrenze di ogni simbolo
 	unsigned int tot = 0;//numero totali simboli letti dallo stream
 	byte tmp;
