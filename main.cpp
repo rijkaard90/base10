@@ -22,25 +22,25 @@ struct coppia {
 	bool operator> (const coppia& c) const { return _prob > c._prob; }
 };
 
-void encode(int start, int size, unsigned& low, unsigned& range){
-	int total = 10;
+void encode(double start, double size, double& low, double& range){
+	double total = 10.0;
 	// adjust the range based on the symbol interval
 	range /= total;
 	low += start * range;
 	range *= size;
-	//modifica per range bassi disponibili
-	if (range - low < 100){
-		range *= 10;
-		low *= 10;
-	}
 }
 
-void encode_symbol(byte b,vector<coppia>& x,unsigned& low,unsigned& range){
+void encode_symbol(byte b,vector<coppia>& x,double& low,double& range){
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
 			encode(it->_start, it->_prob,low,range);
 			//verifica di ogni passaggio
 			cout << "low: " << low << "\t top: " << range + low << "\n";
+			//modifica per range bassi disponibili
+			if (range < 100){
+				range *= 10;
+				low *= 10;
+			}
 			return;
 		}
 	cout << "symbol not found!";
@@ -81,8 +81,8 @@ int main(){
 	}
 
 	/* prova encoding aabaz di wikipedia*/
-	unsigned range = pow(10.0, 10.0); 
-	unsigned low = 0;
+	double range = pow(10.0, 2.0); 
+	double low = 0;
 	is.clear(); // Disattivo l'EOF precedente
 	is.seekg(ios_base::beg); // Torno all'inizio
 	byte b;
