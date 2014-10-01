@@ -46,12 +46,30 @@ void encode_symbol(byte b,vector<coppia>& x,double& low,double& range){
 	cout << "symbol not found!";
 }
 
-int main(){
+void syntax() {
+	cout << "Syntax:\n";
+	cout << "Range encoding <input filename> <output filename>\n";
+	cout << "\n";
+}
+
+int main(int argc, char *argv[]){
+
 	array<unsigned int, 256> myarray;
 	vector<coppia> coppie;
 
-	ifstream is("prova.txt", ifstream::binary);
+	if (argc != 3) {
+		syntax();
+		return EXIT_FAILURE;
+	}
+
+	string InputFileName = argv[1];
+	string OutputFileName = argv[2];
+
+	ifstream is(InputFileName, ifstream::binary);
 	if (!is) return -1;
+
+	ofstream os(OutputFileName, ofstream::binary);
+	if (!os) return -1;
 
 	//mi assicuro che l'array sia inizializzato a zero
 	for (auto it = myarray.begin(); it != myarray.end(); ++it){
@@ -80,14 +98,17 @@ int main(){
 		cout << "symbol: " << it->_b << "\t start_range: " << it->_start << "\t probability: " << it->_prob << "\n";
 	}
 
-	/* prova encoding aabaz di wikipedia*/
+	/* prova encoding */
 	double range = pow(10.0, 2.0); 
 	double low = 0;
 	is.clear(); // Disattivo l'EOF precedente
 	is.seekg(ios_base::beg); // Torno all'inizio
 	byte b;
+
 	while (is.get(reinterpret_cast<char&>(b)))
 		encode_symbol(b,coppie,low,range);
-	cout << "finale " << "low: " << low << "\t top: " << range+low << "\n";
-
+	double top = range + low;
+	cout << "finale " << "low: " << low << "\t top: " << top << "\n";
+	
+	os << low;
 }
