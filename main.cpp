@@ -7,39 +7,45 @@
 #include<algorithm>
 #include<functional>
 #include<math.h>
+#include<string>
 
 //scopo grana in bocca oh yeah la cum
+//MOSCA MANGIA CAZZI
 
 using namespace std;
 typedef unsigned char byte;
 
 struct coppia {
 	byte _b;
-	double _prob;
-	double _start;
+	double _fa; //prob
+	double _Fa; //start
 
-	coppia(byte b, double prob, double start=0) : _b(b), _prob(prob),_start(start) {}
-	bool operator> (const coppia& c) const { return _prob > c._prob; }
+	coppia(byte b, double prob, double start=0) : _b(b), _fa(prob),_Fa(start) {}
+	bool operator> (const coppia& c) const { return _fa > c._fa; }
 };
 
 void encode(double start, double size, double& low, double& range){
-	double total = 10.0;
 	// adjust the range based on the symbol interval
-	range /= total;
-	low += start * range;
-	range *= size;
+	//double total = 100;
+	//range /= total;
+	//ATTENZIONE all'arrotondamento che puo essere sbagliato, DA RIVEDERE
+	low = (unsigned long)(low + start * range);
+	range = range* size;
+	range = (unsigned long)(range + 0.99);
+	//low = (unsigned long)(low + start * range);
+	//range = (unsigned long)(range* size);
 }
 
-void encode_symbol(byte b,vector<coppia>& x,double& low,double& range){
+void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
-			encode(it->_start, it->_prob,low,range);
+			encode(it->_Fa, it->_fa,low,range);
 			//verifica di ogni passaggio
-			cout << "low: " << low << "\t top: " << range + low << "\n";
+			cout << "low: " << low << "\t top: " << range + low << endl;
 			//modifica per range bassi disponibili
-			if (range < 100){
-				range *= 10;
-				low *= 10;
+			if (range < 100.0){
+				range *= 10.0;
+				low *= 10.0;
 			}
 			return;
 		}
@@ -47,9 +53,8 @@ void encode_symbol(byte b,vector<coppia>& x,double& low,double& range){
 }
 
 void syntax() {
-	cout << "Syntax:\n";
-	cout << "Range encoding <input filename> <output filename>\n";
-	cout << "\n";
+	cout << "Syntax:" << endl;
+	cout << "Range encoding <input filename> <output filename>" << endl;
 }
 
 int main(int argc, char *argv[]){
@@ -75,6 +80,7 @@ int main(int argc, char *argv[]){
 	for (auto it = myarray.begin(); it != myarray.end(); ++it){
 		*it = 0;
 	}
+	/* SPUNTONI DA TOGLIERE
 	//calcolo le ricorrenze di ogni simbolo
 	unsigned int tot = 0;//numero totali simboli letti dallo stream
 	byte tmp;
@@ -92,23 +98,67 @@ int main(int argc, char *argv[]){
 	//dopo aver ordinato il vector posso assegnare l'inizio del range per ogni simbolo
 	double prob_range = 0;
 	for (auto it = coppie.begin(); it != coppie.end(); ++it){
-		it->_start = prob_range;
-		prob_range += it->_prob;
+		it->_fa = prob_range;
+		prob_range += it->_Fa;
 		//cout << "symbol: " << it->_b << "\t probability: " << it->_cnt << "\n";
-		cout << "symbol: " << it->_b << "\t start_range: " << it->_start << "\t probability: " << it->_prob << "\n";
+		cout << "symbol: " << it->_b << "\t start_range: " << it->_fa << "\t probability: " << it->_Fa << "\n";
 	}
+	SPUNTONI DA TOGLIERE*/ 
 
 	/* prova encoding */
-	double range = pow(10.0, 2.0); 
+	double range = pow(10.0, 3.0);
 	double low = 0;
 	is.clear(); // Disattivo l'EOF precedente
 	is.seekg(ios_base::beg); // Torno all'inizio
 	byte b;
+	
+	//prova esempio pdf
+	coppie.push_back(coppia('K', 0.10, 0.0));
+	coppie.push_back(coppia('L', 0.21, 0.10));
+	coppie.push_back(coppia('M', 0.27, 0.31));
+	coppie.push_back(coppia('N', 0.42, 0.58));
+	for (auto it = coppie.begin(); it != coppie.end(); ++it){
+		cout << it->_b << " " << it->_Fa << " " << it->_fa << endl;
+	}
 
+	//codifica vera e propria
 	while (is.get(reinterpret_cast<char&>(b)))
 		encode_symbol(b,coppie,low,range);
 	double top = range + low;
-	cout << "finale " << "low: " << low << "\t top: " << top << "\n";
 	
-	os << low;
+	cout << "finale " << "low: " << low << "\t top: " << top << endl;
+
+	//trasformazione in stringhe
+	string first = to_string(low);
+	string last = to_string(top);
+	string codifica;
+
+	//comparazione top e low per trovare le cifre sufficienti per la codifica
+	unsigned length = 1;
+	while (true){
+		if ((first.compare(0, length, last, 0, length)) != 0){
+			break;
+		}
+		codifica.push_back(first.at(length-1));
+		cout << codifica << endl;
+		length++;
+	}
+	
+	//FARE CASO CIFRE UGUALI E NON NE PRENDE DUE MA SOLO UNA!!//
+
+	//ricerca delle due cifre finali
+	double raggio;
+	raggio= top - low;
+	raggio /= 2;
+	raggio += low;
+
+	//aggiunta delle due cifre finali
+	string asd = to_string(raggio); 
+	asd.erase(0, length-1);
+	codifica.append(asd,0,2);
+
+	//stampa
+	cout << first << endl << last << endl;
+	cout << codifica << endl;
+	os << codifica;
 }
