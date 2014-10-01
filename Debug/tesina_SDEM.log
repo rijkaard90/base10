@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Compilazione avviata 01/10/2014 17.45.04.
      1>Progetto "C:\Users\MadMateeo\Desktop\base10\tesina_SDEM.vcxproj" sul nodo 2 (destinazioni: Build).
      1>ClCompile:
@@ -11,3 +12,14 @@
 Compilazione completata.
 
 Tempo trascorso 00:00:02.58
+=======
+﻿Compilazione avviata 01/10/2014 17:17:00.
+     1>Progetto "C:\Users\Mosca\Desktop\base10\tesina_SDEM.vcxproj" sul nodo 2 (destinazioni: Build).
+     1>Link:
+         tesina_SDEM.vcxproj -> C:\Users\Mosca\Desktop\base10\Debug\tesina_SDEM.exe
+     1>Compilazione progetto "C:\Users\Mosca\Desktop\base10\tesina_SDEM.vcxproj" (destinazioni: Build) completata.
+
+Compilazione completata.
+
+Tempo trascorso 00:00:00.08
+>>>>>>> origin/master
