@@ -72,9 +72,11 @@ int main(int argc, char *argv[]){
 	if (!os) return -1;
 
 	//mi assicuro che l'array sia inizializzato a zero
-	for (auto it = myarray.begin(); it != myarray.end(); ++it){
+	myarray.fill(0); // più veloce
+	/*for (auto it = myarray.begin(); it != myarray.end(); ++it){
 		*it = 0;
-	}
+	}*/
+
 	//calcolo le ricorrenze di ogni simbolo
 	unsigned int tot = 0;//numero totali simboli letti dallo stream
 	byte tmp;
