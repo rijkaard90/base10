@@ -9,7 +9,6 @@
 #include<math.h>
 #include<string>
 
-//scopo grana in bocca oh yeah la cum
 //MOSCA MANGIA CAZZI
 
 using namespace std;
