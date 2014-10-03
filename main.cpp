@@ -9,7 +9,6 @@
 #include<math.h>
 #include<string>
 
-//MOSCA MANGIA CAZZI
 
 using namespace std;
 typedef unsigned char byte;
@@ -51,15 +50,33 @@ void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
 	cout << "symbol not found!";
 }
 
-/*iteratore da copiare
-for (auto it = myarray.begin(); it != myarray.end(); ++it){
-*it = 0;
-}
-*/
-
 void syntax() {
 	cout << "Syntax:" << endl;
 	cout << "Range encoding <input filename> <output filename>" << endl;
+}
+
+string trasforma_string(double top, double low, string first, string last){
+	//comparazione top e low per trovare le cifre sufficienti per la codifica
+	string codifica;
+	unsigned length = 1;
+
+	while (true){
+		if ((first.compare(0, length, last, 0, length)) != 0){
+			break;
+		}
+		codifica.push_back(first.at(length - 1));
+		cout << codifica << endl;
+		length++;
+	}
+
+	double raggio=top - low;
+	raggio /= 2;
+	raggio += low;
+	//aggiunta delle due cifre finali
+	string asd = to_string(raggio);
+	asd.erase(0, length - 1);
+	codifica.append(asd, 0, 2);
+	return codifica;
 }
 
 int main(int argc, char *argv[]){
@@ -135,31 +152,8 @@ int main(int argc, char *argv[]){
 	//trasformazione in stringhe
 	string first = to_string(low);
 	string last = to_string(top);
-	string codifica;
-
-	//comparazione top e low per trovare le cifre sufficienti per la codifica
-	unsigned length = 1;
-	while (true){
-		if ((first.compare(0, length, last, 0, length)) != 0){
-			break;
-		}
-		codifica.push_back(first.at(length-1));
-		cout << codifica << endl;
-		length++;
-	}
-	
+	string codifica=trasforma_string(top,low,first,last);
 	//FARE CASO CIFRE UGUALI E NON NE PRENDE DUE MA SOLO UNA!!//
-
-	//ricerca delle due cifre finali
-	double raggio;
-	raggio= top - low;
-	raggio /= 2;
-	raggio += low;
-
-	//aggiunta delle due cifre finali
-	string asd = to_string(raggio); 
-	asd.erase(0, length-1);
-	codifica.append(asd,0,2);
 
 	//stampa
 	cout << first << endl << last << endl;
