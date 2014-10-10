@@ -103,10 +103,10 @@ int main(int argc, char *argv[]){
 
 	/* SPUNTONI DA TOGLIERE
 	//calcolo le ricorrenze di ogni simbolo
-	unsigned int tot = 0;//numero totali simboli letti dallo stream
+	unsigned int tot_symbol = 0;//numero totali simboli letti dallo stream
 	byte tmp;
 	while (is.get(reinterpret_cast<char&>(tmp))){
-		tot++;
+		tot_symbol++;
 		myarray[tmp]++;
 	}
 
@@ -143,8 +143,23 @@ int main(int argc, char *argv[]){
 	}
 
 	//codifica vera e propria
-	while (is.get(reinterpret_cast<char&>(b)))
-		encode_symbol(b,coppie,low,range);
+	unsigned tot_symbol = 0;
+	while (is.get(reinterpret_cast<char&>(b))){
+		tot_symbol++;
+		encode_symbol(b, coppie, low, range);
+	}
+
+	//header= n simboli codificati, tabella symbol-fa-Fa
+	//os << tot_symbol; 
+	os.write(reinterpret_cast<char*>(&tot_symbol), 1);
+	/* da mettere a posto la scrittura dei double nell'header
+	for (unsigned i = 0; i < coppie.size(); ++i){
+		os << coppie[i]._b;
+		os.write(reinterpret_cast<char*>(&coppie[i]._fa), sizeof(coppie[i]._fa));
+		os.write(reinterpret_cast<char*>(&coppie[i]._Fa), sizeof(coppie[i]._Fa));
+	}*/		
+	//os << 0xffff; //termino cosi l'header
+
 	double top = range + low;
 	
 	cout << "finale " << "low: " << low << "\t top: " << top << endl;
@@ -153,10 +168,35 @@ int main(int argc, char *argv[]){
 	string first = to_string(low);
 	string last = to_string(top);
 	string codifica=trasforma_string(top,low,first,last);
-	//FARE CASO CIFRE UGUALI E NON NE PRENDE DUE MA SOLO UNA!!//
 
 	//stampa
 	cout << first << endl << last << endl;
 	cout << codifica << endl;
 	os << codifica;
+	//bisogna scrivere in binario la codifica, cosi è in char e non va bene
+
+	// chiude is e os per poterli eventualemente usare nella decodifica
+	is.close();
+	os.close();
+
+	/*		Decodifica		 */
+	{	//graffe per non avere problemi con i nomi is e os di prima
+		ifstream is(OutputFileName, ifstream::binary);
+		if (!is) return -1;
+		ofstream os("decodifica.txt", ofstream::binary);
+		if (!os) return -1;
+
+		//leggo quanti caratteri devo decodificare nel primo byte del file
+		unsigned n_caratteri = is.get() + 1;
+		//+1 perchè cosi nel while posso fermarmi a 0 e posso usare un unsigned invece di una variabile signed
+		cout << n_caratteri<<'\n';
+		while (n_caratteri > 0)
+			n_caratteri--;
+		//dopo aver scritto in binario la codifica devo gestire la lettura delle cifre, inizio con n_cifre_range_iniziale - 1
+		
+
+
+	}
+
+
 }
