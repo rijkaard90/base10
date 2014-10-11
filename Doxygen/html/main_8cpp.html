@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding Algorithm: C:/Users/Mosca/Desktop/base10 - Copia/main.cpp File Reference</title>
+<title>Range Encoding Algorithm: C:/Users/Mosca/Desktop/base10/main.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -120,7 +120,6 @@ $(document).ready(function(){initNavTree('main_8cpp.html','');});
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
 </div>
 <p><a href="main_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -136,10 +135,10 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0c1c44cc8e62748d90ded6b92d76cc64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a> (double start, double size, double &amp;low, double &amp;range, double &amp;top)</td></tr>
-<tr class="separator:a0c1c44cc8e62748d90ded6b92d76cc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4993aebdcd464c00ca8197c253aa5434"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a4993aebdcd464c00ca8197c253aa5434">encode_symbol</a> (<a class="el" href="main_8cpp.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt; <a class="el" href="structcoppia.html">coppia</a> &gt; &amp;x, double &amp;low, double &amp;range, double &amp;top)</td></tr>
-<tr class="separator:a4993aebdcd464c00ca8197c253aa5434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a715ddb03bf1ce501273bbf7fac87dc50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a715ddb03bf1ce501273bbf7fac87dc50">encode</a> (double start, double size, double &amp;low, double &amp;range)</td></tr>
+<tr class="separator:a715ddb03bf1ce501273bbf7fac87dc50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff851b55cac0c95f21a508cacedf57ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aff851b55cac0c95f21a508cacedf57ab">encode_symbol</a> (<a class="el" href="main_8cpp.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt; <a class="el" href="structcoppia.html">coppia</a> &gt; &amp;x, double &amp;low, double &amp;range)</td></tr>
+<tr class="separator:aff851b55cac0c95f21a508cacedf57ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefeded708611e6e402e2258c60cb5261"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261">syntax</a> ()</td></tr>
 <tr class="separator:aefeded708611e6e402e2258c60cb5261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9400d5cabe81d44a76712482ed76f658"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9400d5cabe81d44a76712482ed76f658">trasforma_string</a> (double top, double low, string first, string last)</td></tr>
@@ -163,7 +162,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a0c1c44cc8e62748d90ded6b92d76cc64"></a>
+<a class="anchor" id="a715ddb03bf1ce501273bbf7fac87dc50"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -189,13 +188,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>top</em>&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -204,12 +197,24 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Descrizione di encode</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">size</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">&amp;low</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">&amp;range</td><td>descrizione parametro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Che cosa ritorna </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aff851b55cac0c95f21a508cacedf57ab">encode_symbol()</a>, <a class="el" href="main_8cpp.html#a9400d5cabe81d44a76712482ed76f658">trasforma_string()</a></dd></dl>
 
-<p>Definition at line <a class="el" href="main_8cpp_source.html#l00025">25</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Definition at line <a class="el" href="main_8cpp_source.html#l00026">26</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a4993aebdcd464c00ca8197c253aa5434"></a>
+<a class="anchor" id="aff851b55cac0c95f21a508cacedf57ab"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -235,13 +240,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>range</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>top</em>&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -250,8 +249,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>funzione di encode dei simboli</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">&amp;x</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">&amp;low</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">&amp;range</td><td>descrizione parametro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Che cosa ritorna </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#a715ddb03bf1ce501273bbf7fac87dc50">encode()</a>, <a class="el" href="main_8cpp.html#aff851b55cac0c95f21a508cacedf57ab">encode_symbol()</a></dd></dl>
 
-<p>Definition at line <a class="el" href="main_8cpp_source.html#l00041">41</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Definition at line <a class="el" href="main_8cpp_source.html#l00047">47</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -278,8 +289,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Funzione main del mio range encoding </p>
 
-<p>Definition at line <a class="el" href="main_8cpp_source.html#l00083">83</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Definition at line <a class="el" href="main_8cpp_source.html#l00109">109</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +308,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="main_8cpp_source.html#l00055">55</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Definition at line <a class="el" href="main_8cpp_source.html#l00072">72</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,8 +347,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Comparazione top e low per trovare le cifre sufficienti per la codifica</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">top</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">low</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">first</td><td>descrizione parametro </td></tr>
+    <tr><td class="paramname">last</td><td>descrizione parametro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Che cosa ritorna </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#a715ddb03bf1ce501273bbf7fac87dc50">encode()</a>, <a class="el" href="main_8cpp.html#aff851b55cac0c95f21a508cacedf57ab">encode_symbol()</a></dd></dl>
 
-<p>Definition at line <a class="el" href="main_8cpp_source.html#l00060">60</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p>Definition at line <a class="el" href="main_8cpp_source.html#l00077">77</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -345,8 +369,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_22e5ea9f8f1a3fdd2feb9c197ddb7b80.html">base10 - Copia</a></li><li class="navelem"><a class="el" href="main_8cpp.html">main.cpp</a></li>
-    <li class="footer">Generated on Sat Oct 11 2014 17:18:55 for Range Encoding Algorithm by
+    <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_0025ae84a1d112193b784f71a836ed06.html">base10</a></li><li class="navelem"><a class="el" href="main_8cpp.html">main.cpp</a></li>
+    <li class="footer">Generated on Sat Oct 11 2014 17:47:01 for Range Encoding Algorithm by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

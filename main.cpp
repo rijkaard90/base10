@@ -14,15 +14,25 @@ using namespace std;
 typedef unsigned char byte;
 
 struct coppia {
+	//! coppia di valori.
 	byte _b;
-	double _fa; //prob
-	double _Fa; //start
+	double _fa; /*!< probabilità della coppia. */
+	double _Fa; /*!< start della coppia. */
 
 	coppia(byte b, double prob, double start=0) : _b(b), _fa(prob),_Fa(start) {}
 	bool operator> (const coppia& c) const { return _fa > c._fa; }
 };
 
 void encode(double start, double size, double& low, double& range){
+	//! Descrizione di encode
+    /*!
+      \param start descrizione parametro
+      \param size descrizione parametro
+	  \param &low descrizione parametro
+	  \param &range descrizione parametro
+      \return Che cosa ritorna
+      \sa encode_symbol(), trasforma_string()
+    */
 	// adjust the range based on the symbol interval
 	//double total = 100;
 	//range /= total;
@@ -35,6 +45,15 @@ void encode(double start, double size, double& low, double& range){
 }
 
 void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
+	//! funzione di encode dei simboli
+    /*!
+      \param b descrizione parametro
+      \param &x descrizione parametro
+	  \param &low descrizione parametro
+	  \param &range descrizione parametro
+      \return Che cosa ritorna
+      \sa encode(), encode_symbol()
+    */
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
 			encode(it->_Fa, it->_fa,low,range);
@@ -56,7 +75,15 @@ void syntax() {
 }
 
 string trasforma_string(double top, double low, string first, string last){
-	//comparazione top e low per trovare le cifre sufficienti per la codifica
+	//! Comparazione top e low per trovare le cifre sufficienti per la codifica
+    /*!
+      \param top descrizione parametro
+      \param low descrizione parametro
+	  \param first descrizione parametro
+	  \param last descrizione parametro
+      \return Che cosa ritorna
+      \sa encode(), encode_symbol()
+    */
 	string codifica;
 	unsigned length = 1;
 
@@ -80,7 +107,7 @@ string trasforma_string(double top, double low, string first, string last){
 }
 
 int main(int argc, char *argv[]){
-
+	//! Funzione main del mio range encoding
 	array<unsigned int, 256> myarray;
 	vector<coppia> coppie;
 
