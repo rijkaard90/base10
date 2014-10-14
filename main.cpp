@@ -8,6 +8,7 @@
 #include<functional>
 #include<math.h>
 #include<string>
+#include<cstdlib>
 
 
 using namespace std;
@@ -217,12 +218,73 @@ int main(int argc, char *argv[]){
 		unsigned n_caratteri = is.get() + 1;
 		//+1 perchè cosi nel while posso fermarmi a 0 e posso usare un unsigned invece di una variabile signed
 		cout << n_caratteri<<'\n';
-		while (n_caratteri > 0)
-			n_caratteri--;
+		unsigned totalrange = 1000;
+		double rangecont = 1000.0;
+		unsigned numero[9] = { 7, 4, 3, 2, 0, 3, 9, 0, 0}; //numero di prova
+		unsigned modulo = 10000;
+		unsigned controllo = 743;
+		double sopraV=1000.0; //variabile in double per permettere migliore arrotondamento
+		unsigned sopra=1000; //necessario unsigned per il valore finale di top e low e per il modulo
+		double sottoV=0.0;
+		unsigned sotto=0;
+		bool flagRange = false;  //flag per controllare se shiftare o no il range
+		bool flagCode = false;
+		unsigned aggiunta = 0;
+
+		//ciclo per ogni carattere
+		while (n_caratteri > 0){
+				//controllo se c'è da shiftare il top e low
+				if ((sotto / 100) == (sopra / 100)){
+					flagRange = true;
+				}
+				//calcolo della probabilità rispetto al range
+				double prob = (double)(controllo-sotto) / rangecont;
+				//ciclo per controllare a quale simbolo di riferisce la probabilità
+				for (auto it = coppie.begin(); it != coppie.end(); ++it){
+					if (prob >= it->_Fa && prob < (it->_fa + it->_Fa)){
+						cout << it->_b;
+						os << it->_b;
+						//aggiornamento valori !!ARROTONDAMENTO ERRATO
+						sottoV = sotto + (it->_Fa*rangecont);
+						rangecont = (rangecont * it->_fa)+0.1;
+						sopraV = sottoV + rangecont;
+						//cout << sottoV << "\t" << rangecont << "\t" << sopraV << endl;
+						break;
+					}
+				}
+
+				//se c'è da shiftare il top e low aggiorno
+				if (flagRange){
+					//operazioni separate per permettere passaggio da double a unsigned senza perdita di segno
+					//e per fare il modulo
+					sottoV = sottoV * 10;
+					sotto = (unsigned)sottoV % 1000;
+					sopraV = sopraV * 10;
+					sopra = (unsigned)sopraV % 1000;
+					flagRange = false;
+					rangecont *= 10;
+				}
+				else{//se non shifto trasformo i double in unsigned
+					sotto = (unsigned)sottoV;
+					sopra = (unsigned)sopraV;
+				}
+
+				//controllo se devo shiftare il code
+				//!!!!ATTENZIONE:ERRORE! ALGORITMO SBAGLIATO, in realtà il code va ogni
+				//volta shiftato il turno dopo, lo stesso vale di conseguenza con il TOP e LOW!!
+				//al primo step per caso andava bene, ma poi in realtà sballa tantissimo per colpa di questo errore!
+				if (controllo <= sotto || controllo > sopra){
+					controllo = (controllo % 100) * 10;
+					controllo += numero[3 + aggiunta];
+					aggiunta++;
+				}
+
+				cout << sotto << "\t" << rangecont << "\t" << sopra << endl;
+				n_caratteri--;
+		}
 		//dopo aver scritto in binario la codifica devo gestire la lettura delle cifre, inizio con n_cifre_range_iniziale - 1
+
 		
-
-
 	}
 
 
