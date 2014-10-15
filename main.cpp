@@ -1,63 +1,126 @@
-#include<iostream>
-#include<stdlib.h>
-#include<stdio.h>
-#include<fstream>
-#include<array>
-#include<vector>
-#include<algorithm>
-#include<functional>
-#include<math.h>
-#include<string>
-#include<cstdlib>
-
+/*! 
+ * \mainpage Range Encoding
+ * \section range_encoding Introduction
+ *
+ * Range encoding is an entropy coding method defined by G. Nigel N. 
+ * Martin in a 1979 paper, which effectively rediscovered the FIFO arithmetic
+ * code first introduced by Richard Clark Pasco in 1976. Given a stream of symbols
+ * and their probabilities, a range coder produces a space efficient stream of bits to 
+ * represent these symbols and, given the stream and the probabilities, a range decoder
+ * reverses the process. 
+ * 
+ * Range coding is very similar to arithmetic encoding, except that encoding is done
+ * with digits in any base, instead of with bits, and so it is faster when using larger
+ * bases (e.g. a byte) at small cost in compression efficiency.
+ * After the expiration of the first (1978) arithmetic coding patent, range encoding
+ * appeared to clearly be free of patent encumbrances. This particularly drove
+ * interest in the technique in the open source community. Since that time, patents on 
+ * various well-known arithmetic coding techniques have also expired.
+ *
+ * \subsection how_works How range encoding works
+ * Range encoding conceptually encodes all the symbols of the message into one number,
+ * unlike Huffman coding which assigns each symbol a bit-pattern and concatenates all 
+ * the bit-patterns together. Thus range encoding can achieve greater compression 
+ * ratios than the one-bit-per-symbol lower bound on Huffman encoding and it does not
+ * suffer the inefficiencies that Huffman does when dealing with probabilities that are
+ * not exact powers of two.
+ *
+ * The central concept behind range encoding is this: given a large-enough range of
+ * integers, and a probability estimation for the symbols, the initial range can easily
+ * be divided into sub-ranges whose sizes are proportional to the probability of the
+ * symbol they represent. Each symbol of the message can then be encoded in turn, by
+ * reducing the current range down to just that sub-range which corresponds to the next
+ * symbol to be encoded. The decoder must have the same probability estimation the
+ * encoder used, which can either be sent in advance, derived from already transferred
+ * data or be part of the compressor and decompressor.
+ *
+ * When all symbols have been encoded, merely identifying the sub-range is enough to
+ * communicate the entire message (presuming of course that the decoder is somehow
+ * notified when it has extracted the entire message). A single integer is actually
+ * sufficient to identify the sub-range, and it may not even be necessary to transmit
+ * the entire integer; if there is a sequence of digits such that every integer
+ * beginning with that prefix falls within the sub-range, then the prefix alone is all
+ * that's needed to identify the sub-range and thus transmit the message.
+ *
+ * The central problem may appear to be selecting an initial range large enough that
+ * no matter how many symbols we have to encode, we will always have a current range
+ * large enough to divide into non-zero sub-ranges. In practice, however, this is not
+ * a problem, because instead of starting with a very large range and gradually
+ * narrowing it down, the encoder works with a smaller range of numbers at any given
+ * time. After some number of digits have been encoded, the leftmost digits will not
+ * change.
+ */
+ 
+#include <iostream>
+#include <fstream>
+#include <array>
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <string>
+#include <cstdlib>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
 using namespace std;
 typedef unsigned char byte;
 
+/*! 
+	\brief	Classe coppia
+	\details Gestione dei caratteri insieme alla probabilità e al range di partenza.
+*/
 struct coppia {
-	//! coppia di valori.
-	byte _b;
-	double _fa; /*!< probabilità della coppia. */
-	double _Fa; /*!< start della coppia. */
+	byte _b;	/*!< Unsigned char. */
+	double _fa; /*!< Probabilità della coppia. */
+	double _Fa; /*!< Start della coppia. */
 
-	coppia(byte b, double prob, double start=0) : _b(b), _fa(prob),_Fa(start) {}
+	/*! 
+		\brief	Inizializzazione struct
+		\details Passaggio e assegnazione dei valori.
+	*/
+	coppia(byte b, double prob, double start = 0) : _b(b), _fa(prob), _Fa(start) {}
+	
+	/*! 
+		\brief	Operator >.
+		\details Overloading operator >.
+	*/
 	bool operator> (const coppia& c) const { return _fa > c._fa; }
 };
 
+/*! 
+	\brief	Function ENCODE
+	\details Adjust the range based on the symbol interval.
+	\param start descrizione parametro.
+	\param size descrizione parametro.
+	\param &low descrizione parametro.
+	\param &range descrizione parametro.
+	\return Adjusted values of low and range.
+	\see encode_symbol(), trasforma_string(), syntax()
+*/
 void encode(double start, double size, double& low, double& range){
-	//! Descrizione di encode
-    /*!
-      \param start descrizione parametro
-      \param size descrizione parametro
-	  \param &low descrizione parametro
-	  \param &range descrizione parametro
-      \return Che cosa ritorna
-      \sa encode_symbol(), trasforma_string()
-    */
-	// adjust the range based on the symbol interval
 	//double total = 100;
 	//range /= total;
 	//ATTENZIONE all'arrotondamento che puo essere sbagliato, DA RIVEDERE
 	low = (unsigned long)(low + start * range);
-	range = range* size;
+	range = (range * size);
 	range = (unsigned long)(range + 0.99);
-	//low = (unsigned long)(low + start * range);
-	//range = (unsigned long)(range* size);
 }
 
+/*! 
+	\brief	Function ENCODE_SYMBOL
+	\details dettagli della funzione encode simboli.
+	\param b descrizione parametro
+	\param &x descrizione parametro
+	\param &low descrizione parametro
+	\param &range descrizione parametro
+	\return Ritorna la coppia di valori.
+	\see encode, trasforma_string(), syntax()
+*/
 void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
-	//! funzione di encode dei simboli
-    /*!
-      \param b descrizione parametro
-      \param &x descrizione parametro
-	  \param &low descrizione parametro
-	  \param &range descrizione parametro
-      \return Che cosa ritorna
-      \sa encode(), encode_symbol()
-    */
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
-			encode(it->_Fa, it->_fa,low,range);
+			encode(it->_Fa, it->_fa, low, range);
 			//verifica di ogni passaggio
 			cout << "low: " << low << "\t top: " << range + low << endl;
 			//modifica per range bassi disponibili
@@ -67,27 +130,22 @@ void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
 			}
 			return;
 		}
-	cout << "symbol not found!";
+	cout << "Symbol not found!";
 }
 
-void syntax() {
-	cout << "Syntax:" << endl;
-	cout << "Range encoding <input filename> <output filename>" << endl;
-}
-
+/*! 
+	\brief	Function TRASFORMA_STRING
+	\details Comparazione top e low per trovare le cifre sufficienti per la codifica.
+	\param top descrizione parametro
+	\param low descrizione parametro
+	\param first descrizione parametro
+	\param last descrizione parametro
+	\return Che cosa ritorna.
+	\see encode(), encode_symbol(), syntax()
+*/
 string trasforma_string(double top, double low, string first, string last){
-	//! Comparazione top e low per trovare le cifre sufficienti per la codifica
-    /*!
-      \param top descrizione parametro
-      \param low descrizione parametro
-	  \param first descrizione parametro
-	  \param last descrizione parametro
-      \return Che cosa ritorna
-      \sa encode(), encode_symbol()
-    */
 	string codifica;
 	unsigned length = 1;
-
 	while (true){
 		if ((first.compare(0, length, last, 0, length)) != 0){
 			break;
@@ -96,9 +154,8 @@ string trasforma_string(double top, double low, string first, string last){
 		cout << codifica << endl;
 		length++;
 	}
-
-	double raggio=top - low;
-	raggio /= 2;
+	double raggio = top - low;
+	raggio /= 2.0;
 	raggio += low;
 	//aggiunta delle due cifre finali
 	string asd = to_string(raggio);
@@ -107,8 +164,20 @@ string trasforma_string(double top, double low, string first, string last){
 	return codifica;
 }
 
+/*! 
+	\brief	Function SYNTAX
+	\details Specifies the correct syntax for using Range Engoding.
+	\return Correct syntax.
+	\see encode(), encode_symbol(), trasforma_string()
+*/
+void syntax() {
+	cout << "Syntax:" << endl;
+	cout << "Range encoding <input filename> <output filename>" << endl;
+}
+
+//! Function main Range Encoding.
 int main(int argc, char *argv[]){
-	//! Funzione main del mio range encoding
+
 	array<unsigned int, 256> myarray;
 	vector<coppia> coppie;
 
@@ -195,7 +264,7 @@ int main(int argc, char *argv[]){
 	//trasformazione in stringhe
 	string first = to_string(low);
 	string last = to_string(top);
-	string codifica=trasforma_string(top,low,first,last);
+	string codifica = trasforma_string(top, low, first, last);
 
 	//stampa
 	cout << first << endl << last << endl;
@@ -211,6 +280,7 @@ int main(int argc, char *argv[]){
 	{	//graffe per non avere problemi con i nomi is e os di prima
 		ifstream is(OutputFileName, ifstream::binary);
 		if (!is) return -1;
+		
 		ofstream os("decodifica.txt", ofstream::binary);
 		if (!os) return -1;
 
@@ -223,30 +293,33 @@ int main(int argc, char *argv[]){
 		unsigned numero[9] = { 7, 4, 3, 2, 0, 3, 9, 0, 0}; //numero di prova
 		unsigned modulo = 10000;
 		unsigned controllo = 743;
-		double sopraV=1000.0; //variabile in double per permettere migliore arrotondamento
-		unsigned sopra=1000; //necessario unsigned per il valore finale di top e low e per il modulo
-		double sottoV=0.0;
-		unsigned sotto=0;
+		double sopraV = 1000.0; //variabile in double per permettere migliore arrotondamento
+		unsigned sopra = 1000; //necessario unsigned per il valore finale di top e low e per il modulo
+		double sottoV = 0.0;
+		unsigned sotto = 0;
 		bool flagRange = false;  //flag per controllare se shiftare o no il range
 		bool flagCode = false;
 		unsigned aggiunta = 0;
 
 		//ciclo per ogni carattere
 		while (n_caratteri > 0){
+		
 				//controllo se c'è da shiftare il top e low
 				if ((sotto / 100) == (sopra / 100)){
 					flagRange = true;
 				}
+				
 				//calcolo della probabilità rispetto al range
-				double prob = (double)(controllo-sotto) / rangecont;
+				double prob = (double)(controllo - sotto) / rangecont;
+				
 				//ciclo per controllare a quale simbolo di riferisce la probabilità
 				for (auto it = coppie.begin(); it != coppie.end(); ++it){
 					if (prob >= it->_Fa && prob < (it->_fa + it->_Fa)){
 						cout << it->_b;
 						os << it->_b;
 						//aggiornamento valori !!ARROTONDAMENTO ERRATO
-						sottoV = sotto + (it->_Fa*rangecont);
-						rangecont = (rangecont * it->_fa)+0.1;
+						sottoV = sotto + (it->_Fa * rangecont);
+						rangecont = (rangecont * it->_fa) + 0.1;
 						sopraV = sottoV + rangecont;
 						//cout << sottoV << "\t" << rangecont << "\t" << sopraV << endl;
 						break;
@@ -255,8 +328,7 @@ int main(int argc, char *argv[]){
 
 				//se c'è da shiftare il top e low aggiorno
 				if (flagRange){
-					//operazioni separate per permettere passaggio da double a unsigned senza perdita di segno
-					//e per fare il modulo
+					//operazioni separate per permettere passaggio da double a unsigned senza perdita di segno e per fare il modulo
 					sottoV = sottoV * 10;
 					sotto = (unsigned)sottoV % 1000;
 					sopraV = sopraV * 10;
@@ -270,7 +342,7 @@ int main(int argc, char *argv[]){
 				}
 
 				//controllo se devo shiftare il code
-				//!!!!ATTENZIONE:ERRORE! ALGORITMO SBAGLIATO, in realtà il code va ogni
+				//ATTENZIONE:ERRORE! ALGORITMO SBAGLIATO, in realtà il code va ogni
 				//volta shiftato il turno dopo, lo stesso vale di conseguenza con il TOP e LOW!!
 				//al primo step per caso andava bene, ma poi in realtà sballa tantissimo per colpa di questo errore!
 				if (controllo <= sotto || controllo > sopra){
@@ -282,10 +354,6 @@ int main(int argc, char *argv[]){
 				cout << sotto << "\t" << rangecont << "\t" << sopra << endl;
 				n_caratteri--;
 		}
-		//dopo aver scritto in binario la codifica devo gestire la lettura delle cifre, inizio con n_cifre_range_iniziale - 1
-
-		
+		//dopo aver scritto in binario la codifica devo gestire la lettura delle cifre, inizio con n_cifre_range_iniziale - 1		
 	}
-
-
 }

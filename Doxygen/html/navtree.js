@@ -1,6 +1,11 @@
 var NAVTREE =
 [
-  [ "Range Encoding Algorithm", "index.html", [
+  [ "Range Encode", "index.html", [
+    [ "Range Encoding", "index.html", [
+      [ "Introduction", "index.html#range_encoding", [
+        [ "How range encoding works", "index.html#how_works", null ]
+      ] ]
+    ] ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
