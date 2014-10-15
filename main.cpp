@@ -98,13 +98,12 @@ struct coppia {
 	\return Adjusted values of low and range.
 	\see encode_symbol(), trasforma_string(), syntax()
 */
-void encode(double start, double size, double& low, double& range){
-	//double total = 100;
-	//range /= total;
-	//ATTENZIONE all'arrotondamento che puo essere sbagliato, DA RIVEDERE
-	low = (unsigned long)(low + start * range);
-	range = (range * size);
-	range = (unsigned long)(range + 0.99);
+void encode(double start, double size, double& low, double& range, double& top){
+	//PORCODO ORA VA BENE DIOCANE
+	low = low + start * range;
+	top = (unsigned long)(low + size* range);
+	low = (unsigned long) low;
+	range = top - low;
 }
 
 /*! 
@@ -117,14 +116,14 @@ void encode(double start, double size, double& low, double& range){
 	\return Ritorna la coppia di valori.
 	\see encode, trasforma_string(), syntax()
 */
-void encode_symbol(byte b, vector<coppia>& x, double& low, double& range){
+void encode_symbol(byte b, vector<coppia>& x, double& low, double& range, double& top){
 	for (auto it = x.begin(); it != x.end(); ++it)
 		if (it->_b == b){
-			encode(it->_Fa, it->_fa, low, range);
+			encode(it->_Fa, it->_fa, low, range, top);
 			//verifica di ogni passaggio
-			cout << "low: " << low << "\t top: " << range + low << endl;
+			cout << "low: " << low << "\t range: " << range << "\t top: " << top << endl;
 			//modifica per range bassi disponibili
-			if (range < 100.0){
+			if (range < 100000000.0){
 				range *= 10.0;
 				low *= 10.0;
 			}
@@ -178,7 +177,7 @@ void syntax() {
 //! Function main Range Encoding.
 int main(int argc, char *argv[]){
 
-	array<unsigned int, 256> myarray;
+	array<double, 256> myarray;
 	vector<coppia> coppie;
 
 	if (argc != 3) {
@@ -198,52 +197,52 @@ int main(int argc, char *argv[]){
 	//mi assicuro che l'array sia inizializzato a zero
 	myarray.fill(0);
 
-	/* SPUNTONI DA TOGLIERE
 	//calcolo le ricorrenze di ogni simbolo
-	unsigned int tot_symbol = 0;//numero totali simboli letti dallo stream
+	unsigned tot_symbol = 0;//numero totali simboli letti dallo stream
 	byte tmp;
 	while (is.get(reinterpret_cast<char&>(tmp))){
 		tot_symbol++;
 		myarray[tmp]++;
 	}
 
-	for (int i = 0; i<256; ++i)
-		if (myarray[i] != 0)
-			coppie.push_back(coppia(i, myarray[i] / (double)tot * 10));
-			//cout << i << '\t' << myarray[i] << '\n';
-
-	sort(coppie.begin(), coppie.end(), greater<coppia>());
-	//dopo aver ordinato il vector posso assegnare l'inizio del range per ogni simbolo
-	double prob_range = 0;
-	for (auto it = coppie.begin(); it != coppie.end(); ++it){
-		it->_fa = prob_range;
-		prob_range += it->_Fa;
-		//cout << "symbol: " << it->_b << "\t probability: " << it->_cnt << "\n";
-		cout << "symbol: " << it->_b << "\t start_range: " << it->_fa << "\t probability: " << it->_Fa << "\n";
+	for (int i = 0; i < 256; ++i){
+		if (myarray[i] != 0){
+			coppie.push_back(coppia(i, (double)myarray[i] / (double)tot_symbol));
+			//cout << i << "\t"<< myarray[i]<<endl;
+		}
 	}
-	SPUNTONI DA TOGLIERE*/ 
+
+	//sort(coppie.begin(), coppie.end(), greater<coppia>());
+	//dopo aver ordinato il vector posso assegnare l'inizio del range per ogni simbolo
+	double prob_range = 0.0;
+	for (auto it = coppie.begin(); it != coppie.end(); ++it){
+		it->_Fa = prob_range;
+		prob_range += it->_fa;
+		//cout << "symbol: " << it->_b << "\t probability: " << it->_cnt << "\n";
+		cout << "symbol: " << it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << "\n";
+	}
 
 	/* prova encoding */
-	double range = pow(10.0, 3.0);
-	double low = 0;
+	double range = pow(10.0, 10.0);
+	double low = 0.0;
+	double up = range;
 	is.clear(); // Disattivo l'EOF precedente
 	is.seekg(ios_base::beg); // Torno all'inizio
 	byte b;
 	
-	//prova esempio pdf
-	coppie.push_back(coppia('K', 0.10, 0.0));
+	//PROVA ESEMPIO PDF
+	/*coppie.push_back(coppia('K', 0.10, 0.0));
 	coppie.push_back(coppia('L', 0.21, 0.10));
 	coppie.push_back(coppia('M', 0.27, 0.31));
 	coppie.push_back(coppia('N', 0.42, 0.58));
 	for (auto it = coppie.begin(); it != coppie.end(); ++it){
 		cout << it->_b << " " << it->_Fa << " " << it->_fa << endl;
-	}
+	}*/
 
 	//codifica vera e propria
-	unsigned tot_symbol = 0;
 	while (is.get(reinterpret_cast<char&>(b))){
-		tot_symbol++;
-		encode_symbol(b, coppie, low, range);
+		//tot_symbol++;
+		encode_symbol(b, coppie, low, range, up);
 	}
 
 	//header= n simboli codificati, tabella symbol-fa-Fa
@@ -285,27 +284,28 @@ int main(int argc, char *argv[]){
 		if (!os) return -1;
 
 		//leggo quanti caratteri devo decodificare nel primo byte del file
-		unsigned n_caratteri = is.get() + 1;
+		unsigned n_caratteri = is.get();
 		//+1 perchè cosi nel while posso fermarmi a 0 e posso usare un unsigned invece di una variabile signed
 		cout << n_caratteri<<'\n';
-		unsigned totalrange = 1000;
-		double rangecont = 1000.0;
-		unsigned numero[9] = { 7, 4, 3, 2, 0, 3, 9, 0, 0}; //numero di prova
-		unsigned modulo = 10000;
-		unsigned controllo = 743;
-		double sopraV = 1000.0; //variabile in double per permettere migliore arrotondamento
-		unsigned sopra = 1000; //necessario unsigned per il valore finale di top e low e per il modulo
+		unsigned totalrange = pow(10.0,10.0);
+		double rangecont = totalrange;
+		unsigned numero[] = {9,4,0,0}; //numero di prova
+		//unsigned modulo = 10000;
+		unsigned controllo = 940;
+		double sopraV = totalrange; //variabile in double per permettere migliore arrotondamento
+		unsigned sopra = 10000000000; //necessario unsigned per il valore finale di top e low e per il modulo
 		double sottoV = 0.0;
 		unsigned sotto = 0;
 		bool flagRange = false;  //flag per controllare se shiftare o no il range
-		bool flagCode = false;
+		bool flagShift = false;
 		unsigned aggiunta = 0;
 
 		//ciclo per ogni carattere
 		while (n_caratteri > 0){
 		
 				//controllo se c'è da shiftare il top e low
-				if ((sotto / 100) == (sopra / 100)){
+				// ((sotto / 100) == (sopra / 100)) ||
+				if (sopra-sotto < 100000000){
 					flagRange = true;
 				}
 				
@@ -319,7 +319,7 @@ int main(int argc, char *argv[]){
 						os << it->_b;
 						//aggiornamento valori !!ARROTONDAMENTO ERRATO
 						sottoV = sotto + (it->_Fa * rangecont);
-						rangecont = (rangecont * it->_fa) + 0.1;
+						rangecont = (rangecont * it->_fa);
 						sopraV = sottoV + rangecont;
 						//cout << sottoV << "\t" << rangecont << "\t" << sopraV << endl;
 						break;
@@ -330,28 +330,23 @@ int main(int argc, char *argv[]){
 				if (flagRange){
 					//operazioni separate per permettere passaggio da double a unsigned senza perdita di segno e per fare il modulo
 					sottoV = sottoV * 10;
-					sotto = (unsigned)sottoV % 1000;
+					sotto = (unsigned)sottoV % 10000000000;
 					sopraV = sopraV * 10;
-					sopra = (unsigned)sopraV % 1000;
+					sopra = (unsigned)sopraV % 10000000000;
 					flagRange = false;
-					rangecont *= 10;
+					rangecont = sopra - sotto;
+					controllo = (controllo % 1000000000) * 10;
+					controllo += numero[3 + aggiunta];
+					aggiunta++;
+					flagRange = false;
 				}
 				else{//se non shifto trasformo i double in unsigned
 					sotto = (unsigned)sottoV;
 					sopra = (unsigned)sopraV;
-				}
+					rangecont = sopra - sotto;
+				}			
 
-				//controllo se devo shiftare il code
-				//ATTENZIONE:ERRORE! ALGORITMO SBAGLIATO, in realtà il code va ogni
-				//volta shiftato il turno dopo, lo stesso vale di conseguenza con il TOP e LOW!!
-				//al primo step per caso andava bene, ma poi in realtà sballa tantissimo per colpa di questo errore!
-				if (controllo <= sotto || controllo > sopra){
-					controllo = (controllo % 100) * 10;
-					controllo += numero[3 + aggiunta];
-					aggiunta++;
-				}
-
-				cout << sotto << "\t" << rangecont << "\t" << sopra << endl;
+				cout << controllo << "\t" << sotto << "\t" << rangecont << "\t" << sopra << endl;
 				n_caratteri--;
 		}
 		//dopo aver scritto in binario la codifica devo gestire la lettura delle cifre, inizio con n_cifre_range_iniziale - 1		
