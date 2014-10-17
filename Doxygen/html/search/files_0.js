@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main_2ecpp',['main.cpp',['../main_8cpp.html',1,'']]]
+  ['codifica_2eh',['codifica.h',['../codifica_8h.html',1,'']]],
+  ['coppia_2eh',['coppia.h',['../coppia_8h.html',1,'']]]
 ];

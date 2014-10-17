@@ -9,7 +9,7 @@ var indexSectionsWithContent =
 {
   0: "_bcemorst",
   1: "c",
-  2: "m",
+  2: "cm",
   3: "cemost",
   4: "_",
   5: "b",
