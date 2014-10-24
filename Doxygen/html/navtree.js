@@ -1,7 +1,7 @@
 var NAVTREE =
 [
-  [ "Range Encode", "index.html", [
-    [ "Range Encoding", "index.html", [
+  [ "Range Encoding", "index.html", [
+    [ "Range Encoding Description", "index.html", [
       [ "Introduction", "index.html#range_encoding", [
         [ "How range encoding works", "index.html#how_works", null ]
       ] ]

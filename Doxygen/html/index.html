@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encode: Range Encoding</title>
+<title>Range Encoding: Range Encoding Description</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encode
+   <div id="projectname">Range Encoding
    </div>
   </td>
  </tr>
@@ -95,13 +95,15 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Range Encoding </div>  </div>
+<div class="title">Range Encoding Description </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="range_encoding"></a>
 Introduction</h1>
 <p>Range encoding is an entropy coding method defined by G. Nigel N. Martin in a 1979 paper, which effectively rediscovered the FIFO arithmetic code first introduced by Richard Clark Pasco in 1976. Given a stream of symbols and their probabilities, a range coder produces a space efficient stream of bits to represent these symbols and, given the stream and the probabilities, a range decoder reverses the process.</p>
-<p>Range coding is very similar to arithmetic encoding, except that encoding is done with digits in any base, instead of with bits, and so it is faster when using larger bases (e.g. a byte) at small cost in compression efficiency. After the expiration of the first (1978) arithmetic coding patent, range encoding appeared to clearly be free of patent encumbrances. This particularly drove interest in the technique in the open source community. Since that time, patents on various well-known arithmetic coding techniques have also expired.</p>
+<p>Range coding is very similar to arithmetic encoding, except that encoding is done with digits in any base, instead of with bits, and so it is faster when using larger bases (e.g. a byte) at small cost in compression efficiency. After the expiration of the first (1978) arithmetic coding patent, range encoding appeared to clearly be free of patent encumbrances. This particularly drove interest in the technique in the open source community. Since that time, patents on various well-known arithmetic coding techniques have also expired. </p><div class="image">
+<img src="../renc.jpg" alt="renc.jpg"/>
+</div>
 <h2><a class="anchor" id="how_works"></a>
 How range encoding works</h2>
 <p>Range encoding conceptually encodes all the symbols of the message into one number, unlike Huffman coding which assigns each symbol a bit-pattern and concatenates all the bit-patterns together. Thus range encoding can achieve greater compression ratios than the one-bit-per-symbol lower bound on Huffman encoding and it does not suffer the inefficiencies that Huffman does when dealing with probabilities that are not exact powers of two.</p>
@@ -113,7 +115,7 @@ How range encoding works</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 17 2014 16:52:55 for Range Encode by
+    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

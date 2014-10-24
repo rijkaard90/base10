@@ -78,11 +78,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="decoding.cpp" />
+    <ClCompile Include="decodingfunction.cpp" />
+    <ClCompile Include="encoding.cpp" />
+    <ClCompile Include="encodingfunction.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="codifica.h" />
-    <ClInclude Include="coppia.h" />
+    <ClInclude Include="bitstreams.h" />
+    <ClInclude Include="couple.h" />
+    <ClInclude Include="decoding.h" />
+    <ClInclude Include="decodingfunction.h" />
+    <ClInclude Include="encoding.h" />
+    <ClInclude Include="encodingfunction.h" />
+    <ClInclude Include="rangeencoding.h" />
+    <ClInclude Include="typedef.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

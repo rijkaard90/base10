@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3e',['operator&gt;',['../structcoppia.html#a164e8e0536a153b4677407266c7555c6',1,'coppia']]]
+  ['flush',['flush',['../classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486',1,'bitwriter']]]
 ];

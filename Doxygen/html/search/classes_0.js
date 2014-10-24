@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['coppia',['coppia',['../structcoppia.html',1,'']]]
+  ['bitreader',['bitreader',['../classbitreader.html',1,'']]],
+  ['bitwriter',['bitwriter',['../classbitwriter.html',1,'']]]
 ];

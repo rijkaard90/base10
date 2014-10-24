@@ -1,26 +1,27 @@
-/*! 
- * \mainpage Range Encoding
+/*!
+ * \mainpage Range Encoding Description
  * \section range_encoding Introduction
  *
- * Range encoding is an entropy coding method defined by G. Nigel N. 
+ * Range encoding is an entropy coding method defined by G. Nigel N.
  * Martin in a 1979 paper, which effectively rediscovered the FIFO arithmetic
  * code first introduced by Richard Clark Pasco in 1976. Given a stream of symbols
- * and their probabilities, a range coder produces a space efficient stream of bits to 
+ * and their probabilities, a range coder produces a space efficient stream of bits to
  * represent these symbols and, given the stream and the probabilities, a range decoder
- * reverses the process. 
- * 
+ * reverses the process.
+ *
  * Range coding is very similar to arithmetic encoding, except that encoding is done
  * with digits in any base, instead of with bits, and so it is faster when using larger
  * bases (e.g. a byte) at small cost in compression efficiency.
  * After the expiration of the first (1978) arithmetic coding patent, range encoding
  * appeared to clearly be free of patent encumbrances. This particularly drove
- * interest in the technique in the open source community. Since that time, patents on 
+ * interest in the technique in the open source community. Since that time, patents on
  * various well-known arithmetic coding techniques have also expired.
+ * \image html "../renc.jpg"
  *
  * \subsection how_works How range encoding works
  * Range encoding conceptually encodes all the symbols of the message into one number,
- * unlike Huffman coding which assigns each symbol a bit-pattern and concatenates all 
- * the bit-patterns together. Thus range encoding can achieve greater compression 
+ * unlike Huffman coding which assigns each symbol a bit-pattern and concatenates all
+ * the bit-patterns together. Thus range encoding can achieve greater compression
  * ratios than the one-bit-per-symbol lower bound on Huffman encoding and it does not
  * suffer the inefficiencies that Huffman does when dealing with probabilities that are
  * not exact powers of two.
@@ -50,46 +51,27 @@
  * time. After some number of digits have been encoded, the leftmost digits will not
  * change.
  */
- 
 
-#include <fstream>
-#include <array>
-//#include <iostream>									
-//#include <algorithm>
-//#include <functional>
-//#include <vector>
-//#include <string>
-//#include <cstdlib>
-//#include <stdlib.h>
-//#include <stdio.h>
-//#include <math.h>
-
-using namespace std;
-typedef unsigned char byte;
-
-#include "codifica.h"
-#include "coppia.h"
+#include "rangeencoding.h"
 
 /*! 
-	\brief	Function SYNTAX
-	\details Specifies the correct syntax for using Range Engoding.
-	\return Correct syntax.
-	\see encode(), encode_symbol(), trasforma_string()
-*/
+ * \short Function SYNTAX
+ * \details Specifies the correct syntax for using RangeEncoding algorithm.
+ * \return Correct syntax.
+ * \see encoding(), decoding()
+ */
 void syntax() {
 	cout << "Syntax:" << endl;
-	cout << "Range encoding <input filename> <output filename>" << endl;
+	cout << "Range Encoding <input filename> <output filename>" << endl;
 }
 
 /*!
-	\brief	Function MAIN
-	\details Contains code to run the RangeEncoding program
-*/
+ * \short Function MAIN
+ * \details Something for running RangeEncoding algorithm.
+ * \see syntax(), encoding(), decoding()
+ */
 int main(int argc, char *argv[]){
-
-	array<double, 256> myarray;
-	vector<coppia> coppie;
-
+	
 	if (argc != 3) {
 		syntax();
 		return EXIT_FAILURE;
@@ -98,166 +80,23 @@ int main(int argc, char *argv[]){
 	string InputFileName = argv[1];
 	string OutputFileName = argv[2];
 
-	ifstream is(InputFileName, ifstream::binary);
-	if (!is) return -1;
+	/*!< Encoding. */
+	{
+		ifstream is(InputFileName, ifstream::binary);
+		if (!is) return -1;
+		ofstream os(OutputFileName, ofstream::binary);
+		if (!os) return -1;
 
-	ofstream os(OutputFileName, ofstream::binary);
-	if (!os) return -1;
-
-	//mi assicuro che l'array sia inizializzato a zero
-	myarray.fill(0);
-
-	//calcolo le ricorrenze di ogni simbolo
-	unsigned tot_symbol = 0;//numero totali simboli letti dallo stream
-	byte tmp;
-	while (is.get(reinterpret_cast<char&>(tmp))){
-		tot_symbol++;
-		myarray[tmp]++;
+		encoding(is, os);
 	}
-
-	for (int i = 0; i < 256; ++i){
-		if (myarray[i] != 0){
-			coppie.push_back(coppia(i, (double)myarray[i] / (double)tot_symbol));
-			//cout << i << "\t"<< myarray[i]<<endl;
-		}
-	}
-
-	//sort(coppie.begin(), coppie.end(), greater<coppia>());
-	//dopo aver ordinato il vector posso assegnare l'inizio del range per ogni simbolo
-	double prob_range = 0.0;
-	for (auto it = coppie.begin(); it != coppie.end(); ++it){
-		it->_Fa = prob_range;
-		prob_range += it->_fa;
-		//cout << "symbol: " << it->_b << "\t probability: " << it->_cnt << "\n";
-		cout << "symbol: " << it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << "\n";
-	}
-
-	/* prova encoding */
-	double range = pow(10.0, 10.0);
-	double low = 0.0;
-	double up = range;
-	is.clear(); // Disattivo l'EOF precedente
-	is.seekg(ios_base::beg); // Torno all'inizio
-	byte b;
 	
-	//PROVA ESEMPIO PDF
-	/*coppie.push_back(coppia('K', 0.10, 0.0));
-	coppie.push_back(coppia('L', 0.21, 0.10));
-	coppie.push_back(coppia('M', 0.27, 0.31));
-	coppie.push_back(coppia('N', 0.42, 0.58));
-	for (auto it = coppie.begin(); it != coppie.end(); ++it){
-		cout << it->_b << " " << it->_Fa << " " << it->_fa << endl;
-	}*/
-
-	//codifica vera e propria
-	while (is.get(reinterpret_cast<char&>(b))){
-		//tot_symbol++;
-		encode_symbol(b, coppie, low, range, up);
-	}
-
-	//header= n simboli codificati, tabella symbol-fa-Fa
-	//os << tot_symbol; 
-	os.write(reinterpret_cast<char*>(&tot_symbol), 1);
-	/* da mettere a posto la scrittura dei double nell'header
-	for (unsigned i = 0; i < coppie.size(); ++i){
-		os << coppie[i]._b;
-		os.write(reinterpret_cast<char*>(&coppie[i]._fa), sizeof(coppie[i]._fa));
-		os.write(reinterpret_cast<char*>(&coppie[i]._Fa), sizeof(coppie[i]._Fa));
-	}*/		
-	//os << 0xffff; //termino cosi l'header
-
-	double top = range + low;
-	
-	cout << "finale " << "low: " << low << "\t top: " << top << endl;
-
-	//trasformazione in stringhe
-	string first = to_string(low);
-	string last = to_string(top);
-	string codifica = trasforma_string(top, low, first, last);
-
-	//stampa
-	cout << first << endl << last << endl;
-	cout << codifica << endl;
-	os << codifica;
-	//bisogna scrivere in binario la codifica, cosi è in char e non va bene
-
-	// chiude is e os per poterli eventualemente usare nella decodifica
-	is.close();
-	os.close();
-
-	/*		Decodifica		 */
-	{	//graffe per non avere problemi con i nomi is e os di prima
+	/*!< Decoding. */
+	{	
 		ifstream is(OutputFileName, ifstream::binary);
 		if (!is) return -1;
-		
 		ofstream os("decodifica.txt", ofstream::binary);
 		if (!os) return -1;
 
-		//leggo quanti caratteri devo decodificare nel primo byte del file
-		unsigned n_caratteri = is.get();
-		//+1 perchè cosi nel while posso fermarmi a 0 e posso usare un unsigned invece di una variabile signed
-		cout << n_caratteri<<'\n';
-		unsigned totalrange = pow(10.0,10.0);
-		double rangecont = totalrange;
-		unsigned numero[] = {9,4,0,0}; //numero di prova
-		//unsigned modulo = 10000;
-		unsigned controllo = 940;
-		double sopraV = totalrange; //variabile in double per permettere migliore arrotondamento
-		unsigned sopra = 10000000000; //necessario unsigned per il valore finale di top e low e per il modulo
-		double sottoV = 0.0;
-		unsigned sotto = 0;
-		bool flagRange = false;  //flag per controllare se shiftare o no il range
-		bool flagShift = false;
-		unsigned aggiunta = 0;
-
-		//ciclo per ogni carattere
-		while (n_caratteri > 0){
-		
-				//controllo se c'è da shiftare il top e low
-				// ((sotto / 100) == (sopra / 100)) ||
-				if (sopra-sotto < 100000000){
-					flagRange = true;
-				}
-				
-				//calcolo della probabilità rispetto al range
-				double prob = (double)(controllo - sotto) / rangecont;
-				
-				//ciclo per controllare a quale simbolo di riferisce la probabilità
-				for (auto it = coppie.begin(); it != coppie.end(); ++it){
-					if (prob >= it->_Fa && prob < (it->_fa + it->_Fa)){
-						cout << it->_b;
-						os << it->_b;
-						sottoV = sotto + (it->_Fa * rangecont);
-						rangecont = (rangecont * it->_fa);
-						sopraV = sottoV + rangecont;
-						//cout << sottoV << "\t" << rangecont << "\t" << sopraV << endl;
-						break;
-					}
-				}
-
-				//se c'è da shiftare il top e low aggiorno
-				if (flagRange){
-					//operazioni separate per permettere passaggio da double a unsigned senza perdita di segno e per fare il modulo
-					sottoV = sottoV * 10;
-					sotto = (unsigned)sottoV % 10000000000;
-					sopraV = sopraV * 10;
-					sopra = (unsigned)sopraV % 10000000000;
-					flagRange = false;
-					rangecont = sopra - sotto;
-					controllo = (controllo % 1000000000) * 10;
-					controllo += numero[3 + aggiunta];
-					aggiunta++;
-					flagRange = false;
-				}
-				else{//se non shifto trasformo i double in unsigned
-					sotto = (unsigned)sottoV;
-					sopra = (unsigned)sopraV;
-					rangecont = sopra - sotto;
-				}			
-
-				cout << controllo << "\t" << sotto << "\t" << rangecont << "\t" << sopra << endl;
-				n_caratteri--;
-		}
-		//dopo aver scritto in binario la codifica devo gestire la lettura delle cifre, inizio con n_cifre_range_iniziale - 1		
+		decoding(is, os);
 	}
 }
