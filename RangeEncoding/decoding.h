@@ -1,4 +1,4 @@
-#ifndef DECODING_H
+ #ifndef DECODING_H
 #define DECODING_H
 
 #include <iostream>

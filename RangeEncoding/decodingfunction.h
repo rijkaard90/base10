@@ -35,6 +35,6 @@ unsigned read_little_endian(ifstream& is, unsigned nByte);
  * \see syntax(), decoding(), encoding(), read_little_endian();
  */
 void double_to_unsigned(double& sottoV, unsigned& sotto, double& sopraV, unsigned& sopra,
-	unsigned& contacaratteri, double& rangecont, unsigned& controllo, bitreader& br);
+	unsigned& contacaratteri, double& rangecont, unsigned& controllo, bitreader& br, bool& flagEndCode);
 
 #endif // DECODINGFUNCTION_H

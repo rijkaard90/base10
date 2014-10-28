@@ -3,8 +3,8 @@
 void encode(double start, double size, double& low, double& range, double& top){
 	low = low + start * range;
 	top = (low + size* range);
-	top = (unsigned)top;
-	low = (unsigned)ceil(low);
+	top = (unsigned)(top);
+	low = (unsigned)(low);
 	range = top - low;
 }
 

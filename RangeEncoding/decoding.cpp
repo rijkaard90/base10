@@ -31,7 +31,7 @@ void decoding(ifstream& is, ofstream& os){
 	}
 
 	//+1 perchè cosi nel while posso fermarmi a 0 e posso usare un unsigned invece di una variabile signed
-	n_caratteri++;
+	//n_caratteri++;
 
 	//bitreader per leggere le cifre salvate in 4 bit
 	bitreader br(is);
@@ -43,9 +43,10 @@ void decoding(ifstream& is, ofstream& os){
 	unsigned sopra = 1000000; //necessario unsigned per il valore finale di top e low e per il modulo
 	double sottoV = 0.0;
 	unsigned sotto = 0;
-	bool flagRange = true;  //flag per controllare se shiftare o no il range
+	bool flagRange = false;  //flag per controllare se shiftare o no il range
 	bool flagShift = false;
 	bool flagTry = false;
+	bool flagEndCode = false;
 	unsigned contacaratteri = 5;
 	unsigned sopraw, sottow;
 
@@ -64,7 +65,7 @@ void decoding(ifstream& is, ofstream& os){
 		//caso particolare dove range piccolo e first digits diversi, necessario per il giusto calcolo successivo
 		while (((sottow / (unsigned)(pow(10.0, contacaratteri))) != (sopraw / (unsigned)(pow(10.0, contacaratteri)))) && rangecont < 1000){
 			sotto = sotto * 10;
-			sotto = (unsigned)ceil(sottoV) % (unsigned)(pow(10.0, contacaratteri + 1));
+			sotto = (unsigned)(sottoV) % (unsigned)(pow(10.0, contacaratteri + 1));
 			controllo = (controllo % (unsigned)(pow(10.0, contacaratteri))) * 10;
 			controllo += br(4);
 			rangecont = 1000000 - sotto;
@@ -96,7 +97,7 @@ void decoding(ifstream& is, ofstream& os){
 
 		//se c'è da shiftare il top e low aggiorno
 		while (((sottow / (unsigned)(pow(10.0, contacaratteri))) == (sopraw / (unsigned)(pow(10.0, contacaratteri))))){			
-			double_to_unsigned(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br);
+			double_to_unsigned(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br,flagEndCode);
 			flagShift = true;
 			//aggiornamento valori per il while
 			sottow = sottow % (unsigned)(pow(10.0, contacaratteri + 1));
@@ -107,14 +108,14 @@ void decoding(ifstream& is, ofstream& os){
 
 		//entra solo se è già entrato nel while precedente
 		if (rangecont < 1000 && flagTry){
-			double_to_unsigned(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br);
+			double_to_unsigned(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br,flagEndCode);
 			flagRange = true;
 			cout << "\t" << "entra";
 		}
 
 		//se non succede niente precedentemente
 		if (!flagShift && !flagRange){
-			sotto = (unsigned)ceil(sottoV);
+			sotto = (unsigned)sottoV;
 			sopra = (unsigned)sopraV;
 			rangecont = sopra - sotto;
 		}
