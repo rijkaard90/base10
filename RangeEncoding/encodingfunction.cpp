@@ -3,13 +3,13 @@
 void encode(double start, double size, double& low, double& range, double& top){
 	low = low + start * range;
 	top = (low + size* range);
-	top = (unsigned)(top);
-	low = (unsigned)(low);
+	top = (unsigned)round(top);
+	low = (unsigned)round(low);
 	range = top - low;
 }
 
 void emit_digit(double& low, bitwriter& bw){
-	unsigned lowU = (unsigned)low % 100000;
+	unsigned lowU = (unsigned)round(low) % 100000;
 	unsigned out = low / 100000;
 	bw(out, 4);
 	low = lowU * 10;
@@ -25,7 +25,7 @@ void encode_symbol(byte b, vector<coppia>& x, double& low, double& range, double
 			while (((unsigned)low / 100000) == ((unsigned)top / 100000)){
 				//emit_digit(low, os);
 				emit_digit(low, bw);
-				unsigned topU = (unsigned)top % 100000;
+				unsigned topU = (unsigned)round(top) % 100000;
 				top = topU * 10;
 				range = top - low;
 			}

@@ -66,36 +66,42 @@ void encoding(ifstream& is, ofstream& os){
 	bitwriter bw(os);
 
 	//codifica vera e propria
-	while (is.get(reinterpret_cast<char&>(b)))
-		encode_symbol(b, coppie, low, range, up, os, bw);
+	while (is.get(reinterpret_cast<char&>(b))){
+		//if (tmp != 0x0D)
+			encode_symbol(b, coppie, low, range, up, os, bw);
+	}
 
-	//while da controllare!!!!!
 	unsigned differenza = 1;
 	double appoggio;
-	int cnt = 0;
+	double appoggioU;
+	double cnt = 0.0;
+	//variabili d'appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due
 	appoggio = low;
+	appoggioU = up;
 	//cerchiamo l'ordine di grandezza di low e top
-	while (appoggio > 10){
+	while (appoggio > 10 || appoggioU >10){
 		appoggio /= 10;
+		appoggioU /= 10;
 		cnt++;
 	}
 
 	//calcolo quante cifre ha il low e salvo in miao per il for successivo
-	appoggio = 0;
+	appoggio = 0.0;
 	unsigned miao = 0;
 	while (differenza == 1){
-		appoggio = low / (unsigned)pow(10, cnt);
-		differenza = (unsigned)(up / (unsigned)pow(10, cnt) - appoggio);
+		appoggio = low / pow(10.0, cnt);
+		differenza = (unsigned)(up / (unsigned)pow(10, cnt) - (unsigned)appoggio);
 		cnt--;
 		miao++;
 	}
 
 	//calcolo valore finale da aggiungere al file
 	unsigned final = (unsigned)(appoggio + differenza / 2);
+	cout << "finale:" << final << endl;
 
 	//estrazione cifre finali e scrittura tramite bitwriter sul file
 	unsigned x;
-	for (unsigned i = 0; i <miao; ++i){
+	for (unsigned i = 0; i < miao; ++i){
 		x = (final *(unsigned)pow(10, i)) % (unsigned)pow(10, miao) / (unsigned)pow(10, miao - 1);
 		bw(x, 4);
 	}

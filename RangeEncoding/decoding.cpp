@@ -65,12 +65,12 @@ void decoding(ifstream& is, ofstream& os){
 		//caso particolare dove range piccolo e first digits diversi, necessario per il giusto calcolo successivo
 		while (((sottow / (unsigned)(pow(10.0, contacaratteri))) != (sopraw / (unsigned)(pow(10.0, contacaratteri)))) && rangecont < 1000){
 			sotto = sotto * 10;
-			sotto = (unsigned)(sottoV) % (unsigned)(pow(10.0, contacaratteri + 1));
+			sotto = sotto % (unsigned)(pow(10.0, contacaratteri + 1));
 			controllo = (controllo % (unsigned)(pow(10.0, contacaratteri))) * 10;
 			controllo += br(4);
 			rangecont = 1000000 - sotto;
 			flagTry = true;
-			cout << "\t" << "entra";
+			cout << "\t" << "entra ";
 		}
 
 		//calcolo della probabilità rispetto al range
@@ -97,7 +97,7 @@ void decoding(ifstream& is, ofstream& os){
 
 		//se c'è da shiftare il top e low aggiorno
 		while (((sottow / (unsigned)(pow(10.0, contacaratteri))) == (sopraw / (unsigned)(pow(10.0, contacaratteri))))){			
-			double_to_unsigned(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br,flagEndCode);
+			convert_and_shift(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
 			flagShift = true;
 			//aggiornamento valori per il while
 			sottow = sottow % (unsigned)(pow(10.0, contacaratteri + 1));
@@ -106,17 +106,17 @@ void decoding(ifstream& is, ofstream& os){
 			sopraw = sopraw * 10;
 		}
 
-		//entra solo se è già entrato nel while precedente
+		//entra solo se è già entrato nel while del caso particolare
 		if (rangecont < 1000 && flagTry){
-			double_to_unsigned(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br,flagEndCode);
+			convert_and_shift(sottoV, sotto, sopraV, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
 			flagRange = true;
 			cout << "\t" << "entra";
 		}
 
 		//se non succede niente precedentemente
 		if (!flagShift && !flagRange){
-			sotto = (unsigned)sottoV;
-			sopra = (unsigned)sopraV;
+			sotto = (unsigned)round(sottoV);
+			sopra = (unsigned)round(sopraV);
 			rangecont = sopra - sotto;
 		}
 
