@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/decodingfunction.cpp File Reference</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/decodingfunction.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -107,70 +107,71 @@ $(document).ready(function(){initNavTree('decodingfunction_8cpp.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="decodingfunction_8h_source.html">decodingfunction.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for decodingfunction.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="decodingfunction_8cpp__incl.png" border="0" usemap="#_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2decodingfunction_8cpp" alt=""/></div>
+<map name="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2decodingfunction_8cpp" id="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2decodingfunction_8cpp">
+<area shape="rect" id="node2" href="decodingfunction_8h.html" title="decodingfunction.h" alt="" coords="224,95,355,121"/><area shape="rect" id="node7" href="typedef_8h.html" title="typedef.h" alt="" coords="347,169,421,196"/><area shape="rect" id="node8" href="couple_8h.html" title="couple.h" alt="" coords="446,169,517,196"/><area shape="rect" id="node9" href="bitstreams_8h.html" title="bitstreams.h" alt="" coords="541,169,635,196"/></map>
+</div>
 </div>
 <p><a href="decodingfunction_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a69aa350e44ea4bb9f042e51f4afce847"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decodingfunction_8cpp.html#a69aa350e44ea4bb9f042e51f4afce847">read_little_endian</a> (ifstream &amp;is, unsigned nByte)</td></tr>
-<tr class="memdesc:a69aa350e44ea4bb9f042e51f4afce847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function READ_LITTLE_ENDIAN.  <a href="#a69aa350e44ea4bb9f042e51f4afce847">More...</a><br /></td></tr>
-<tr class="separator:a69aa350e44ea4bb9f042e51f4afce847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75aa49cde2064766802b91723014be1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decodingfunction_8cpp.html#a75aa49cde2064766802b91723014be1f">double_to_unsigned</a> (double &amp;sottoV, unsigned &amp;sotto, double &amp;sopraV, unsigned &amp;sopra, unsigned &amp;contacaratteri, double &amp;rangecont, unsigned &amp;controllo, <a class="el" href="classbitreader.html">bitreader</a> &amp;br)</td></tr>
-<tr class="memdesc:a75aa49cde2064766802b91723014be1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function DOUBLE_TO_UNSIGNED.  <a href="#a75aa49cde2064766802b91723014be1f">More...</a><br /></td></tr>
-<tr class="separator:a75aa49cde2064766802b91723014be1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df6b0079643fd33953cbd7c77ba65c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a> (ifstream &amp;is, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> nByte)</td></tr>
+<tr class="memdesc:a7df6b0079643fd33953cbd7c77ba65c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function READ_LITTLE_ENDIAN.  <a href="#a7df6b0079643fd33953cbd7c77ba65c4">More...</a><br /></td></tr>
+<tr class="separator:a7df6b0079643fd33953cbd7c77ba65c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136b8973c6e5053d21a5b4f477dfa42d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decodingfunction_8cpp.html#a136b8973c6e5053d21a5b4f477dfa42d">convert_and_shift</a> (<a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;sotto, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;sopra, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;contacaratteri, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;rangecont, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;controllo, <a class="el" href="classbitreader.html">bitreader</a> &amp;br, bool &amp;flagEndCode)</td></tr>
+<tr class="memdesc:a136b8973c6e5053d21a5b4f477dfa42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function CONVERT_AND_SHIFT.  <a href="#a136b8973c6e5053d21a5b4f477dfa42d">More...</a><br /></td></tr>
+<tr class="separator:a136b8973c6e5053d21a5b4f477dfa42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a75aa49cde2064766802b91723014be1f"></a>
+<a class="anchor" id="a136b8973c6e5053d21a5b4f477dfa42d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void double_to_unsigned </td>
+          <td class="memname">void convert_and_shift </td>
           <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>sottoV</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>sotto</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>sopraV</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>sopra</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>contacaratteri</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>rangecont</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>controllo</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classbitreader.html">bitreader</a> &amp;&#160;</td>
-          <td class="paramname"><em>br</em>&#160;</td>
+          <td class="paramname"><em>br</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>flagEndCode</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -180,33 +181,32 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function DOUBLE_TO_UNSIGNED. </p>
-<p>Allows switching from double to unsigned without loosing sign. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Function CONVERT_AND_SHIFT. </p>
+<p>Allows algorithm to calculate new values to be used in decoding. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">&amp;sottoV</td><td>Double for better rounding bottom range. </td></tr>
     <tr><td class="paramname">&amp;sotto</td><td>Bottom range. </td></tr>
-    <tr><td class="paramname">&amp;sopraV</td><td>Double for better rounding top range. </td></tr>
     <tr><td class="paramname">&amp;sopra</td><td>Top range. </td></tr>
     <tr><td class="paramname">&amp;contacaratteri</td><td>Characters count. </td></tr>
     <tr><td class="paramname">&amp;rangecont</td><td>Range of decoding. </td></tr>
     <tr><td class="paramname">&amp;controllo</td><td>Characters input. </td></tr>
     <tr><td class="paramname">&amp;br</td><td>Bit reader. </td></tr>
+    <tr><td class="paramname">&amp;flagEndCode</td><td>End </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Unsigned range and data. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decodingfunction_8h.html#a69aa350e44ea4bb9f042e51f4afce847" title="Function READ_LITTLE_ENDIAN. ">read_little_endian()</a>; </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>New values used by RangeEncoding algorithm for decoding. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="decodingfunction_8h.html#a7df6b0079643fd33953cbd7c77ba65c4" title="Function READ_LITTLE_ENDIAN. ">read_little_endian()</a>; </dd></dl>
 
-<p>Definition at line <a class="el" href="decodingfunction_8cpp_source.html#l00011">11</a> of file <a class="el" href="decodingfunction_8cpp_source.html">decodingfunction.cpp</a>.</p>
+<p>Definition at line <a class="el" href="decodingfunction_8cpp_source.html#l00012">12</a> of file <a class="el" href="decodingfunction_8cpp_source.html">decodingfunction.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a69aa350e44ea4bb9f042e51f4afce847"></a>
+<a class="anchor" id="a7df6b0079643fd33953cbd7c77ba65c4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned read_little_endian </td>
+          <td class="memname"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> read_little_endian </td>
           <td>(</td>
           <td class="paramtype">ifstream &amp;&#160;</td>
           <td class="paramname"><em>is</em>, </td>
@@ -214,7 +214,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&#160;</td>
           <td class="paramname"><em>nByte</em>&#160;</td>
         </tr>
         <tr>
@@ -226,6 +226,21 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function READ_LITTLE_ENDIAN. </p>
+<p>List of RangeEncoding algorithm function:</p><ul>
+<li><code><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a></code> </li>
+<li><code><a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a></code> <ol type="1">
+<li><a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a></li>
+</ol>
+</li>
+<li><code><a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a></code> <ol type="1">
+<li><a class="el" href="decodingfunction_8h.html#a7df6b0079643fd33953cbd7c77ba65c4" title="Function READ_LITTLE_ENDIAN. ">read_little_endian()</a></li>
+<li><a class="el" href="decodingfunction_8h.html#a136b8973c6e5053d21a5b4f477dfa42d" title="Function CONVERT_AND_SHIFT. ">convert_and_shift()</a></li>
+</ol>
+</li>
+</ul>
+<p>More details will be provided in definition.</p>
 <p>Reading for encoding in little endian. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">&amp;is</td><td>Input file. </td></tr>
@@ -234,7 +249,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Occurrences read. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decodingfunction_8h.html#a75aa49cde2064766802b91723014be1f" title="Function DOUBLE_TO_UNSIGNED. ">double_to_unsigned()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="decodingfunction_8h.html#a136b8973c6e5053d21a5b4f477dfa42d" title="Function CONVERT_AND_SHIFT. ">convert_and_shift()</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="decodingfunction_8cpp_source.html#l00003">3</a> of file <a class="el" href="decodingfunction_8cpp_source.html">decodingfunction.cpp</a>.</p>
 
@@ -246,7 +261,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="decodingfunction_8cpp.html">decodingfunction.cpp</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:14 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

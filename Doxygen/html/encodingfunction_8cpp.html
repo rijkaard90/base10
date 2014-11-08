@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encodingfunction.cpp File Reference</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encodingfunction.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -107,30 +107,37 @@ $(document).ready(function(){initNavTree('encodingfunction_8cpp.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="encodingfunction_8h_source.html">encodingfunction.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for encodingfunction.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="encodingfunction_8cpp__incl.png" border="0" usemap="#_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encodingfunction_8cpp" alt=""/></div>
+<map name="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encodingfunction_8cpp" id="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encodingfunction_8cpp">
+<area shape="rect" id="node2" href="encodingfunction_8h.html" title="encodingfunction.h" alt="" coords="224,95,355,121"/><area shape="rect" id="node7" href="typedef_8h.html" title="typedef.h" alt="" coords="347,169,421,196"/><area shape="rect" id="node8" href="couple_8h.html" title="couple.h" alt="" coords="446,169,517,196"/><area shape="rect" id="node9" href="bitstreams_8h.html" title="bitstreams.h" alt="" coords="541,169,635,196"/></map>
+</div>
 </div>
 <p><a href="encodingfunction_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0c1c44cc8e62748d90ded6b92d76cc64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encodingfunction_8cpp.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a> (double start, double size, double &amp;low, double &amp;range, double &amp;top)</td></tr>
-<tr class="memdesc:a0c1c44cc8e62748d90ded6b92d76cc64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function ENCODE.  <a href="#a0c1c44cc8e62748d90ded6b92d76cc64">More...</a><br /></td></tr>
-<tr class="separator:a0c1c44cc8e62748d90ded6b92d76cc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92808af7f5cee7c02a6720d7482d1423"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a> (double &amp;low, <a class="el" href="classbitwriter.html">bitwriter</a> &amp;bw)</td></tr>
-<tr class="memdesc:a92808af7f5cee7c02a6720d7482d1423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function EMIT_DIGIT.  <a href="#a92808af7f5cee7c02a6720d7482d1423">More...</a><br /></td></tr>
-<tr class="separator:a92808af7f5cee7c02a6720d7482d1423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac27769cf36e6bbbddff7977042ce0e7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encodingfunction_8cpp.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a> (<a class="el" href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt; <a class="el" href="structcoppia.html">coppia</a> &gt; &amp;x, double &amp;low, double &amp;range, double &amp;top, ofstream &amp;os, <a class="el" href="classbitwriter.html">bitwriter</a> &amp;bw)</td></tr>
-<tr class="memdesc:ac27769cf36e6bbbddff7977042ce0e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function ENCODE_SYMBOL.  <a href="#ac27769cf36e6bbbddff7977042ce0e7b">More...</a><br /></td></tr>
-<tr class="separator:ac27769cf36e6bbbddff7977042ce0e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc00fa15f2cc9c0883ea1cd4535f7574"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574">encode</a> (<a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> start, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> size, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;low, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;range, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;top)</td></tr>
+<tr class="memdesc:adc00fa15f2cc9c0883ea1cd4535f7574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function ENCODE.  <a href="#adc00fa15f2cc9c0883ea1cd4535f7574">More...</a><br /></td></tr>
+<tr class="separator:adc00fa15f2cc9c0883ea1cd4535f7574"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6013d45cbd3006d127bd7ed72a6e3bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a> (<a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;low, <a class="el" href="classbitwriter.html">bitwriter</a> &amp;bw)</td></tr>
+<tr class="memdesc:ab6013d45cbd3006d127bd7ed72a6e3bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function EMIT_DIGIT.  <a href="#ab6013d45cbd3006d127bd7ed72a6e3bc">More...</a><br /></td></tr>
+<tr class="separator:ab6013d45cbd3006d127bd7ed72a6e3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78461e855e3d0e16dd688790991d70be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a> (<a class="el" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt; <a class="el" href="structcoppia2.html">coppia2</a> &gt; &amp;x, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;low, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;range, <a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;top, ofstream &amp;os, <a class="el" href="classbitwriter.html">bitwriter</a> &amp;bw)</td></tr>
+<tr class="memdesc:a78461e855e3d0e16dd688790991d70be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function ENCODE_SYMBOL.  <a href="#a78461e855e3d0e16dd688790991d70be">More...</a><br /></td></tr>
+<tr class="separator:a78461e855e3d0e16dd688790991d70be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a92808af7f5cee7c02a6720d7482d1423"></a>
+<a class="anchor" id="ab6013d45cbd3006d127bd7ed72a6e3bc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void emit_digit </td>
           <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>low</em>, </td>
         </tr>
         <tr>
@@ -156,44 +163,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Bottom range adjusted. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="encodingfunction_8h.html#a0c1c44cc8e62748d90ded6b92d76cc64" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8h.html#ac27769cf36e6bbbddff7977042ce0e7b" title="Function ENCODE_SYMBOL. ">encode_symbol()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="encodingfunction_8h.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8h.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="encodingfunction_8cpp_source.html#l00011">11</a> of file <a class="el" href="encodingfunction_8cpp_source.html">encodingfunction.cpp</a>.</p>
+<p>Definition at line <a class="el" href="encodingfunction_8cpp_source.html#l00009">9</a> of file <a class="el" href="encodingfunction_8cpp_source.html">encodingfunction.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0c1c44cc8e62748d90ded6b92d76cc64"></a>
+<a class="anchor" id="adc00fa15f2cc9c0883ea1cd4535f7574"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void encode </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&#160;</td>
           <td class="paramname"><em>start</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>low</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>top</em>&#160;</td>
         </tr>
         <tr>
@@ -205,6 +212,21 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function ENCODE. </p>
+<p>List of RangeEncoding algorithm function:</p><ul>
+<li><code><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a></code> </li>
+<li><code><a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a></code> <ol type="1">
+<li><a class="el" href="encodingfunction_8h.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a></li>
+<li><a class="el" href="encodingfunction_8h.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a></li>
+<li><a class="el" href="encodingfunction_8h.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a></li>
+</ol>
+</li>
+<li><code><a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a></code> <ol type="1">
+<li><a class="el" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4" title="Function READ_LITTLE_ENDIAN. ">read_little_endian()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#a136b8973c6e5053d21a5b4f477dfa42d" title="Function CONVERT_AND_SHIFT. ">convert_and_shift()</a></li>
+</ol>
+</li>
+</ul>
+<p>More details will be provided in definition.</p>
 <p>Calculates the values of top and bottom range, and new range. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">start</td><td>Starting range. </td></tr>
@@ -216,44 +238,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Range for encoding. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="encodingfunction_8h.html#a92808af7f5cee7c02a6720d7482d1423" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="encodingfunction_8h.html#ac27769cf36e6bbbddff7977042ce0e7b" title="Function ENCODE_SYMBOL. ">encode_symbol()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="encodingfunction_8h.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="encodingfunction_8h.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="encodingfunction_8cpp_source.html#l00003">3</a> of file <a class="el" href="encodingfunction_8cpp_source.html">encodingfunction.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac27769cf36e6bbbddff7977042ce0e7b"></a>
+<a class="anchor" id="a78461e855e3d0e16dd688790991d70be"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void encode_symbol </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a>&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="structcoppia.html">coppia</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="structcoppia2.html">coppia2</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>low</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>range</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> &amp;&#160;</td>
           <td class="paramname"><em>top</em>, </td>
         </tr>
         <tr>
@@ -290,9 +312,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Encoding symbol. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="encodingfunction_8h.html#a0c1c44cc8e62748d90ded6b92d76cc64" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8h.html#a92808af7f5cee7c02a6720d7482d1423" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="encodingfunction_8h.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8h.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="encodingfunction_8cpp_source.html#l00018">18</a> of file <a class="el" href="encodingfunction_8cpp_source.html">encodingfunction.cpp</a>.</p>
+<p>Definition at line <a class="el" href="encodingfunction_8cpp_source.html#l00016">16</a> of file <a class="el" href="encodingfunction_8cpp_source.html">encodingfunction.cpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +324,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="encodingfunction_8cpp.html">encodingfunction.cpp</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:14 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

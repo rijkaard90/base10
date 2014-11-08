@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encoding.h File Reference</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encoding.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -113,6 +113,20 @@ $(document).ready(function(){initNavTree('encoding_8h.html','');});
 <code>#include &quot;<a class="el" href="typedef_8h_source.html">typedef.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="couple_8h_source.html">couple.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="bitstreams_8h_source.html">bitstreams.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for encoding.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8h__incl.png" border="0" usemap="#_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encoding_8h" alt=""/></div>
+<map name="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encoding_8h" id="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encoding_8h">
+<area shape="rect" id="node6" href="typedef_8h.html" title="typedef.h" alt="" coords="347,95,421,121"/><area shape="rect" id="node7" href="couple_8h.html" title="couple.h" alt="" coords="446,95,517,121"/><area shape="rect" id="node8" href="bitstreams_8h.html" title="bitstreams.h" alt="" coords="541,95,635,121"/></map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="encoding_8h__dep__incl.png" border="0" usemap="#_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encoding_8hdep" alt=""/></div>
+<map name="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encoding_8hdep" id="_c_1_2_users_2_mosca_2_desktop_2_s_d_e_m_2_range_encoding_2encoding_8hdep">
+<area shape="rect" id="node2" href="encoding_8cpp.html" title="C:/Users/Mosca/Desktop\l/SDEM/RangeEncoding/encoding.cpp" alt="" coords="5,95,245,136"/><area shape="rect" id="node3" href="rangeencoding_8h.html" title="C:/Users/Mosca/Desktop\l/SDEM/RangeEncoding/rangeencoding.h" alt="" coords="269,95,528,136"/><area shape="rect" id="node4" href="main_8cpp.html" title="C:/Users/Mosca/Desktop\l/SDEM/RangeEncoding/main.cpp" alt="" coords="291,184,507,225"/></map>
+</div>
 </div>
 <p><a href="encoding_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -148,6 +162,21 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Function ENCODING. </p>
+<p>List of RangeEncoding algorithm function:</p><ul>
+<li><code><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a></code> </li>
+<li><code><a class="el" href="encoding_8h.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a></code> <ol type="1">
+<li><a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a></li>
+</ol>
+</li>
+<li><code><a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a></code> <ol type="1">
+<li><a class="el" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4" title="Function READ_LITTLE_ENDIAN. ">read_little_endian()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#a136b8973c6e5053d21a5b4f477dfa42d" title="Function CONVERT_AND_SHIFT. ">convert_and_shift()</a></li>
+</ol>
+</li>
+</ul>
+<p>More details will be provided in definition.</p>
 <p>Primary function for encoding algorithm. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">&amp;is</td><td>Input file. </td></tr>
@@ -156,7 +185,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The encoded input file. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="encodingfunction_8cpp.html#a0c1c44cc8e62748d90ded6b92d76cc64" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="encodingfunction_8cpp.html#ac27769cf36e6bbbddff7977042ce0e7b" title="Function ENCODE_SYMBOL. ">encode_symbol()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a>, <a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a> </dd></dl>
+<p>&lt; Header creation. </p>
 
 <p>Definition at line <a class="el" href="encoding_8cpp_source.html#l00004">4</a> of file <a class="el" href="encoding_8cpp_source.html">encoding.cpp</a>.</p>
 
@@ -168,7 +198,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="encoding_8h.html">encoding.h</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:14 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

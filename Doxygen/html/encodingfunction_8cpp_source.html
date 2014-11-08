@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encodingfunction.cpp Source File</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encodingfunction.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -106,59 +106,58 @@ $(document).ready(function(){initNavTree('encodingfunction_8cpp_source.html','')
 <div class="contents">
 <a href="encodingfunction_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="encodingfunction_8h.html">encodingfunction.h</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="encodingfunction_8h.html#a0c1c44cc8e62748d90ded6b92d76cc64">    3</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8cpp.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a>(<span class="keywordtype">double</span> start, <span class="keywordtype">double</span> size, <span class="keywordtype">double</span>&amp; low, <span class="keywordtype">double</span>&amp; range, <span class="keywordtype">double</span>&amp; top){</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    low = low + start * range;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    top = (low + size* range);</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    top = (unsigned)top;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    low = (unsigned)ceil(low);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    range = top - low;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="encodingfunction_8h.html#a92808af7f5cee7c02a6720d7482d1423">   11</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a>(<span class="keywordtype">double</span>&amp; low, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw){</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">unsigned</span> lowU = (unsigned)low % 100000;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">unsigned</span> out = low / 100000;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    bw(out, 4);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    low = lowU * 10;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="encodingfunction_8h.html#ac27769cf36e6bbbddff7977042ce0e7b">   18</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8cpp.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a>(<a class="code" href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt;coppia&gt;&amp; x, <span class="keywordtype">double</span>&amp; low, <span class="keywordtype">double</span>&amp; range, <span class="keywordtype">double</span>&amp; top, ofstream&amp; os, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw){</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = x.begin(); it != x.end(); ++it)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">if</span> (it-&gt;_b == b){</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <a class="code" href="encodingfunction_8cpp.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a>(it-&gt;_Fa, it-&gt;_fa, low, range, top);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="comment">//verifica di ogni passaggio</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;low: &quot;</span> &lt;&lt; low &lt;&lt; <span class="stringliteral">&quot;\t range: &quot;</span> &lt;&lt; range &lt;&lt; <span class="stringliteral">&quot;\t top: &quot;</span> &lt;&lt; top &lt;&lt; endl;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="comment">//se la prima cifra del low e del top sono uguali la sputo fuori</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordflow">while</span> (((<span class="keywordtype">unsigned</span>)low / 100000) == ((<span class="keywordtype">unsigned</span>)top / 100000)){</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <span class="comment">//emit_digit(low, os);</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <a class="code" href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a>(low, bw);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordtype">unsigned</span> topU = (unsigned)top % 100000;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                top = topU * 10;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                range = top - low;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="comment">//modifica per range bassi disponibili</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">if</span> (range &lt; 1000){</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <a class="code" href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a>(low, bw);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <a class="code" href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a>(low, bw);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                range = 1000000.0 - low;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                top = low + range;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Symbol not found!&quot;</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="ttc" id="couple_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00004">couple.h:4</a></div></div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="encodingfunction_8h.html#adc00fa15f2cc9c0883ea1cd4535f7574">    3</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574">encode</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> start, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> size, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; low, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; range, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; top){</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    low = low + ceil((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(start)*((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)range / 10000));</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    range = ((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(size)*((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)range / 10000));</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    top = low + range;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="encodingfunction_8h.html#ab6013d45cbd3006d127bd7ed72a6e3bc">    9</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; low, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw){</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> lowU = (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)round(low) % 100000;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> out = low / 100000;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    bw(out, 4);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    low = lowU * 10;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="encodingfunction_8h.html#a78461e855e3d0e16dd688790991d70be">   16</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a>(<a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt;coppia2&gt;&amp; x, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; low, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; range, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; top, ofstream&amp; os, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw){</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = x.begin(); it != x.end(); ++it)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">if</span> (it-&gt;_b == b){</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <a class="code" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574">encode</a>(it-&gt;_Fa, it-&gt;_fa, low, range, top);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="comment">//verifica di ogni passaggio</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="comment">//cout &lt;&lt; &quot;low: &quot; &lt;&lt; low &lt;&lt; &quot;\t range: &quot; &lt;&lt; range &lt;&lt; &quot;\t top: &quot; &lt;&lt; top &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="comment">//se la prima cifra del low e del top sono uguali la sputo fuori</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="keywordflow">while</span> (((<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)low / 100000) == ((<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)top / 100000)){</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="comment">//emit_digit(low, os);</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <a class="code" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a>(low, bw);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> topU = (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)round(top) % 100000;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                top = topU * 10;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                range = top - low;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="comment">//modifica per range bassi disponibili</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">if</span> (range &lt; 1000){</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <a class="code" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a>(low, bw);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <a class="code" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a>(low, bw);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                range = 1000000 - low;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Symbol not found!&quot;</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="ttc" id="couple_8h_html_a2002b70582b90f0ba284df57216bad66"><div class="ttname"><a href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a></div><div class="ttdeci">double float_64</div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00006">couple.h:6</a></div></div>
+<div class="ttc" id="encodingfunction_8cpp_html_adc00fa15f2cc9c0883ea1cd4535f7574"><div class="ttname"><a href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574">encode</a></div><div class="ttdeci">void encode(uint_32 start, uint_32 size, uint_32 &amp;low, uint_32 &amp;range, uint_32 &amp;top)</div><div class="ttdoc">Function ENCODE. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00003">encodingfunction.cpp:3</a></div></div>
+<div class="ttc" id="encodingfunction_8cpp_html_ab6013d45cbd3006d127bd7ed72a6e3bc"><div class="ttname"><a href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a></div><div class="ttdeci">void emit_digit(uint_32 &amp;low, bitwriter &amp;bw)</div><div class="ttdoc">Function EMIT_DIGIT. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00009">encodingfunction.cpp:9</a></div></div>
+<div class="ttc" id="encodingfunction_8cpp_html_a78461e855e3d0e16dd688790991d70be"><div class="ttname"><a href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a></div><div class="ttdeci">void encode_symbol(byte b, vector&lt; coppia2 &gt; &amp;x, uint_32 &amp;low, uint_32 &amp;range, uint_32 &amp;top, ofstream &amp;os, bitwriter &amp;bw)</div><div class="ttdoc">Function ENCODE_SYMBOL. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00016">encodingfunction.cpp:16</a></div></div>
 <div class="ttc" id="encodingfunction_8h_html"><div class="ttname"><a href="encodingfunction_8h.html">encodingfunction.h</a></div></div>
-<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00010">bitstreams.h:10</a></div></div>
-<div class="ttc" id="encodingfunction_8cpp_html_a0c1c44cc8e62748d90ded6b92d76cc64"><div class="ttname"><a href="encodingfunction_8cpp.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a></div><div class="ttdeci">void encode(double start, double size, double &amp;low, double &amp;range, double &amp;top)</div><div class="ttdoc">Function ENCODE. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00003">encodingfunction.cpp:3</a></div></div>
-<div class="ttc" id="encodingfunction_8cpp_html_ac27769cf36e6bbbddff7977042ce0e7b"><div class="ttname"><a href="encodingfunction_8cpp.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a></div><div class="ttdeci">void encode_symbol(byte b, vector&lt; coppia &gt; &amp;x, double &amp;low, double &amp;range, double &amp;top, ofstream &amp;os, bitwriter &amp;bw)</div><div class="ttdoc">Function ENCODE_SYMBOL. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00018">encodingfunction.cpp:18</a></div></div>
-<div class="ttc" id="encodingfunction_8cpp_html_a92808af7f5cee7c02a6720d7482d1423"><div class="ttname"><a href="encodingfunction_8cpp.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a></div><div class="ttdeci">void emit_digit(double &amp;low, bitwriter &amp;bw)</div><div class="ttdoc">Function EMIT_DIGIT. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00011">encodingfunction.cpp:11</a></div></div>
+<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00014">bitstreams.h:14</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00006">bitstreams.h:6</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a64e458b61bddf0b87a3701578aa7a428"><div class="ttname"><a href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a></div><div class="ttdeci">unsigned int uint_32</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00008">bitstreams.h:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="encodingfunction_8cpp.html">encodingfunction.cpp</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:13 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

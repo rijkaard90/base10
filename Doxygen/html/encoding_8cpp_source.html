@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encoding.cpp Source File</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encoding.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -109,125 +109,606 @@ $(document).ready(function(){initNavTree('encoding_8cpp_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="encoding_8h.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd">    4</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd">encoding</a>(ifstream&amp; is, ofstream&amp; os){</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    array&lt;unsigned, 256&gt; myarray;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    array&lt;uint_32, 256&gt; myarray;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    vector&lt;coppia&gt; coppie;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="comment">//mi assicuro che l&#39;array sia inizializzato a zero</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    myarray.fill(0);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="comment">//calcolo le ricorrenze di ogni simbolo</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">unsigned</span> tot_symbol = 0;<span class="comment">//numero totali simboli letti dallo stream</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> tmp;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">while</span> (is.get(reinterpret_cast&lt;char&amp;&gt;(tmp))){</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="comment">//gestione ritorno a capo(è presente uno spazio in più)</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">if</span> (tmp == 0x0D){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    vector&lt;coppia2&gt; coppie2;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="comment">//mi assicuro che l&#39;array sia inizializzato a zero</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    myarray.fill(0);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">//calcolo le ricorrenze di ogni simbolo</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> tot_symbol = 0;<span class="comment">//numero totali simboli letti dallo stream</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> tmp;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">while</span> (is.get(reinterpret_cast&lt;char&amp;&gt;(tmp))){ <span class="comment">//gestione ritorno a capo (è presente uno spazio in più)        </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">if</span> (tmp == 0x0D)</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            is.get();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        }</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        tot_symbol++;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        myarray[tmp]++;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 256; ++i){</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span> (myarray[i] != 0)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            coppie.push_back(<a class="code" href="structcoppia.html">coppia</a>(i, (<span class="keywordtype">double</span>)myarray[i] / (<span class="keywordtype">double</span>)tot_symbol));</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">//dopo aver ordinato il vector posso assegnare l&#39;inizio del range per ogni simbolo</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">double</span> prob_range = 0.0;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = coppie.begin(); it != coppie.end(); ++it){</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        it-&gt;_Fa = prob_range;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        prob_range += it-&gt;_fa;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;symbol: &quot;</span> &lt;&lt; it-&gt;_b &lt;&lt; <span class="stringliteral">&quot;\t start_range: &quot;</span> &lt;&lt; it-&gt;_Fa &lt;&lt; <span class="stringliteral">&quot;\t probability: &quot;</span> &lt;&lt; it-&gt;_fa &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">/* prova encoding */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">double</span> range = pow(10.0, 6.0);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">double</span> low = 0.0;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">double</span> up = range;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    is.clear(); <span class="comment">// Disattivo l&#39;EOF precedente</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    is.seekg(ios_base::beg); <span class="comment">// Torno all&#39;inizio</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">/*  SCRITTURA HEADER         */</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//scrivo in output lunghezza file iniziale</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    os.write(reinterpret_cast&lt;char*&gt;(&amp;tot_symbol), <span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span>));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">//scrivo in output numero simboli ascii con probabilità maggiore di zero</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> numcoppie = coppie.size();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    os.write(reinterpret_cast&lt;char*&gt;(&amp;numcoppie), 1);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        tot_symbol++;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        myarray[tmp]++;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; 256; ++i){</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">if</span> (myarray[i] != 0)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            coppie.push_back(<a class="code" href="structcoppia.html">coppia</a>(i, (<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)myarray[i] / (<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)tot_symbol));</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> flagSfora = <span class="keyword">true</span>; <span class="comment">//flag per verificare il caso della probabilità che sfora 1</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> contaprob = 0;   <span class="comment">// conta la probabilità     uint_32 indice = 0; //ricorda il valore con probabil. piu grande
+    uint_32 max = 0; //ricorda valore con probab. piu grande
+    uint_32 i = 0;  //indice iteratore
+    //arrotondamento a 4 cifre decimali della probabilità
+   while (true){
+        for (auto it = coppie.begin(); it != coppie.end(); ++it){
+            float_64 x = it-&gt;_fa;
+            x = x * 10000;
+            //variabile dove è salvato il valore senza virgola della prob
+            int_16 u = x;
+            //livellamento delle probabilità dei valori per evitare errori di calcolo
+            if (flagSfora){
+                if (u &lt; 50){
+                    u = 50;
+                }
+                if (u &gt; 300){
+                    u = 300;
+                }
+            }
+            //ci entriamo se il livellamento supera 1 di probabilità totale.
+            //tutti i valori hanno uguale probabilità
+           else
+                u = 10000 / coppie.size();
+
+            contaprob += u;
+            coppie2.push_back(coppia2(it-&gt;_b, u));
+            i++;
+        }
+        //ci entriamo se il livellamento supera 1 di probabilità totale.
+        //tutti i valori avranno uguale probabilità
+     if (contaprob &gt; 10000){
+            flagSfora = false;
+            coppie2.clear();
+            contaprob = 0;
+        }
+        else break;
+    }
+
+    //dopo aver ordinato il vector posso assegnare l&#39;inizio del range per ogni simbolo
+    uint_32 prob_range = 0;
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        it-&gt;_Fa = prob_range;
+        prob_range += it-&gt;_fa;
+        cout &lt;&lt; &quot;symbol: &quot; &lt;&lt; it-&gt;_b &lt;&lt; &quot;\t start_range: &quot; &lt;&lt; it-&gt;_Fa &lt;&lt; &quot;\t probability: &quot; &lt;&lt; it-&gt;_fa &lt;&lt; endl;
+    }
+
+    //correzione valore finale per arrivare a 1
+    coppie.at(coppie.size() - 1)._fa = 10000 - coppie.at(coppie.size() - 1)._Fa;
+
+    /* prova encoding */
+    uint_32 range = pow(10.0, 6.0);
+    uint_32 low = 0;
+    uint_32 up = range;
+    is.clear(); // Disattivo l&#39;EOF precedente
+    is.seekg(ios_base::beg); // Torno all&#39;inizio
+    byte b;
+
+    /*!&lt; Header creation. */
+
+    //scrivo in output lunghezza file iniziale
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;tot_symbol), sizeof(uint_32));
+
+    //scrivo in output numero simboli ascii con probabilità maggiore di zero
+    byte numcoppie = coppie2.size();
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;numcoppie), 1);
+
+    //stampiamo per ogni simbolo il valore della probabilità senza virgola
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        os &lt;&lt; it-&gt;_b;
+        int_16 u = round(it-&gt;_fa);
+        os.write(reinterpret_cast&lt;char*&gt;(&amp;u), 2);
+    }
+
+    /*!&lt; Header end. */
+
+    //il bitwriter serve per scrivere in output le cifre da 0 a 9, quindi bastano 4 bit per cifra per codificarle
+    bitwriter bw(os);
+
+    //codifica vera e propria
+    while (is.get(reinterpret_cast&lt;char&amp;&gt;(b)))
+        encode_symbol(b, coppie2, low, range, up, os, bw);
+
+    uint_32 differenza = 1;
+    float_64 appoggio;
+    float_64 appoggioU;
+    float_64 cnt = 0.0;
+    //variabili d&#39;appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due
+    appoggio = low;
+    appoggioU = up;
+    //cerchiamo l&#39;ordine di grandezza di low e top
+    while (appoggio &gt; 10 || appoggioU &gt;10){
+        appoggio /= 10;
+        appoggioU /= 10;
+        cnt++;
+    }
+
+    //calcolo quante cifre ha il low e salvo in contLow per il for successivo
+    appoggio = 0.0;
+    uint_32 contLow = 0;
+    while (differenza == 1){
+        appoggio = low / pow(10.0, cnt);
+        differenza = (uint_32)(up / (uint_32)pow(10, cnt) - (uint_32)appoggio);
+        cnt--;
+        contLow++;
+    }
+
+    //calcolo valore finale da aggiungere al file
+    uint_32 final = (uint_32)(appoggio + differenza / 2);
+    cout &lt;&lt; &quot;finale:&quot; &lt;&lt; final &lt;&lt; endl;
+
+    //estrazione cifre finali e scrittura tramite bitwriter sul file
+    uint_32 x;
+    for (uint_32 i = 0; i &lt; contLow; ++i){
+        x = (final *(uint_32)pow(10, i)) % (uint_32)pow(10, contLow) / (uint_32)pow(10, contLow - 1);
+        bw(x, 4);
+    }
+
+    //per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte
+    bw.flush();
+
+    // chiude is e os per poterli eventualemente riusare
+    is.close();
+    os.close();
+}</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> indice = 0; <span class="comment">//ricorda il valore con probabil. piu grande</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> max = 0; <span class="comment">//ricorda valore con probab. piu grande</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0;  <span class="comment">//indice iteratore</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//arrotondamento a 4 cifre decimali della probabilità    while (true){
+        for (auto it = coppie.begin(); it != coppie.end(); ++it){
+            float_64 x = it-&gt;_fa;
+            x = x * 10000;
+            //variabile dove è salvato il valore senza virgola della prob
+            int_16 u = x;
+            //livellamento delle probabilità dei valori per evitare errori di calcolo
+            if (flagSfora){
+                if (u &lt; 50){
+                    u = 50;
+                }
+                if (u &gt; 300){
+                    u = 300;
+                }
+            }
+            //ci entriamo se il livellamento supera 1 di probabilità totale.
+            //tutti i valori hanno uguale probabilità
+           else
+                u = 10000 / coppie.size();
+
+            contaprob += u;
+            coppie2.push_back(coppia2(it-&gt;_b, u));
+            i++;
+        }
+        //ci entriamo se il livellamento supera 1 di probabilità totale.
+        //tutti i valori avranno uguale probabilità
+     if (contaprob &gt; 10000){
+            flagSfora = false;
+            coppie2.clear();
+            contaprob = 0;
+        }
+        else break;
+    }
+
+    //dopo aver ordinato il vector posso assegnare l&#39;inizio del range per ogni simbolo
+    uint_32 prob_range = 0;
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        it-&gt;_Fa = prob_range;
+        prob_range += it-&gt;_fa;
+        cout &lt;&lt; &quot;symbol: &quot; &lt;&lt; it-&gt;_b &lt;&lt; &quot;\t start_range: &quot; &lt;&lt; it-&gt;_Fa &lt;&lt; &quot;\t probability: &quot; &lt;&lt; it-&gt;_fa &lt;&lt; endl;
+    }
+
+    //correzione valore finale per arrivare a 1
+    coppie.at(coppie.size() - 1)._fa = 10000 - coppie.at(coppie.size() - 1)._Fa;
+
+    /* prova encoding */
+    uint_32 range = pow(10.0, 6.0);
+    uint_32 low = 0;
+    uint_32 up = range;
+    is.clear(); // Disattivo l&#39;EOF precedente
+    is.seekg(ios_base::beg); // Torno all&#39;inizio
+    byte b;
+
+    /*!&lt; Header creation. */
+
+    //scrivo in output lunghezza file iniziale
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;tot_symbol), sizeof(uint_32));
+
+    //scrivo in output numero simboli ascii con probabilità maggiore di zero
+    byte numcoppie = coppie2.size();
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;numcoppie), 1);
+
+    //stampiamo per ogni simbolo il valore della probabilità senza virgola
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        os &lt;&lt; it-&gt;_b;
+        int_16 u = round(it-&gt;_fa);
+        os.write(reinterpret_cast&lt;char*&gt;(&amp;u), 2);
+    }
+
+    /*!&lt; Header end. */
+
+    //il bitwriter serve per scrivere in output le cifre da 0 a 9, quindi bastano 4 bit per cifra per codificarle
+    bitwriter bw(os);
+
+    //codifica vera e propria
+    while (is.get(reinterpret_cast&lt;char&amp;&gt;(b)))
+        encode_symbol(b, coppie2, low, range, up, os, bw);
+
+    uint_32 differenza = 1;
+    float_64 appoggio;
+    float_64 appoggioU;
+    float_64 cnt = 0.0;
+    //variabili d&#39;appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due
+    appoggio = low;
+    appoggioU = up;
+    //cerchiamo l&#39;ordine di grandezza di low e top
+    while (appoggio &gt; 10 || appoggioU &gt;10){
+        appoggio /= 10;
+        appoggioU /= 10;
+        cnt++;
+    }
+
+    //calcolo quante cifre ha il low e salvo in contLow per il for successivo
+    appoggio = 0.0;
+    uint_32 contLow = 0;
+    while (differenza == 1){
+        appoggio = low / pow(10.0, cnt);
+        differenza = (uint_32)(up / (uint_32)pow(10, cnt) - (uint_32)appoggio);
+        cnt--;
+        contLow++;
+    }
+
+    //calcolo valore finale da aggiungere al file
+    uint_32 final = (uint_32)(appoggio + differenza / 2);
+    cout &lt;&lt; &quot;finale:&quot; &lt;&lt; final &lt;&lt; endl;
+
+    //estrazione cifre finali e scrittura tramite bitwriter sul file
+    uint_32 x;
+    for (uint_32 i = 0; i &lt; contLow; ++i){
+        x = (final *(uint_32)pow(10, i)) % (uint_32)pow(10, contLow) / (uint_32)pow(10, contLow - 1);
+        bw(x, 4);
+    }
+
+    //per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte
+    bw.flush();
+
+    // chiude is e os per poterli eventualemente riusare
+    is.close();
+    os.close();
+}</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">while</span> (<span class="keyword">true</span>){</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = coppie.begin(); it != coppie.end(); ++it){</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a> x = it-&gt;_fa;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            x = x * 10000;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="comment">//variabile dove è salvato il valore senza virgola della prob</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="typedef_8h.html#a50b9bd952ce3056007b411d12913991f">int_16</a> u = x;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="comment">//livellamento delle probabilità dei valori per evitare errori di calcolo</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">if</span> (flagSfora){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <span class="keywordflow">if</span> (u &lt; 50){</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                    u = 50;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordflow">if</span> (u &gt; 300){</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    u = 300;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="comment">//ci entriamo se il livellamento supera 1 di probabilità totale.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="comment">//tutti i valori hanno uguale probabilità            else
+                u = 10000 / coppie.size();
+
+            contaprob += u;
+            coppie2.push_back(coppia2(it-&gt;_b, u));
+            i++;
+        }
+        //ci entriamo se il livellamento supera 1 di probabilità totale.
+        //tutti i valori avranno uguale probabilità
+     if (contaprob &gt; 10000){
+            flagSfora = false;
+            coppie2.clear();
+            contaprob = 0;
+        }
+        else break;
+    }
+
+    //dopo aver ordinato il vector posso assegnare l&#39;inizio del range per ogni simbolo
+    uint_32 prob_range = 0;
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        it-&gt;_Fa = prob_range;
+        prob_range += it-&gt;_fa;
+        cout &lt;&lt; &quot;symbol: &quot; &lt;&lt; it-&gt;_b &lt;&lt; &quot;\t start_range: &quot; &lt;&lt; it-&gt;_Fa &lt;&lt; &quot;\t probability: &quot; &lt;&lt; it-&gt;_fa &lt;&lt; endl;
+    }
+
+    //correzione valore finale per arrivare a 1
+    coppie.at(coppie.size() - 1)._fa = 10000 - coppie.at(coppie.size() - 1)._Fa;
+
+    /* prova encoding */
+    uint_32 range = pow(10.0, 6.0);
+    uint_32 low = 0;
+    uint_32 up = range;
+    is.clear(); // Disattivo l&#39;EOF precedente
+    is.seekg(ios_base::beg); // Torno all&#39;inizio
+    byte b;
+
+    /*!&lt; Header creation. */
+
+    //scrivo in output lunghezza file iniziale
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;tot_symbol), sizeof(uint_32));
+
+    //scrivo in output numero simboli ascii con probabilità maggiore di zero
+    byte numcoppie = coppie2.size();
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;numcoppie), 1);
+
+    //stampiamo per ogni simbolo il valore della probabilità senza virgola
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        os &lt;&lt; it-&gt;_b;
+        int_16 u = round(it-&gt;_fa);
+        os.write(reinterpret_cast&lt;char*&gt;(&amp;u), 2);
+    }
+
+    /*!&lt; Header end. */
+
+    //il bitwriter serve per scrivere in output le cifre da 0 a 9, quindi bastano 4 bit per cifra per codificarle
+    bitwriter bw(os);
+
+    //codifica vera e propria
+    while (is.get(reinterpret_cast&lt;char&amp;&gt;(b)))
+        encode_symbol(b, coppie2, low, range, up, os, bw);
+
+    uint_32 differenza = 1;
+    float_64 appoggio;
+    float_64 appoggioU;
+    float_64 cnt = 0.0;
+    //variabili d&#39;appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due
+    appoggio = low;
+    appoggioU = up;
+    //cerchiamo l&#39;ordine di grandezza di low e top
+    while (appoggio &gt; 10 || appoggioU &gt;10){
+        appoggio /= 10;
+        appoggioU /= 10;
+        cnt++;
+    }
+
+    //calcolo quante cifre ha il low e salvo in contLow per il for successivo
+    appoggio = 0.0;
+    uint_32 contLow = 0;
+    while (differenza == 1){
+        appoggio = low / pow(10.0, cnt);
+        differenza = (uint_32)(up / (uint_32)pow(10, cnt) - (uint_32)appoggio);
+        cnt--;
+        contLow++;
+    }
+
+    //calcolo valore finale da aggiungere al file
+    uint_32 final = (uint_32)(appoggio + differenza / 2);
+    cout &lt;&lt; &quot;finale:&quot; &lt;&lt; final &lt;&lt; endl;
+
+    //estrazione cifre finali e scrittura tramite bitwriter sul file
+    uint_32 x;
+    for (uint_32 i = 0; i &lt; contLow; ++i){
+        x = (final *(uint_32)pow(10, i)) % (uint_32)pow(10, contLow) / (uint_32)pow(10, contLow - 1);
+        bw(x, 4);
+    }
+
+    //per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte
+    bw.flush();
+
+    // chiude is e os per poterli eventualemente riusare
+    is.close();
+    os.close();
+}</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                u = 10000 / coppie.size();</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">//stampiamo per ogni simbolo le sue occorrenze ed alla fine il numero totale di symbol letti</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//in decodifica calcoleremo fa,Fa di nuovo</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 256; ++i){</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> (myarray[i] != 0){</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            os &lt;&lt; (char)i;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="comment">//per salvare spazio nell&#39;header scrivo solo 3 byte dell&#39;unsigned perchè 4 non sono praticamente mai utilizzati</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            os.write(reinterpret_cast&lt;char*&gt;(&amp;myarray[i]), 3);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">/*  FINE HEADER      */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">//il bitwriter serve per scrivere in output le cifre da 0 a 9, quindi bastano 4 bit per cifra per codificarle</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classbitwriter.html">bitwriter</a> bw(os);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            contaprob += u;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            coppie2.push_back(<a class="code" href="structcoppia2.html">coppia2</a>(it-&gt;_b, u));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            i++;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="comment">//ci entriamo se il livellamento supera 1 di probabilità totale.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">//tutti i valori avranno uguale probabilità      if (contaprob &gt; 10000){
+            flagSfora = false;
+            coppie2.clear();
+            contaprob = 0;
+        }
+        else break;
+    }
+
+    //dopo aver ordinato il vector posso assegnare l&#39;inizio del range per ogni simbolo
+    uint_32 prob_range = 0;
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        it-&gt;_Fa = prob_range;
+        prob_range += it-&gt;_fa;
+        cout &lt;&lt; &quot;symbol: &quot; &lt;&lt; it-&gt;_b &lt;&lt; &quot;\t start_range: &quot; &lt;&lt; it-&gt;_Fa &lt;&lt; &quot;\t probability: &quot; &lt;&lt; it-&gt;_fa &lt;&lt; endl;
+    }
+
+    //correzione valore finale per arrivare a 1
+    coppie.at(coppie.size() - 1)._fa = 10000 - coppie.at(coppie.size() - 1)._Fa;
+
+    /* prova encoding */
+    uint_32 range = pow(10.0, 6.0);
+    uint_32 low = 0;
+    uint_32 up = range;
+    is.clear(); // Disattivo l&#39;EOF precedente
+    is.seekg(ios_base::beg); // Torno all&#39;inizio
+    byte b;
+
+    /*!&lt; Header creation. */
+
+    //scrivo in output lunghezza file iniziale
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;tot_symbol), sizeof(uint_32));
+
+    //scrivo in output numero simboli ascii con probabilità maggiore di zero
+    byte numcoppie = coppie2.size();
+    os.write(reinterpret_cast&lt;char*&gt;(&amp;numcoppie), 1);
+
+    //stampiamo per ogni simbolo il valore della probabilità senza virgola
+    for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
+        os &lt;&lt; it-&gt;_b;
+        int_16 u = round(it-&gt;_fa);
+        os.write(reinterpret_cast&lt;char*&gt;(&amp;u), 2);
+    }
+
+    /*!&lt; Header end. */
+
+    //il bitwriter serve per scrivere in output le cifre da 0 a 9, quindi bastano 4 bit per cifra per codificarle
+    bitwriter bw(os);
+
+    //codifica vera e propria
+    while (is.get(reinterpret_cast&lt;char&amp;&gt;(b)))
+        encode_symbol(b, coppie2, low, range, up, os, bw);
+
+    uint_32 differenza = 1;
+    float_64 appoggio;
+    float_64 appoggioU;
+    float_64 cnt = 0.0;
+    //variabili d&#39;appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due
+    appoggio = low;
+    appoggioU = up;
+    //cerchiamo l&#39;ordine di grandezza di low e top
+    while (appoggio &gt; 10 || appoggioU &gt;10){
+        appoggio /= 10;
+        appoggioU /= 10;
+        cnt++;
+    }
+
+    //calcolo quante cifre ha il low e salvo in contLow per il for successivo
+    appoggio = 0.0;
+    uint_32 contLow = 0;
+    while (differenza == 1){
+        appoggio = low / pow(10.0, cnt);
+        differenza = (uint_32)(up / (uint_32)pow(10, cnt) - (uint_32)appoggio);
+        cnt--;
+        contLow++;
+    }
+
+    //calcolo valore finale da aggiungere al file
+    uint_32 final = (uint_32)(appoggio + differenza / 2);
+    cout &lt;&lt; &quot;finale:&quot; &lt;&lt; final &lt;&lt; endl;
+
+    //estrazione cifre finali e scrittura tramite bitwriter sul file
+    uint_32 x;
+    for (uint_32 i = 0; i &lt; contLow; ++i){
+        x = (final *(uint_32)pow(10, i)) % (uint_32)pow(10, contLow) / (uint_32)pow(10, contLow - 1);
+        bw(x, 4);
+    }
+
+    //per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte
+    bw.flush();
+
+    // chiude is e os per poterli eventualemente riusare
+    is.close();
+    os.close();
+}</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span> (contaprob &gt; 10000){</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            flagSfora = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            coppie2.clear();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            contaprob = 0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">//codifica vera e propria</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">while</span> (is.get(reinterpret_cast&lt;char&amp;&gt;(b)))</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="encodingfunction_8cpp.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a>(b, coppie, low, range, up, os, bw);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">//while da controllare!!!!!</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">unsigned</span> differenza = 1;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> appoggio;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> cnt = 0;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    appoggio = low;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">//cerchiamo l&#39;ordine di grandezza di low e top</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">while</span> (appoggio &gt; 10){</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        appoggio /= 10;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        cnt++;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">//calcolo quante cifre ha il low e salvo in miao per il for successivo</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    appoggio = 0;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">unsigned</span> miao = 0;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">while</span> (differenza == 1){</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        appoggio = low / (unsigned)pow(10, cnt);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        differenza = (unsigned)(up / (<span class="keywordtype">unsigned</span>)pow(10, cnt) - appoggio);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        cnt--;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        miao++;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">//calcolo valore finale da aggiungere al file</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keyword">final</span> = (unsigned)(appoggio + differenza / 2);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">//dopo aver ordinato il vector posso assegnare l&#39;inizio del range per ogni simbolo</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> prob_range = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = coppie2.begin(); it != coppie2.end(); ++it){</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        it-&gt;_Fa = prob_range;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        prob_range += it-&gt;_fa;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;symbol: &quot;</span> &lt;&lt; it-&gt;_b &lt;&lt; <span class="stringliteral">&quot;\t start_range: &quot;</span> &lt;&lt; it-&gt;_Fa &lt;&lt; <span class="stringliteral">&quot;\t probability: &quot;</span> &lt;&lt; it-&gt;_fa &lt;&lt; endl;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//correzione valore finale per arrivare a 1</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    coppie.at(coppie.size() - 1)._fa = 10000 - coppie.at(coppie.size() - 1)._Fa;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">/* prova encoding */</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> range = pow(10.0, 6.0);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> low = 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> up = range;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    is.clear(); <span class="comment">// Disattivo l&#39;EOF precedente</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    is.seekg(ios_base::beg); <span class="comment">// Torno all&#39;inizio</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">//scrivo in output lunghezza file iniziale</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    os.write(reinterpret_cast&lt;char*&gt;(&amp;tot_symbol), <span class="keyword">sizeof</span>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>));</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">//scrivo in output numero simboli ascii con probabilità maggiore di zero</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> numcoppie = coppie2.size();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    os.write(reinterpret_cast&lt;char*&gt;(&amp;numcoppie), 1);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">//estrazione cifre finali e scrittura tramite bitwriter sul file</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">unsigned</span> x;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt;miao; ++i){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        x = (<span class="keyword">final</span> *(unsigned)pow(10, i)) % (<span class="keywordtype">unsigned</span>)pow(10, miao) / (unsigned)pow(10, miao - 1);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        bw(x, 4);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">//stampiamo per ogni simbolo il valore della probabilità senza virgola</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = coppie2.begin(); it != coppie2.end(); ++it){</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        os &lt;&lt; it-&gt;_b;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="typedef_8h.html#a50b9bd952ce3056007b411d12913991f">int_16</a> u = round(it-&gt;_fa);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        os.write(reinterpret_cast&lt;char*&gt;(&amp;u), 2);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">//per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    bw.<a class="code" href="classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486">flush</a>();</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">// chiude is e os per poterli eventualemente riusare</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    is.close();</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    os.close();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">//il bitwriter serve per scrivere in output le cifre da 0 a 9, quindi bastano 4 bit per cifra per codificarle</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="classbitwriter.html">bitwriter</a> bw(os);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">//codifica vera e propria</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">while</span> (is.get(reinterpret_cast&lt;char&amp;&gt;(b)))</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a>(b, coppie2, low, range, up, os, bw);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> differenza = 1;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a> appoggio;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a> appoggioU;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a> cnt = 0.0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="comment">//variabili d&#39;appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    appoggio = low;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    appoggioU = up;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="comment">//cerchiamo l&#39;ordine di grandezza di low e top</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">while</span> (appoggio &gt; 10 || appoggioU &gt;10){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        appoggio /= 10;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        appoggioU /= 10;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        cnt++;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="comment">//calcolo quante cifre ha il low e salvo in contLow per il for successivo</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    appoggio = 0.0;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> contLow = 0;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">while</span> (differenza == 1){</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        appoggio = low / pow(10.0, cnt);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        differenza = (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(up / (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)pow(10, cnt) - (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)appoggio);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        cnt--;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        contLow++;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="comment">//calcolo valore finale da aggiungere al file</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> <span class="keyword">final</span> = (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(appoggio + differenza / 2);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;finale:&quot;</span> &lt;&lt; <span class="keyword">final</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="comment">//estrazione cifre finali e scrittura tramite bitwriter sul file</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> x;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; contLow; ++i){</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        x = (<span class="keyword">final</span> *(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)pow(10, i)) % (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)pow(10, contLow) / (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)pow(10, contLow - 1);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        bw(x, 4);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="comment">//per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    bw.<a class="code" href="classbitwriter.html#a17984f7e020583a5192d6d1662977da9">flush</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="comment">// chiude is e os per poterli eventualemente riusare</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    is.close();</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    os.close();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
+<div class="ttc" id="structcoppia2_html"><div class="ttname"><a href="structcoppia2.html">coppia2</a></div><div class="ttdoc">Class coppia2. </div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00034">couple.h:34</a></div></div>
+<div class="ttc" id="couple_8h_html_a2002b70582b90f0ba284df57216bad66"><div class="ttname"><a href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a></div><div class="ttdeci">double float_64</div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00006">couple.h:6</a></div></div>
+<div class="ttc" id="classbitwriter_html_a17984f7e020583a5192d6d1662977da9"><div class="ttname"><a href="classbitwriter.html#a17984f7e020583a5192d6d1662977da9">bitwriter::flush</a></div><div class="ttdeci">void flush(uint_32 fill_bit=1)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00042">bitstreams.h:42</a></div></div>
 <div class="ttc" id="encoding_8cpp_html_a7f8dc47b94994ef07f4f3e8c4dd87fdd"><div class="ttname"><a href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd">encoding</a></div><div class="ttdeci">void encoding(ifstream &amp;is, ofstream &amp;os)</div><div class="ttdoc">Function ENCODING. </div><div class="ttdef"><b>Definition:</b> <a href="encoding_8cpp_source.html#l00004">encoding.cpp:4</a></div></div>
-<div class="ttc" id="couple_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00004">couple.h:4</a></div></div>
+<div class="ttc" id="encodingfunction_8cpp_html_a78461e855e3d0e16dd688790991d70be"><div class="ttname"><a href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a></div><div class="ttdeci">void encode_symbol(byte b, vector&lt; coppia2 &gt; &amp;x, uint_32 &amp;low, uint_32 &amp;range, uint_32 &amp;top, ofstream &amp;os, bitwriter &amp;bw)</div><div class="ttdoc">Function ENCODE_SYMBOL. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00016">encodingfunction.cpp:16</a></div></div>
 <div class="ttc" id="encodingfunction_8h_html"><div class="ttname"><a href="encodingfunction_8h.html">encodingfunction.h</a></div></div>
 <div class="ttc" id="encoding_8h_html"><div class="ttname"><a href="encoding_8h.html">encoding.h</a></div></div>
-<div class="ttc" id="structcoppia_html"><div class="ttname"><a href="structcoppia.html">coppia</a></div><div class="ttdoc">Class coppia. </div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00010">couple.h:10</a></div></div>
-<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00010">bitstreams.h:10</a></div></div>
-<div class="ttc" id="classbitwriter_html_ab538f26cfd1eeca2fd89bd45c2dab486"><div class="ttname"><a href="classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486">bitwriter::flush</a></div><div class="ttdeci">void flush(unsigned fill_bit=1)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00038">bitstreams.h:38</a></div></div>
-<div class="ttc" id="encodingfunction_8cpp_html_ac27769cf36e6bbbddff7977042ce0e7b"><div class="ttname"><a href="encodingfunction_8cpp.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a></div><div class="ttdeci">void encode_symbol(byte b, vector&lt; coppia &gt; &amp;x, double &amp;low, double &amp;range, double &amp;top, ofstream &amp;os, bitwriter &amp;bw)</div><div class="ttdoc">Function ENCODE_SYMBOL. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00018">encodingfunction.cpp:18</a></div></div>
+<div class="ttc" id="typedef_8h_html_a50b9bd952ce3056007b411d12913991f"><div class="ttname"><a href="typedef_8h.html#a50b9bd952ce3056007b411d12913991f">int_16</a></div><div class="ttdeci">short int_16</div><div class="ttdef"><b>Definition:</b> <a href="typedef_8h_source.html#l00010">typedef.h:10</a></div></div>
+<div class="ttc" id="structcoppia_html"><div class="ttname"><a href="structcoppia.html">coppia</a></div><div class="ttdoc">Class coppia. </div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00012">couple.h:12</a></div></div>
+<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00014">bitstreams.h:14</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00006">bitstreams.h:6</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a64e458b61bddf0b87a3701578aa7a428"><div class="ttname"><a href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a></div><div class="ttdeci">unsigned int uint_32</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00008">bitstreams.h:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="encoding_8cpp.html">encoding.cpp</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:13 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

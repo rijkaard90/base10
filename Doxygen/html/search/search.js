@@ -7,12 +7,12 @@
 
 var indexSectionsWithContent =
 {
-  0: "_bcdefmorstu~",
+  0: "_bcdefimorstu~",
   1: "bc",
   2: "bcdemrt",
   3: "bcdefmors~",
   4: "_",
-  5: "bu",
+  5: "bfiu",
   6: "r"
 };
 

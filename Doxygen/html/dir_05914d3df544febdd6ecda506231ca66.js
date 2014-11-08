@@ -1,9 +1,6 @@
 var dir_05914d3df544febdd6ecda506231ca66 =
 [
-    [ "bitstreams.h", "bitstreams_8h.html", [
-      [ "bitwriter", "classbitwriter.html", "classbitwriter" ],
-      [ "bitreader", "classbitreader.html", "classbitreader" ]
-    ] ],
+    [ "bitstreams.h", "bitstreams_8h.html", "bitstreams_8h" ],
     [ "couple.h", "couple_8h.html", "couple_8h" ],
     [ "decoding.cpp", "decoding_8cpp.html", "decoding_8cpp" ],
     [ "decoding.h", "decoding_8h.html", "decoding_8h" ],

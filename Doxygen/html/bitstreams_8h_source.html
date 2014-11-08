@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/bitstreams.h Source File</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/bitstreams.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -109,92 +109,99 @@ $(document).ready(function(){initNavTree('bitstreams_8h_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classbitwriter.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbitwriter.html">bitwriter</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    std::ostream&amp; _os;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _buffer;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">int</span> _bits;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// Aggiunge il bit meno significativo di u al buffer</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> write_bit(<span class="keywordtype">unsigned</span> u) {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        _buffer = (_buffer &lt;&lt; 1) | (u &amp; 1);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">if</span> (++_bits == 8) {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            _os.put(_buffer);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            _bits = 0;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// Non si deve né copiare né assegnare!</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classbitwriter.html">bitwriter</a>(<span class="keyword">const</span> <a class="code" href="classbitwriter.html">bitwriter</a>&amp;);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classbitwriter.html">bitwriter</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="classbitwriter.html">bitwriter</a>&amp;);</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">    6</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="bitstreams_8h.html#ae5c5e6fe946fcce0d2156db86ffffa8a">    7</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="bitstreams_8h.html#ae5c5e6fe946fcce0d2156db86ffffa8a">int_32</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classbitwriter.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbitwriter.html">bitwriter</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    std::ostream&amp; _os;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> _buffer;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="bitstreams_8h.html#ae5c5e6fe946fcce0d2156db86ffffa8a">int_32</a> _bits;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// Aggiunge il bit meno significativo di u al buffer</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> write_bit(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> u) {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        _buffer = (_buffer &lt;&lt; 1) | (u &amp; 1);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">if</span> (++_bits == 8) {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            _os.put(_buffer);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            _bits = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classbitwriter.html#adc99578a0fe2761a620e64e08b8fbefe">   29</a></span>&#160;    <a class="code" href="classbitwriter.html#adc99578a0fe2761a620e64e08b8fbefe">bitwriter</a>(std::ostream&amp; os) : _os(os), _bits(0) {}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// Scrive sul bitstream i count bit meno significativi di u</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classbitwriter.html#a00472be04b4230885b8e7e069cf68fe5">   32</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbitwriter.html#a00472be04b4230885b8e7e069cf68fe5">operator() </a>(<span class="keywordtype">unsigned</span> u, <span class="keywordtype">unsigned</span> count) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">while</span> (count &gt; 0)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            write_bit(u &gt;&gt; --count);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// Svuota il buffer sul file</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486">   38</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486">flush</a>(<span class="keywordtype">unsigned</span> fill_bit = 1) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">while</span> (_bits &gt; 0)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            write_bit(fill_bit);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classbitwriter.html#aa5b87ec4fbe2f9f7b08aeb7ea767d0d8">   43</a></span>&#160;    <a class="code" href="classbitwriter.html#aa5b87ec4fbe2f9f7b08aeb7ea767d0d8">~bitwriter</a>() {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486">flush</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// Non si deve né copiare né assegnare!</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classbitwriter.html">bitwriter</a>(<span class="keyword">const</span> <a class="code" href="classbitwriter.html">bitwriter</a>&amp;);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classbitwriter.html">bitwriter</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="classbitwriter.html">bitwriter</a>&amp;);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classbitwriter.html#adc99578a0fe2761a620e64e08b8fbefe">   33</a></span>&#160;    <a class="code" href="classbitwriter.html#adc99578a0fe2761a620e64e08b8fbefe">bitwriter</a>(std::ostream&amp; os) : _os(os), _bits(0) {}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// Scrive sul bitstream i count bit meno significativi di u</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classbitwriter.html#a91e680a337ac7be5ea87e10050ad040b">   36</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbitwriter.html#a91e680a337ac7be5ea87e10050ad040b">operator() </a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> u, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> count) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">while</span> (count &gt; 0)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            write_bit(u &gt;&gt; --count);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Svuota il buffer sul file</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classbitwriter.html#a17984f7e020583a5192d6d1662977da9">   42</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classbitwriter.html#a17984f7e020583a5192d6d1662977da9">flush</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> fill_bit = 1) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">while</span> (_bits &gt; 0)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            write_bit(fill_bit);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classbitreader.html">   52</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbitreader.html">bitreader</a> {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::istream&amp; _is;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> _buffer;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">int</span> _bits;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// Aggiunge il bit meno significativo di u al buffer</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">unsigned</span> read_bit() {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">if</span> (_bits == 0) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            _is.get(reinterpret_cast&lt;char&amp;&gt;(_buffer));</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            _bits = 8;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> (_buffer &gt;&gt; --_bits) &amp; 1;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Non si deve né copiare né assegnare!</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classbitreader.html">bitreader</a>(<span class="keyword">const</span> <a class="code" href="classbitreader.html">bitreader</a>&amp;);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classbitreader.html">bitreader</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="classbitreader.html">bitreader</a>&amp;);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classbitwriter.html#aa5b87ec4fbe2f9f7b08aeb7ea767d0d8">   47</a></span>&#160;    <a class="code" href="classbitwriter.html#aa5b87ec4fbe2f9f7b08aeb7ea767d0d8">~bitwriter</a>() {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classbitwriter.html#a17984f7e020583a5192d6d1662977da9">flush</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classbitreader.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classbitreader.html">bitreader</a> {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::istream&amp; _is;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> _buffer;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="bitstreams_8h.html#ae5c5e6fe946fcce0d2156db86ffffa8a">int_32</a> _bits;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// Aggiunge il bit meno significativo di u al buffer</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> read_bit() {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (_bits == 0) {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            _is.get(reinterpret_cast&lt;char&amp;&gt;(_buffer));</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            _bits = 8;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">return</span> (_buffer &gt;&gt; --_bits) &amp; 1;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classbitreader.html#a5d3b68bdc7621f59b75af8a8784c9d0b">   71</a></span>&#160;    <a class="code" href="classbitreader.html#a5d3b68bdc7621f59b75af8a8784c9d0b">bitreader</a>(std::istream&amp; is) : _is(is), _bits(0) {}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classbitreader.html#a7a41e1ee4213509458d4cdad44ae1cb3">   73</a></span>&#160;    <span class="keyword">operator</span> std::istream&amp;() { <span class="keywordflow">return</span> _is; }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// Legge dal bitstream i count bit richiesti e li mette nei bit meno significativi del risultato</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classbitreader.html#abf827f66fafa270f0304837a60a4f230">   76</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="classbitreader.html#abf827f66fafa270f0304837a60a4f230">operator() </a>(<span class="keywordtype">unsigned</span> count) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordtype">unsigned</span> u = 0;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">while</span> (count-- &gt; 0)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            u = (u &lt;&lt; 1) | read_bit();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> u;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif // BITSTREAMS_H</span></div>
-<div class="ttc" id="classbitwriter_html_adc99578a0fe2761a620e64e08b8fbefe"><div class="ttname"><a href="classbitwriter.html#adc99578a0fe2761a620e64e08b8fbefe">bitwriter::bitwriter</a></div><div class="ttdeci">bitwriter(std::ostream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00029">bitstreams.h:29</a></div></div>
-<div class="ttc" id="classbitreader_html_a5d3b68bdc7621f59b75af8a8784c9d0b"><div class="ttname"><a href="classbitreader.html#a5d3b68bdc7621f59b75af8a8784c9d0b">bitreader::bitreader</a></div><div class="ttdeci">bitreader(std::istream &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00071">bitstreams.h:71</a></div></div>
-<div class="ttc" id="classbitreader_html_abf827f66fafa270f0304837a60a4f230"><div class="ttname"><a href="classbitreader.html#abf827f66fafa270f0304837a60a4f230">bitreader::operator()</a></div><div class="ttdeci">unsigned operator()(unsigned count)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00076">bitstreams.h:76</a></div></div>
-<div class="ttc" id="classbitreader_html"><div class="ttname"><a href="classbitreader.html">bitreader</a></div><div class="ttdoc">Class BitReader. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00052">bitstreams.h:52</a></div></div>
-<div class="ttc" id="classbitwriter_html_aa5b87ec4fbe2f9f7b08aeb7ea767d0d8"><div class="ttname"><a href="classbitwriter.html#aa5b87ec4fbe2f9f7b08aeb7ea767d0d8">bitwriter::~bitwriter</a></div><div class="ttdeci">~bitwriter()</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00043">bitstreams.h:43</a></div></div>
-<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00010">bitstreams.h:10</a></div></div>
-<div class="ttc" id="classbitwriter_html_ab538f26cfd1eeca2fd89bd45c2dab486"><div class="ttname"><a href="classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486">bitwriter::flush</a></div><div class="ttdeci">void flush(unsigned fill_bit=1)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00038">bitstreams.h:38</a></div></div>
-<div class="ttc" id="classbitwriter_html_a00472be04b4230885b8e7e069cf68fe5"><div class="ttname"><a href="classbitwriter.html#a00472be04b4230885b8e7e069cf68fe5">bitwriter::operator()</a></div><div class="ttdeci">void operator()(unsigned u, unsigned count)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00032">bitstreams.h:32</a></div></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Non si deve né copiare né assegnare!</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classbitreader.html">bitreader</a>(<span class="keyword">const</span> <a class="code" href="classbitreader.html">bitreader</a>&amp;);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classbitreader.html">bitreader</a>&amp; operator= (<span class="keyword">const</span> <a class="code" href="classbitreader.html">bitreader</a>&amp;);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classbitreader.html#a5d3b68bdc7621f59b75af8a8784c9d0b">   75</a></span>&#160;    <a class="code" href="classbitreader.html#a5d3b68bdc7621f59b75af8a8784c9d0b">bitreader</a>(std::istream&amp; is) : _is(is), _bits(0) {}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classbitreader.html#a7a41e1ee4213509458d4cdad44ae1cb3">   77</a></span>&#160;    <span class="keyword">operator</span> std::istream&amp;() { <span class="keywordflow">return</span> _is; }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Legge dal bitstream i count bit richiesti e li mette nei bit meno significativi del risultato</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classbitreader.html#a9d456c1226e34b8387eca0c4f25b6911">   80</a></span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> <a class="code" href="classbitreader.html#a9d456c1226e34b8387eca0c4f25b6911">operator() </a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> count) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> u = 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">while</span> (count-- &gt; 0)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            u = (u &lt;&lt; 1) | read_bit();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> u;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif // BITSTREAMS_H</span></div>
+<div class="ttc" id="classbitwriter_html_a17984f7e020583a5192d6d1662977da9"><div class="ttname"><a href="classbitwriter.html#a17984f7e020583a5192d6d1662977da9">bitwriter::flush</a></div><div class="ttdeci">void flush(uint_32 fill_bit=1)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00042">bitstreams.h:42</a></div></div>
+<div class="ttc" id="classbitwriter_html_adc99578a0fe2761a620e64e08b8fbefe"><div class="ttname"><a href="classbitwriter.html#adc99578a0fe2761a620e64e08b8fbefe">bitwriter::bitwriter</a></div><div class="ttdeci">bitwriter(std::ostream &amp;os)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00033">bitstreams.h:33</a></div></div>
+<div class="ttc" id="classbitreader_html_a5d3b68bdc7621f59b75af8a8784c9d0b"><div class="ttname"><a href="classbitreader.html#a5d3b68bdc7621f59b75af8a8784c9d0b">bitreader::bitreader</a></div><div class="ttdeci">bitreader(std::istream &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00075">bitstreams.h:75</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_ae5c5e6fe946fcce0d2156db86ffffa8a"><div class="ttname"><a href="bitstreams_8h.html#ae5c5e6fe946fcce0d2156db86ffffa8a">int_32</a></div><div class="ttdeci">int int_32</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00007">bitstreams.h:7</a></div></div>
+<div class="ttc" id="classbitreader_html"><div class="ttname"><a href="classbitreader.html">bitreader</a></div><div class="ttdoc">Class BitReader. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00056">bitstreams.h:56</a></div></div>
+<div class="ttc" id="classbitwriter_html_aa5b87ec4fbe2f9f7b08aeb7ea767d0d8"><div class="ttname"><a href="classbitwriter.html#aa5b87ec4fbe2f9f7b08aeb7ea767d0d8">bitwriter::~bitwriter</a></div><div class="ttdeci">~bitwriter()</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00047">bitstreams.h:47</a></div></div>
+<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00014">bitstreams.h:14</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00006">bitstreams.h:6</a></div></div>
+<div class="ttc" id="classbitreader_html_a9d456c1226e34b8387eca0c4f25b6911"><div class="ttname"><a href="classbitreader.html#a9d456c1226e34b8387eca0c4f25b6911">bitreader::operator()</a></div><div class="ttdeci">uint_32 operator()(uint_32 count)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00080">bitstreams.h:80</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a64e458b61bddf0b87a3701578aa7a428"><div class="ttname"><a href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a></div><div class="ttdeci">unsigned int uint_32</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00008">bitstreams.h:8</a></div></div>
+<div class="ttc" id="classbitwriter_html_a91e680a337ac7be5ea87e10050ad040b"><div class="ttname"><a href="classbitwriter.html#a91e680a337ac7be5ea87e10050ad040b">bitwriter::operator()</a></div><div class="ttdeci">void operator()(uint_32 u, uint_32 count)</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00036">bitstreams.h:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="bitstreams_8h.html">bitstreams.h</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:13 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

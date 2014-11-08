@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uint_5f32',['uint_32',['../typedef_8h.html#a64e458b61bddf0b87a3701578aa7a428',1,'typedef.h']]]
+  ['float_5f64',['float_64',['../couple_8h.html#a2002b70582b90f0ba284df57216bad66',1,'float_64():&#160;couple.h'],['../typedef_8h.html#a2002b70582b90f0ba284df57216bad66',1,'float_64():&#160;typedef.h']]]
 ];

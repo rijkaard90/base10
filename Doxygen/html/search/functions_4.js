@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['flush',['flush',['../classbitwriter.html#ab538f26cfd1eeca2fd89bd45c2dab486',1,'bitwriter']]]
+  ['flush',['flush',['../classbitwriter.html#a17984f7e020583a5192d6d1662977da9',1,'bitwriter']]]
 ];

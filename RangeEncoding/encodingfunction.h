@@ -11,6 +11,20 @@
 #include "bitstreams.h"
 
 /*!
+ *  List of RangeEncoding algorithm function:
+ *    - \c syntax()
+ *    - \c encoding()
+ *         1. encode()
+ *         2. emit_digit()
+ *         3. encode_symbol()
+ *    - \c decoding()
+ *         1. read_little_endian()
+ *         2. convert_and_shift()
+ *
+ *  More details will be provided in definition.
+ */
+
+/*!
  * \short Function ENCODE
  * \details Calculates the values of top and bottom range, and new range.
  * \param start Starting range.
@@ -19,9 +33,9 @@
  * \param &range Size of range.
  * \param &top Top range.
  * \return Range for encoding.
- * \see syntax(), encoding(), emit_digit(), encode_symbol(), decoding()
+ * \see syntax(), encoding(), decoding(), emit_digit(), encode_symbol()
  */
-void encode(double start, double size, double& low, double& range, double& top);
+void encode(uint_32 start, uint_32 size, uint_32& low, uint_32& range, uint_32& top);
 
 /*!
  * \short Function EMIT_DIGIT
@@ -29,9 +43,9 @@ void encode(double start, double size, double& low, double& range, double& top);
  * \param &low Bottom range.
  * \param &bw Bit writer.
  * \return Bottom range adjusted.
- * \see encoding(), encode(), encode_symbol(), decoding(), syntax()
+ * \see syntax(), encoding(), decoding(), encode(), encode_symbol()
  */
-void emit_digit(double& low, bitwriter& bw);
+void emit_digit(uint_32& low, bitwriter& bw);
 
 /*!
  * \short Function ENCODE_SYMBOL
@@ -44,8 +58,8 @@ void emit_digit(double& low, bitwriter& bw);
  * \param &os Output file.
  * \param &bw Bit writer.
  * \return Encoding symbol.
- * \see encoding(), encode(), emit_digit(), decoding(), syntax()
+ * \see syntax(), encoding(), decoding(),  encode(), emit_digit()
  */
-void encode_symbol(byte b, vector<coppia>& x, double& low, double& range, double& top, ofstream& os, bitwriter& bw);
+void encode_symbol(byte b, vector<coppia2>& x, uint_32& low, uint_32& range, uint_32& top, ofstream& os, bitwriter& bw);
 
 #endif // ENCODINGFUNCTION_H

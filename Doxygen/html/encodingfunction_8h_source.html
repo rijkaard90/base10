@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Range Encoding: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encodingfunction.h Source File</title>
+<title>Range Encoding Compression: C:/Users/Mosca/Desktop/SDEM/RangeEncoding/encodingfunction.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Range Encoding
+   <div id="projectname">Range Encoding Compression
    </div>
   </td>
  </tr>
@@ -116,28 +116,29 @@ $(document).ready(function(){initNavTree('encodingfunction_8h_source.html','');}
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="couple_8h.html">couple.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="bitstreams_8h.html">bitstreams.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8h.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a>(<span class="keywordtype">double</span> start, <span class="keywordtype">double</span> size, <span class="keywordtype">double</span>&amp; low, <span class="keywordtype">double</span>&amp; range, <span class="keywordtype">double</span>&amp; top);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8h.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a>(<span class="keywordtype">double</span>&amp; low, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8h.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a>(<a class="code" href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt;coppia&gt;&amp; x, <span class="keywordtype">double</span>&amp; low, <span class="keywordtype">double</span>&amp; range, <span class="keywordtype">double</span>&amp; top, ofstream&amp; os, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif // ENCODINGFUNCTION_H</span></div>
-<div class="ttc" id="couple_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="couple_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00004">couple.h:4</a></div></div>
-<div class="ttc" id="encodingfunction_8h_html_ac27769cf36e6bbbddff7977042ce0e7b"><div class="ttname"><a href="encodingfunction_8h.html#ac27769cf36e6bbbddff7977042ce0e7b">encode_symbol</a></div><div class="ttdeci">void encode_symbol(byte b, vector&lt; coppia &gt; &amp;x, double &amp;low, double &amp;range, double &amp;top, ofstream &amp;os, bitwriter &amp;bw)</div><div class="ttdoc">Function ENCODE_SYMBOL. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00018">encodingfunction.cpp:18</a></div></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8h.html#adc00fa15f2cc9c0883ea1cd4535f7574">encode</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> start, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> size, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; low, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; range, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; top);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8h.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; low, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> <a class="code" href="encodingfunction_8h.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a>(<a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> b, vector&lt;coppia2&gt;&amp; x, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; low, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; range, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; top, ofstream&amp; os, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif // ENCODINGFUNCTION_H</span></div>
+<div class="ttc" id="encodingfunction_8h_html_a78461e855e3d0e16dd688790991d70be"><div class="ttname"><a href="encodingfunction_8h.html#a78461e855e3d0e16dd688790991d70be">encode_symbol</a></div><div class="ttdeci">void encode_symbol(byte b, vector&lt; coppia2 &gt; &amp;x, uint_32 &amp;low, uint_32 &amp;range, uint_32 &amp;top, ofstream &amp;os, bitwriter &amp;bw)</div><div class="ttdoc">Function ENCODE_SYMBOL. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00016">encodingfunction.cpp:16</a></div></div>
+<div class="ttc" id="encodingfunction_8h_html_ab6013d45cbd3006d127bd7ed72a6e3bc"><div class="ttname"><a href="encodingfunction_8h.html#ab6013d45cbd3006d127bd7ed72a6e3bc">emit_digit</a></div><div class="ttdeci">void emit_digit(uint_32 &amp;low, bitwriter &amp;bw)</div><div class="ttdoc">Function EMIT_DIGIT. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00009">encodingfunction.cpp:9</a></div></div>
 <div class="ttc" id="typedef_8h_html"><div class="ttname"><a href="typedef_8h.html">typedef.h</a></div></div>
 <div class="ttc" id="couple_8h_html"><div class="ttname"><a href="couple_8h.html">couple.h</a></div></div>
-<div class="ttc" id="encodingfunction_8h_html_a92808af7f5cee7c02a6720d7482d1423"><div class="ttname"><a href="encodingfunction_8h.html#a92808af7f5cee7c02a6720d7482d1423">emit_digit</a></div><div class="ttdeci">void emit_digit(double &amp;low, bitwriter &amp;bw)</div><div class="ttdoc">Function EMIT_DIGIT. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00011">encodingfunction.cpp:11</a></div></div>
-<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00010">bitstreams.h:10</a></div></div>
-<div class="ttc" id="encodingfunction_8h_html_a0c1c44cc8e62748d90ded6b92d76cc64"><div class="ttname"><a href="encodingfunction_8h.html#a0c1c44cc8e62748d90ded6b92d76cc64">encode</a></div><div class="ttdeci">void encode(double start, double size, double &amp;low, double &amp;range, double &amp;top)</div><div class="ttdoc">Function ENCODE. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00003">encodingfunction.cpp:3</a></div></div>
+<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00014">bitstreams.h:14</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00006">bitstreams.h:6</a></div></div>
+<div class="ttc" id="encodingfunction_8h_html_adc00fa15f2cc9c0883ea1cd4535f7574"><div class="ttname"><a href="encodingfunction_8h.html#adc00fa15f2cc9c0883ea1cd4535f7574">encode</a></div><div class="ttdeci">void encode(uint_32 start, uint_32 size, uint_32 &amp;low, uint_32 &amp;range, uint_32 &amp;top)</div><div class="ttdoc">Function ENCODE. </div><div class="ttdef"><b>Definition:</b> <a href="encodingfunction_8cpp_source.html#l00003">encodingfunction.cpp:3</a></div></div>
 <div class="ttc" id="bitstreams_8h_html"><div class="ttname"><a href="bitstreams_8h.html">bitstreams.h</a></div></div>
+<div class="ttc" id="bitstreams_8h_html_a64e458b61bddf0b87a3701578aa7a428"><div class="ttname"><a href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a></div><div class="ttdeci">unsigned int uint_32</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00008">bitstreams.h:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="encodingfunction_8h.html">encodingfunction.h</a></li>
-    <li class="footer">Generated on Fri Oct 24 2014 21:14:06 for Range Encoding by
+    <li class="footer">Generated on Sat Nov 8 2014 16:58:13 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
