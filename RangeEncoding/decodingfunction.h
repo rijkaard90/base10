@@ -36,7 +36,7 @@ uint_32 read_little_endian(ifstream& is, uint_32 nByte);
 
 /*!
  * \short Function CONVERT_AND_SHIFT
- * \details Allows algorithm to calculate new values to be used in decoding.
+ * \details If Top and Low has the same first digit, then it is not significant and removed. We add a new digit to the right to improve the precision.
  * \param &sotto Bottom range.
  * \param &sopra Top range.
  * \param &contacaratteri Characters count.
