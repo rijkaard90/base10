@@ -62,4 +62,16 @@ void emit_digit(uint_32& low, bitwriter& bw);
  */
 void encode_symbol(byte b, vector<coppia2>& x, uint_32& low, uint_32& range, uint_32& top, ofstream& os, bitwriter& bw);
 
+void calcOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray);
+
+void calcProbability(vector<coppia>& coppie, uint_32& tot_symbol, array<uint_32, 256>& myarray);
+
+void rounding(vector<coppia>& coppie, vector<coppia2>& coppie2);
+
+void rangeAssignment(vector<coppia>& coppie, vector<coppia2>& coppie2);
+
+void headerCreation(vector<coppia2>& coppie2, uint_32& tot_symbol, ofstream& os);
+
+void encodeAlgorithm(ifstream& is, ofstream& os, vector<coppia2>& coppie2);
+
 #endif // ENCODINGFUNCTION_H

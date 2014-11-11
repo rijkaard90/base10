@@ -50,4 +50,11 @@ uint_32 read_little_endian(ifstream& is, uint_32 nByte);
 void convert_and_shift(uint_32& sotto, uint_32& sopra, uint_32& contacaratteri,
 	uint_32& rangecont, uint_32& controllo, bitreader& br, bool& flagEndCode);
 
+void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br);
+
+void rangeFinder(ifstream& is, uint_32& controllo, bitreader& br);
+
+void headerExtraction(ifstream& is, vector<coppia2>& Dcoppie, uint_32& n_caratteri);
+
+void probRange(vector<coppia2>& Dcoppie);
 #endif // DECODINGFUNCTION_H
