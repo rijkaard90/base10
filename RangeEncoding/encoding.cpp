@@ -31,7 +31,7 @@ void encoding(ifstream& is, ofstream& os){
 	uint_32 indice = 0; //ricorda il valore con probabil. piu grande
 	uint_32 max = 0; //ricorda valore con probab. piu grande
 	uint_32 i = 0;  //indice iteratore
-	//arrotondamento a 4 cifre decimali della probabilità
+	//arrotondamento a 5 cifre decimali della probabilità
 	while (true){
 		for (auto it = coppie.begin(); it != coppie.end(); ++it){
 			float_64 x = it->_fa;
@@ -51,8 +51,8 @@ void encoding(ifstream& is, ofstream& os){
 			//tutti i valori avranno uguale probabilità
 			else
 				u = 100000 / coppie.size();
-
 			contaprob += u;
+			//inserimento della probabilità corretta
 			coppie2.push_back(coppia2(it->_b, u));
 			i++;
 		}
@@ -74,10 +74,10 @@ void encoding(ifstream& is, ofstream& os){
 		cout << "symbol: " << it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << endl;
 	}
 
-	//correzione valore finale per arrivare a 1
+	//correzione valore finale per arrivare a 1 di probabilità
 	coppie.at(coppie.size() - 1)._fa = 100000 - coppie.at(coppie.size() - 1)._Fa;
 
-	/* prova encoding */
+	/* valori per l'encoding */
 	uint_32 range = pow(10.0, 9.0);
 	uint_32 low = 0;
 	uint_32 up = range;
@@ -98,7 +98,7 @@ void encoding(ifstream& is, ofstream& os){
 	for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
 		os << it->_b;
 		uint_32 u = round(it->_fa);
-		os.write(reinterpret_cast<char*>(&u), 3);
+		os.write(reinterpret_cast<char*>(&u), 3); //non sono necessari più di 3 byte
 	}
 
 	/*!< Header end. */
@@ -110,6 +110,7 @@ void encoding(ifstream& is, ofstream& os){
 	while (is.get(reinterpret_cast<char&>(b)))
 		encode_symbol(b, coppie2, low, range, up, os, bw);
 
+	//variabili per i calcoli successivi
 	uint_32 differenza = 1;
 	float_64 appoggio;
 	float_64 appoggioU;

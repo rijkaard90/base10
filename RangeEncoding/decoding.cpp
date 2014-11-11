@@ -19,7 +19,7 @@ void decoding(ifstream& is, ofstream& os){
 	//leggo simboli con probabilità e ricreo array coppie
 	for (uint_32 i = 0; i < n_simboli; i++){
 		byte valore = is.get();
-		//leggo 2 byte per come è impostato l'header
+		//leggo 3 byte per come è impostato l'header
 		uint_32 u_prob = read_little_endian(is, 3);
 		Dcoppie.push_back(coppia2(valore, u_prob));
 	}
@@ -37,21 +37,24 @@ void decoding(ifstream& is, ofstream& os){
 	//bitreader per leggere le cifre salvate in 4 bit
 	bitreader br(is);
 
+	//verifica n_caratteri
 	cout << n_caratteri << '\n';
+
+	/* valori per il decoding */
 	uint_32 rangecont = pow(10.0, 9.0);
 	uint_32 sopra = rangecont; 
 	uint_32 sotto = 0;
 	bool flagEndCode = false;
 	uint_32 contacaratteri = 8;
 
-	//inizializzo controllo con le prime 6 cifre del file input perchè il range è 10^6
+	//inizializzo variabile controllo con le prime 9 cifre del file input perchè il range è 10^9
+	//questa variabile rappresenterà il valore che sarà cercato nel range tra sotto e sopra
 	uint_32 controllo = 0;
 	for (uint_32 i = 0; i < 9; ++i)
 		controllo = controllo * 10 + br(4);
 	cout << endl << "controllo: " << controllo << endl;
 	
-	//afdaf
-	uint_32 oba = n_caratteri;
+	/* inizio decodifica vera e propria*/
 	//ciclo per ogni carattere
 	while (n_caratteri > 0){
 
@@ -68,7 +71,7 @@ void decoding(ifstream& is, ofstream& os){
 					byte spazio = 0x0A;
 					os << spazio;
 				}
-				//aggiornamento valori !!ARROTONDAMENTO ERRATO
+				//aggiornamento valori
 				sotto = sotto + ceil((float_64)(it->_Fa)*((float_64)rangecont / 100000));
 				rangecont = ((float_64)(it->_fa)*((float_64)rangecont / 100000));
 				sopra = sotto + rangecont;
@@ -76,14 +79,17 @@ void decoding(ifstream& is, ofstream& os){
 				break;
 			}
 		}
+
 		//cout << controllo << "\t" << sotto << "\t" << rangecont << "\t" << sopra << "\t" << n_caratteri << endl;
+
 		//se c'è da shiftare il top e low aggiorno
 		while (((sotto / (uint_32)(pow(10.0, contacaratteri))) == (sopra / (uint_32)(pow(10.0, contacaratteri)))))
 			convert_and_shift(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
 
-		//caso particolare
+		//caso particolare nel caso di range piccoli
 		if (rangecont < 1000){
-			cout << "entra";
+			//verifica quando entra nel caso particolare
+			//cout << "entra";
 			convert_and_shift(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
 			convert_and_shift(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
 			rangecont = 1000000000 - sotto;

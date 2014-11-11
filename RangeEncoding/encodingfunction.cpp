@@ -1,12 +1,15 @@
 #include "encodingfunction.h"
 
 void encode(uint_32 start, uint_32 size, uint_32& low, uint_32& range, uint_32& top){
+	//calcoli valori top,range e low
+	//arrotondamento in alto per il low e in basso per il range
 	low = low + ceil((float_64)(start)*((float_64)range / 100000));
 	range = ((float_64)(size)*((float_64)range / 100000));
 	top = low + range;
 }
 
 void emit_digit(uint_32& low, bitwriter& bw){
+	//shift del low e uscita della cifra
 	uint_32 lowU = (uint_32)round(low) % 100000000;
 	uint_32 out = low / 100000000;
 	bw(out, 4);
