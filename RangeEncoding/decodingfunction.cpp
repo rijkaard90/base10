@@ -13,8 +13,10 @@ void convert_and_shift(uint_32& sotto, uint_32& sopra, uint_32& contacaratteri,
 	uint_32& rangecont, uint_32& controllo, bitreader& br, bool& flagEndCode){
 
 	//variabile d'appoggio e uso del long long per non perdere precisione
-	uint_64 sottoP = sotto * 10;
-	uint_64 sopraP = sopra * 10;
+	uint_64 sottoP = sotto;
+	uint_64 sopraP = sopra;
+	sottoP *= 10;
+	sopraP *= 10;
 
 	//calcolo modulo
 	sotto = sottoP % (uint_64)(pow(10.0, contacaratteri + 1));

@@ -20,6 +20,7 @@ void encoding(ifstream& is, ofstream& os){
 		myarray[tmp]++;
 	}
 
+	//calcolo delle probabilità e inserimento nel vettore 
 	for (uint_32 i = 0; i < 256; ++i){
 		if (myarray[i] != 0)
 			coppie.push_back(coppia(i, (float_64)myarray[i] / (float_64)tot_symbol));
@@ -34,22 +35,22 @@ void encoding(ifstream& is, ofstream& os){
 	while (true){
 		for (auto it = coppie.begin(); it != coppie.end(); ++it){
 			float_64 x = it->_fa;
-			x = x * 10000;
+			x = x * 100000;
 			//variabile dove è salvato il valore senza virgola della prob
-			int_16 u = x;
+			uint_32 u = x;
 			//livellamento delle probabilità dei valori per evitare errori di calcolo
 			if (flagSfora){
-				if (u < 50){
-					u = 50;
+				if (u < 100){
+					u = 100;
 				}
-				if (u > 300){
-					u = 300;
+				if (u > 3000){
+					u = 3000;
 				}
 			}
 			//ci entriamo se il livellamento supera 1 di probabilità totale.
-			//tutti i valori hanno uguale probabilità
+			//tutti i valori avranno uguale probabilità
 			else
-				u = 10000 / coppie.size();
+				u = 100000 / coppie.size();
 
 			contaprob += u;
 			coppie2.push_back(coppia2(it->_b, u));
@@ -57,7 +58,7 @@ void encoding(ifstream& is, ofstream& os){
 		}
 		//ci entriamo se il livellamento supera 1 di probabilità totale.
 		//tutti i valori avranno uguale probabilità
-		if (contaprob > 10000){
+		if (contaprob > 100000){
 			flagSfora = false;
 			coppie2.clear();
 			contaprob = 0;
@@ -74,10 +75,10 @@ void encoding(ifstream& is, ofstream& os){
 	}
 
 	//correzione valore finale per arrivare a 1
-	coppie.at(coppie.size() - 1)._fa = 10000 - coppie.at(coppie.size() - 1)._Fa;
+	coppie.at(coppie.size() - 1)._fa = 100000 - coppie.at(coppie.size() - 1)._Fa;
 
 	/* prova encoding */
-	uint_32 range = pow(10.0, 6.0);
+	uint_32 range = pow(10.0, 9.0);
 	uint_32 low = 0;
 	uint_32 up = range;
 	is.clear(); // Disattivo l'EOF precedente
@@ -96,8 +97,8 @@ void encoding(ifstream& is, ofstream& os){
 	//stampiamo per ogni simbolo il valore della probabilità senza virgola
 	for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
 		os << it->_b;
-		int_16 u = round(it->_fa);
-		os.write(reinterpret_cast<char*>(&u), 2);
+		uint_32 u = round(it->_fa);
+		os.write(reinterpret_cast<char*>(&u), 3);
 	}
 
 	/*!< Header end. */
@@ -113,9 +114,11 @@ void encoding(ifstream& is, ofstream& os){
 	float_64 appoggio;
 	float_64 appoggioU;
 	float_64 cnt = 0.0;
+
 	//variabili d'appoggio, necessarie entrambe per il caso particolare che lo zero sia prima cifra di uno dei due
 	appoggio = low;
 	appoggioU = up;
+
 	//cerchiamo l'ordine di grandezza di low e top
 	while (appoggio > 10 || appoggioU >10){
 		appoggio /= 10;
