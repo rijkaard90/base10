@@ -62,7 +62,9 @@
  */
 void syntax() {
 	cout << "Syntax:" << endl;
-	cout << "Range Encoding <input filename> <output filename>" << endl;
+	//bisogna specificare se dobbiamo comprimere un file di testo o un altro tipo di file
+	//perchè l'interpretazione di alcuni valori è differente
+	cout << "Range Encoding <type of file: t/o> <input filename> <output filename>" << endl;
 }
 
 /*!
@@ -72,31 +74,38 @@ void syntax() {
  */
 int main(int argc, char *argv[]){
 	
-	if (argc != 3) {
+	if (argc != 4) {
 		syntax();
 		return EXIT_FAILURE;
 	}
 
-	string InputFileName = argv[1];
-	string OutputFileName = argv[2];
+	char* Type = argv[1];
+	string InputFileName = argv[2];
+	string OutputFileName = argv[3];
 
 	/*!< Encoding. */
 	{
+		//non capisco per quale motivo non va sto confronto porcodio
+		//ho notato che è sbagliato quindi anche in encode e decode
+		//ho provato strcmp non va un cazzo
+		/*if (Type != "t" && Type != "o")
+			return -1;*/
+
 		ifstream is(InputFileName, ifstream::binary);
 		if (!is) return -1;
 		ofstream os(OutputFileName, ofstream::binary);
 		if (!os) return -1;
 
-		encoding(is, os);
+		encoding(Type,is, os);
 	}
 	
 	/*!< Decoding. */
-	{	
+	{
 		ifstream is(OutputFileName, ifstream::binary);
 		if (!is) return -1;
 		ofstream os("decodifica.txt", ofstream::binary);
 		if (!os) return -1;
 
-		decoding(is, os);
+		decoding(Type,is, os);
 	}
 }

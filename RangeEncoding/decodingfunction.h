@@ -108,6 +108,6 @@ void shift_and_control(uint_32& sotto, uint_32& sopra, uint_32& contacaratteri,
  * \see decoding(), read_little_endian(), headerExtraction(), setRangeValue(),
  *      setControl(), shift_and_control(), syntax(), encoding()
  */
-void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br);
+void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br, bitwriter& bw, char* Type);
 
 #endif // DECODINGFUNCTION_H

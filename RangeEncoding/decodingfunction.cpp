@@ -65,7 +65,7 @@ void shift_and_control(uint_32& sotto, uint_32& sopra, uint_32& contacaratteri,
 	else flagEndCode = true;
 }
 
-void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br){
+void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br,bitwriter& bw, char* Type){
 	//valori per il decoding
 	uint_32 rangecont = pow(10.0, 9.0);
 	uint_32 sopra = rangecont;
@@ -83,9 +83,12 @@ void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vec
 		for (auto it = Dcoppie.begin(); it != Dcoppie.end(); ++it){
 			if (prob >= it->_Fa && prob < (it->_fa + it->_Fa)){
 				//cout << it->_b;  //<< "\t";
-				os << it->_b;
+				//os << it->_b;
+				char gg=it->_b;
+				bw(gg, 8);
+				//os.write(reinterpret_cast<char*>(&gg), 1);
 				//per riscrivere il ritorno a capo, necessaria aggiunta
-				if (it->_b == 0x0D){
+				if (it->_b == 0x0D && Type == "t"){
 					byte spazio = 0x0A;
 					os << spazio;
 				}

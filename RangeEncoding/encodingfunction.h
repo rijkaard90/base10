@@ -44,7 +44,7 @@
  * \see encoding(), setProbability(), rounding(), setRange(), headerCreation(), 
  *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
  */
-void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray);
+void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, char* Type);
 
 /*!
  * \short Function SETPROBABILITY

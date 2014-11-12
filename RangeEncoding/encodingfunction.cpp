@@ -1,12 +1,12 @@
 #include "encodingfunction.h"
 
-void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray){
+void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, char* Type){
 	//mi assicuro che l'array sia inizializzato a zero
 	myarray.fill(0);
 
 	byte tmp;
 	while (is.get(reinterpret_cast<char&>(tmp))){ //gestione ritorno a capo (è presente uno spazio in più)		
-		if (tmp == 0x0D)
+		if (tmp == 0x0D && Type=="t")
 			is.get();
 		tot_symbol++;
 		myarray[tmp]++;

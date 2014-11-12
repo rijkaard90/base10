@@ -1,7 +1,7 @@
 #include "encoding.h"
 #include "encodingfunction.h"
 
-void encoding(ifstream& is, ofstream& os){
+void encoding(char* Type,ifstream& is, ofstream& os){
 
 	array<uint_32, 256> myarray;
 	vector<coppia> coppie;
@@ -9,7 +9,7 @@ void encoding(ifstream& is, ofstream& os){
 	uint_32 tot_symbol = 0; //numero totali simboli letti dallo stream		
 
 	//calcolo le ricorrenze di ogni simbolo
-	setOccurrences(is, tot_symbol, myarray);	
+	setOccurrences(is, tot_symbol, myarray,Type);	
 
 	//calcolo delle probabilità e inserimento nel vettore 
 	setProbability(coppie, tot_symbol, myarray);		
