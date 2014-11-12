@@ -14,12 +14,22 @@
  *  List of RangeEncoding algorithm function:
  *    - \c syntax()
  *    - \c encoding()
- *         1. encode()
- *         2. emit_digit()
- *         3. encode_symbol()
+ *		   1. setOccurrences()
+ *         2. setProbability()
+ *         3. rounding()
+ *         4. setRange()
+ *		   5. headerCreation()
+ *         6. encode()
+ *         7. emit_digit()
+ *		   8. encode_symbol()
+ *		   9. encodeAlgorithm()
  *    - \c decoding()
  *         1. read_little_endian()
- *         2. convert_and_shift()
+ *         2. headerExtraction()
+ *         3. setRangeValue()
+ *         4. setControl()
+ *         5. shift_and_control()
+ *         6. decodeAlgorithm()
  *
  *  More details will be provided in definition.
  */
@@ -30,7 +40,8 @@
  * \param &is Input file.
  * \param &os Output file.
  * \return The decoded input file.
- * \see syntax(), encoding(), read_little_endian(), convert_and_shift()
+ * \see read_little_endian(), headerExtraction(), setRangeValue(), setControl(), 
+ *      shift_and_control(), decodeAlgorithm(), syntax(), encoding()
  */
 void decoding(ifstream& is, ofstream& os);
 

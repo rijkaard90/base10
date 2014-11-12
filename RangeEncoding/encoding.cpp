@@ -9,16 +9,16 @@ void encoding(ifstream& is, ofstream& os){
 	uint_32 tot_symbol = 0; //numero totali simboli letti dallo stream		
 
 	//calcolo le ricorrenze di ogni simbolo
-	calcOccurrences(is, tot_symbol, myarray);	
+	setOccurrences(is, tot_symbol, myarray);	
 
 	//calcolo delle probabilità e inserimento nel vettore 
-	calcProbability(coppie, tot_symbol, myarray);		
+	setProbability(coppie, tot_symbol, myarray);		
 
 	//arrotondamento a 5 cifre decimali della probabilità
 	rounding(coppie, coppie2);		
 
 	//dopo aver ordinato il vector posso assegnare l'inizio del range per ogni simbolo
-	rangeAssignment(coppie, coppie2);	
+	setRange(coppie, coppie2);	
 	
 	is.clear(); // Disattivo l'EOF precedente
 	is.seekg(ios_base::beg); // Torno all'inizio	

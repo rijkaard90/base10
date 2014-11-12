@@ -10,7 +10,7 @@ void decoding(ifstream& is, ofstream& os){
 	headerExtraction(is, Dcoppie, n_caratteri);
 
 	//inserimento probabilità e range di partenza
-	probRange(Dcoppie);
+	setRangeValue(Dcoppie);
 
 	//verifica n_caratteri
 	cout << n_caratteri << '\n';	
@@ -22,7 +22,7 @@ void decoding(ifstream& is, ofstream& os){
 	//bitreader per leggere le cifre salvate in 4 bit
 	bitreader br(is);
 	
-	rangeFinder(is, controllo, br);
+	setControl(is, controllo, br);
 
 	//decodifica vera e propria
 	decodeAlgorithm(os, n_caratteri, controllo, Dcoppie, br);	

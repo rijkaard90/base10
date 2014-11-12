@@ -7,7 +7,7 @@ typedef double float_64;
 
 /*!
  * \short Class coppia
- * \details Characters, probability and starting range management - Double.
+ * \details Symbol, probability and starting range management - Double.
  */
 struct coppia {
 	byte _b;	  /*!< Unsigned char. */
@@ -29,7 +29,7 @@ struct coppia {
 
 /*!
  * \short Class coppia2
- * \details Characters, probability and starting range management - Unsigned.
+ * \details Symbol, probability and starting range management - Unsigned.
  */
 struct coppia2 {
 	byte _b;	 /*!< Unsigned char. */

@@ -1,46 +1,6 @@
 #include "encodingfunction.h"
 
-void encode(uint_32 start, uint_32 size, uint_32& low, uint_32& range, uint_32& top){
-	//calcoli valori top,range e low
-	//arrotondamento in alto per il low e in basso per il range
-	low = low + ceil((float_64)(start)*((float_64)range / 100000));
-	range = ((float_64)(size)*((float_64)range / 100000));
-	top = low + range;
-}
-
-void emit_digit(uint_32& low, bitwriter& bw){
-	//shift del low e uscita della cifra
-	uint_32 lowU = (uint_32)round(low) % 100000000;
-	uint_32 out = low / 100000000;
-	bw(out, 4);
-	low = lowU * 10;
-}
-
-void encode_symbol(byte b, vector<coppia2>& x, uint_32& low, uint_32& range, uint_32& top, ofstream& os, bitwriter& bw){
-	for (auto it = x.begin(); it != x.end(); ++it)
-		if (it->_b == b){
-			encode(it->_Fa, it->_fa, low, range, top);
-			//verifica di ogni passaggio
-			//cout << "low: " << low << "\t range: " << range << "\t top: " << top << endl;
-			//se la prima cifra del low e del top sono uguali la sputo fuori
-			while (((uint_32)low / 100000000) == ((uint_32)top / 100000000)){
-				emit_digit(low, bw);
-				uint_32 topU = (uint_32)round(top) % 100000000;
-				top = topU * 10;
-				range = top - low;
-			}
-			//modifica per range bassi disponibili
-			if (range < 1000){
-				emit_digit(low, bw);
-				emit_digit(low, bw);
-				range = 1000000000 - low;
-			}
-			return;
-		}
-	//cout << "Symbol not found!";
-}
-
-void calcOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray){
+void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray){
 	//mi assicuro che l'array sia inizializzato a zero
 	myarray.fill(0);
 
@@ -53,7 +13,7 @@ void calcOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& mya
 	}
 }
 
-void calcProbability(vector<coppia>& coppie, uint_32& tot_symbol, array<uint_32, 256>& myarray){
+void setProbability(vector<coppia>& coppie, uint_32& tot_symbol, array<uint_32, 256>& myarray){
 	for (uint_32 i = 0; i < 256; ++i){
 		if (myarray[i] != 0)
 			coppie.push_back(coppia(i, (float_64)myarray[i] / (float_64)tot_symbol));
@@ -98,14 +58,13 @@ void rounding(vector<coppia>& coppie, vector<coppia2>& coppie2){
 	}
 }
 
-void rangeAssignment(vector<coppia>& coppie, vector<coppia2>& coppie2){
+void setRange(vector<coppia>& coppie, vector<coppia2>& coppie2){
 	uint_32 prob_range = 0;
 	for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
 		it->_Fa = prob_range;
 		prob_range += it->_fa;
 		cout << "symbol: " << it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << endl;
 	}
-
 	//correzione valore finale per arrivare a 1 di probabilità
 	coppie.at(coppie.size() - 1)._fa = 100000 - coppie.at(coppie.size() - 1)._Fa;
 }
@@ -124,6 +83,46 @@ void headerCreation(vector<coppia2>& coppie2, uint_32& tot_symbol, ofstream& os)
 		uint_32 u = round(it->_fa);
 		os.write(reinterpret_cast<char*>(&u), 3); //non sono necessari più di 3 byte
 	}
+}
+
+void encode(uint_32 start, uint_32 size, uint_32& low, uint_32& range, uint_32& top){
+	//calcoli valori top,range e low
+	//arrotondamento in alto per il low e in basso per il range
+	low = low + ceil((float_64)(start)*((float_64)range / 100000));
+	range = ((float_64)(size)*((float_64)range / 100000));
+	top = low + range;
+}
+
+void emit_digit(uint_32& low, bitwriter& bw){
+	//shift del low e uscita della cifra
+	uint_32 lowU = (uint_32)round(low) % 100000000;
+	uint_32 out = low / 100000000;
+	bw(out, 4);
+	low = lowU * 10;
+}
+
+void encode_symbol(byte b, vector<coppia2>& x, uint_32& low, uint_32& range, uint_32& top, ofstream& os, bitwriter& bw){
+	for (auto it = x.begin(); it != x.end(); ++it)
+		if (it->_b == b){
+			encode(it->_Fa, it->_fa, low, range, top);
+			//verifica di ogni passaggio
+			//cout << "low: " << low << "\t range: " << range << "\t top: " << top << endl;
+			//se la prima cifra del low e del top sono uguali la sputo fuori
+			while (((uint_32)low / 100000000) == ((uint_32)top / 100000000)){
+				emit_digit(low, bw);
+				uint_32 topU = (uint_32)round(top) % 100000000;
+				top = topU * 10;
+				range = top - low;
+			}
+			//modifica per range bassi disponibili
+			if (range < 1000){
+				emit_digit(low, bw);
+				emit_digit(low, bw);
+				range = 1000000000 - low;
+			}
+			return;
+		}
+	//cout << "Symbol not found!";
 }
 
 void encodeAlgorithm(ifstream& is, ofstream& os, vector<coppia2>& coppie2){
