@@ -44,7 +44,7 @@
  * \see encoding(), setProbability(), rounding(), setRange(), headerCreation(), 
  *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
  */
-void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, char* Type);
+void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, bool isTextFile);
 
 /*!
  * \short Function SETPROBABILITY
@@ -80,6 +80,7 @@ void rounding(vector<coppia>& coppie, vector<coppia2>& coppie2);
  */
 void setRange(vector<coppia>& coppie, vector<coppia2>& coppie2);
 
+uint_32 inputSize(ifstream& is);
 /*!
  * \short Function HEADERCREATION
  * \details Creating header for encoding.
@@ -144,5 +145,7 @@ void encode_symbol(byte b, vector<coppia2>& x, uint_32& low, uint_32& range, uin
  *      encode(), emit_digit(), encode_symbol(), syntax(), decodeAlgorithm()
  */
 void encodeAlgorithm(ifstream& is, ofstream& os, vector<coppia2>& coppie2);
+
+void printCompressionRatio(ofstream& os, uint_32& inputLength);
 
 #endif // ENCODINGFUNCTION_H

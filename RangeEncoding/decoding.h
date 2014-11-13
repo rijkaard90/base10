@@ -43,6 +43,6 @@
  * \see read_little_endian(), headerExtraction(), setRangeValue(), setControl(), 
  *      shift_and_control(), decodeAlgorithm(), syntax(), encoding()
  */
-void decoding(char* Type,ifstream& is, ofstream& os);
+void decoding(ifstream& is, ofstream& os, bool isTextFile);
 
 #endif // DECODING_H

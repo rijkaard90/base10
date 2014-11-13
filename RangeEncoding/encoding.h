@@ -43,6 +43,6 @@
  * \see setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(), 
  *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decoding()
  */
-void encoding (char* Type,ifstream& is, ofstream& os);
+void encoding(ifstream& is, ofstream& os, bool isTextFile);
 
 #endif // ENCODING_H

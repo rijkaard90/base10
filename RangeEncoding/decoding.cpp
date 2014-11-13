@@ -1,7 +1,7 @@
 #include "decoding.h"
 #include "decodingfunction.h"
 
-void decoding(char* Type, ifstream& is, ofstream& os){
+void decoding(ifstream& is, ofstream& os, bool isTextFile){
 	
 	vector<coppia2> Dcoppie;
 	uint_32 n_caratteri;
@@ -10,10 +10,7 @@ void decoding(char* Type, ifstream& is, ofstream& os){
 	headerExtraction(is, Dcoppie, n_caratteri);
 
 	//inserimento probabilità e range di partenza
-	setRangeValue(Dcoppie);
-
-	//verifica n_caratteri
-	cout << n_caratteri << '\n';	
+	setRangeValue(Dcoppie);	
 
 	//bitreader per leggere le cifre salvate in 4 bit
 	bitreader br(is);
@@ -26,7 +23,7 @@ void decoding(char* Type, ifstream& is, ofstream& os){
 	bitwriter bw(os);
 
 	//decodifica vera e propria
-	decodeAlgorithm(os, n_caratteri, controllo, Dcoppie, br, bw,Type);	
+	decodeAlgorithm(os, n_caratteri, controllo, Dcoppie, br, bw, isTextFile);
 
 	// chiude is e os per poterli eventualemente riusare
 	is.close();

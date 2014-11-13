@@ -74,38 +74,38 @@ void syntax() {
  */
 int main(int argc, char *argv[]){
 	
-	if (argc != 4) {
+	if (argc != 5) {
 		syntax();
 		return EXIT_FAILURE;
 	}
 
 	char* Type = argv[1];
 	string InputFileName = argv[2];
-	string OutputFileName = argv[3];
+	string EncodedFileName = argv[3];
+	string DecodedFileName = argv[4];
+	
+	bool isTextFile = false;
+	// Controllo tipo di file
+	if (*Type == 't')
+		isTextFile = true;
 
 	/*!< Encoding. */
 	{
-		//non capisco per quale motivo non va sto confronto porcodio
-		//ho notato che è sbagliato quindi anche in encode e decode
-		//ho provato strcmp non va un cazzo
-		/*if (Type != "t" && Type != "o")
-			return -1;*/
-
 		ifstream is(InputFileName, ifstream::binary);
 		if (!is) return -1;
-		ofstream os(OutputFileName, ofstream::binary);
+		ofstream os(EncodedFileName, ofstream::binary);
 		if (!os) return -1;
 
-		encoding(Type,is, os);
+		encoding(is, os, isTextFile);
 	}
 	
 	/*!< Decoding. */
 	{
-		ifstream is(OutputFileName, ifstream::binary);
+		ifstream is(EncodedFileName, ifstream::binary);
 		if (!is) return -1;
-		ofstream os("decodifica.txt", ofstream::binary);
+		ofstream os(DecodedFileName, ofstream::binary);
 		if (!os) return -1;
 
-		decoding(Type,is, os);
-	}
+		decoding(is, os, isTextFile);
+	} 
 }

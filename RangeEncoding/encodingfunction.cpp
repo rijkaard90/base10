@@ -1,12 +1,12 @@
 #include "encodingfunction.h"
 
-void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, char* Type){
+void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, bool isTextFile){
 	//mi assicuro che l'array sia inizializzato a zero
 	myarray.fill(0);
 
 	byte tmp;
 	while (is.get(reinterpret_cast<char&>(tmp))){ //gestione ritorno a capo (è presente uno spazio in più)		
-		if (tmp == 0x0D && Type=="t")
+		if (tmp == 0x0D && isTextFile)
 			is.get();
 		tot_symbol++;
 		myarray[tmp]++;
@@ -63,10 +63,19 @@ void setRange(vector<coppia>& coppie, vector<coppia2>& coppie2){
 	for (auto it = coppie2.begin(); it != coppie2.end(); ++it){
 		it->_Fa = prob_range;
 		prob_range += it->_fa;
-		cout << "symbol: " << it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << endl;
+		//cout << "symbol: " << it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << endl;
 	}
 	//correzione valore finale per arrivare a 1 di probabilità
 	coppie.at(coppie.size() - 1)._fa = 100000 - coppie.at(coppie.size() - 1)._Fa;
+}
+
+uint_32 inputSize(ifstream& is){
+	uint_32 inputLength;
+	is.clear(); // Disattivo l'EOF precedente
+	is.seekg(0, ios::end);
+	inputLength = uint_32(is.tellg());
+	is.seekg(ios_base::beg); // Torno all'inizio
+	return inputLength;
 }
 
 void headerCreation(vector<coppia2>& coppie2, uint_32& tot_symbol, ofstream& os){
@@ -167,7 +176,7 @@ void encodeAlgorithm(ifstream& is, ofstream& os, vector<coppia2>& coppie2){
 
 	//calcolo valore finale da aggiungere al file
 	uint_32 final = (uint_32)(appoggio + differenza / 2);
-	cout << "finale:" << final << endl;
+	//cout << "finale:" << final << endl;
 
 	//estrazione cifre finali e scrittura tramite bitwriter sul file
 	uint_32 x;
@@ -178,4 +187,12 @@ void encodeAlgorithm(ifstream& is, ofstream& os, vector<coppia2>& coppie2){
 
 	//per scrivere non solo gli uno finali del flush ma anche l ultimo valore se non riempe il byte
 	bw.flush();
+}
+
+void printCompressionRatio(ofstream& os, uint_32& inputLength){
+	os.seekp(0, ios::end);
+	uint_32 encodedLength = uint_32(os.tellp());
+	cout << "Size of InputFile is: " << inputLength << " bytes.";
+	cout << endl << "Size of EncodedFile is: " << encodedLength << " bytes.";
+	cout << endl << "Compress Ratio: " << 100 - ((float_64)encodedLength / inputLength * 100) << endl;
 }

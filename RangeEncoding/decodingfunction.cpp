@@ -17,7 +17,7 @@ void headerExtraction(ifstream& is, vector<coppia2>& Dcoppie, uint_32& n_caratte
 	uint_32 n_simboli = is.get();
 	//controllo errore nel caso siano presenti tutti i valori del codice ascii.
 	if (n_simboli == 0) n_simboli = 256;
-	cout << endl << endl << "n_caratteri: " << n_caratteri << endl << "n_simboli: " << n_simboli << endl;
+	//cout << endl << endl << "n_simboli: " << n_simboli << endl;
 
 	//leggo simboli con probabilità e ricreo array coppie
 	for (uint_32 i = 0; i < n_simboli; i++){
@@ -33,14 +33,14 @@ void setRangeValue(vector<coppia2>& Dcoppie){
 	for (auto it = Dcoppie.begin(); it != Dcoppie.end(); ++it){
 		it->_Fa = prob;
 		prob += it->_fa;
-		cout << "symbol: " << (uint_32)it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << "\n";
+		//cout << "symbol: " << (uint_32)it->_b << "\t start_range: " << it->_Fa << "\t probability: " << it->_fa << "\n";
 	}
 }
 
 void setControl(ifstream& is, uint_32& controllo, bitreader& br){
 	for (uint_32 i = 0; i < 9; ++i)
 		controllo = controllo * 10 + br(4);
-	cout << endl << "controllo: " << controllo << endl;
+	//cout << endl << "Starting control: " << controllo << endl;
 }
 
 void shift_and_control(uint_32& sotto, uint_32& sopra, uint_32& contacaratteri,
@@ -65,7 +65,7 @@ void shift_and_control(uint_32& sotto, uint_32& sopra, uint_32& contacaratteri,
 	else flagEndCode = true;
 }
 
-void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br,bitwriter& bw, char* Type){
+void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vector<coppia2>& Dcoppie, bitreader& br, bitwriter& bw, bool isTextFile){
 	//valori per il decoding
 	uint_32 rangecont = pow(10.0, 9.0);
 	uint_32 sopra = rangecont;
@@ -88,7 +88,7 @@ void decodeAlgorithm(ofstream& os, uint_32& n_caratteri, uint_32& controllo, vec
 				bw(gg, 8);
 				//os.write(reinterpret_cast<char*>(&gg), 1);
 				//per riscrivere il ritorno a capo, necessaria aggiunta
-				if (it->_b == 0x0D && Type == "t"){
+				if (it->_b == 0x0D && isTextFile){
 					byte spazio = 0x0A;
 					os << spazio;
 				}
