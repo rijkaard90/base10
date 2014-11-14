@@ -85,7 +85,7 @@ void decodeAlgorithm(ofstream& os, uint_32& numSymbolsFirstByte, uint_32& contro
 				// cout << it->_b;  //<< "\t";
 				char out = it->_b;
 				bw(out, 8);
-				// per riscrivere il ritorno a capo, necessaria aggiunta
+				// per riscrivere il ritorno a capo, necessaria aggiunta (file di testo)
 				if (it->_b == 0x0D && isTextFile){
 					byte space = 0x0A;
 					os << space;
