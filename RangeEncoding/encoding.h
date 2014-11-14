@@ -18,11 +18,13 @@
  *         2. setProbability()
  *         3. rounding()
  *         4. setRange()
- *		   5. headerCreation()
- *         6. encode()
- *         7. emit_digit()
- *		   8. encode_symbol()
- *		   9. encodeAlgorithm()
+ *		   5. inputSize()
+ *		   6. headerCreation()
+ *         7. encode()
+ *         8. emit_digit()
+ *		   9. encode_symbol()
+ *		   10. encodeAlgorithm()
+ *		   11. printCompressionRatio()
  *    - \c decoding()
  *         1. read_little_endian()
  *         2. headerExtraction()
@@ -30,6 +32,7 @@
  *         4. setControl()
  *         5. shift_and_control()
  *         6. decodeAlgorithm()
+ *		   7. decodedSize()
  *
  *  More details will be provided in definition.
  */
@@ -39,9 +42,10 @@
  * \details Primary function for encoding algorithm.
  * \param &is Input file.
  * \param &os Output file.
+ * \param isTextFile Specify if we have to compress a text file or another type.
  * \return The encoded input file.
- * \see setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(), 
- *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decoding()
+ * \see syntax(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(), headerCreation(), 
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
 void encoding(ifstream& is, ofstream& os, bool isTextFile);
 

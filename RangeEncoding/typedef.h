@@ -1,9 +1,9 @@
 #ifndef TYPEDEF_H
 #define TYPEDEF_H
 
-/*!< Rename of some types required for RangeEncoding. */
-
 using namespace std;
+
+/*!< Rename of some types required for RangeEncoding. */
 
 typedef unsigned char byte;
 

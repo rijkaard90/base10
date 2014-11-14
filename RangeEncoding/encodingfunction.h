@@ -18,11 +18,13 @@
  *         2. setProbability()
  *         3. rounding()
  *         4. setRange()
- *		   5. headerCreation()
- *         6. encode()
- *         7. emit_digit()
- *		   8. encode_symbol()
- *		   9. encodeAlgorithm()
+ *		   5. inputSize()
+ *		   6. headerCreation()
+ *         7. encode()
+ *         8. emit_digit()
+ *		   9. encode_symbol()
+ *		   10. encodeAlgorithm()
+ *		   11. printCompressionRatio()
  *    - \c decoding()
  *         1. read_little_endian()
  *         2. headerExtraction()
@@ -30,6 +32,7 @@
  *         4. setControl()
  *         5. shift_and_control()
  *         6. decodeAlgorithm()
+ *		   7. decodedSize()
  *
  *  More details will be provided in definition.
  */
@@ -38,60 +41,70 @@
  * \short Function SETOCCURRENCES
  * \details Calculating the occurrences of each symbol.
  * \param &is Input file.
- * \param &tot_symbol Total number of symbols read from the stream.
- * \param &myarray Array of occurrences.
+ * \param &totInputSymbols Total number of symbols read from the stream.
+ * \param &symbolsOccurrences Array of occurrences.
+ * \param isTextFile Specify if we have to compress a text file or another type.
  * \return Array occurrences depending on the input file.
- * \see encoding(), setProbability(), rounding(), setRange(), headerCreation(), 
- *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setProbability(), rounding(), setRange(), inputSize(), headerCreation(), 
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
-void setOccurrences(ifstream& is, uint_32& tot_symbol, array<uint_32, 256>& myarray, bool isTextFile);
+void setOccurrences(ifstream& is, uint_32& totInputSymbols, array<uint_32, 256>& symbolsOccurrences, bool isTextFile);
 
 /*!
  * \short Function SETPROBABILITY
  * \details Calculating the probability of each symbol.
- * \param &coppie Vector of symbols, probability and starting range. 
- * \param &tot_symbol Total number of symbols read from the stream.
- * \param &myarray Array of occurrences.
+ * \param &floatCouple Vector of symbols, probability and starting range, float.
+ * \param &totInputSymbols Total number of symbols read from the stream.
+ * \param &symbolsOccurrences Array of occurrences.
  * \return Array probability depending on the input file.
- * \see encoding(), setOccurrences(), rounding(), setRange(), headerCreation(),
- *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), rounding(), setRange(), inputSize(), headerCreation(),
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
-void setProbability(vector<coppia>& coppie, uint_32& tot_symbol, array<uint_32, 256>& myarray);
+void setProbability(vector<f_couple>& floatCouple, uint_32& totInputSymbols, array<uint_32, 256>& symbolsOccurrences);
 
 /*!
  * \short Function ROUNDING
  * \details Rounding to 5 decimal digits for probability.
- * \param &coppie Vector of symbols, probability and starting range.
- * \param &coppie2 Vector with correct probability.
+ * \param &floatCouple Vector of symbols, probability and starting range, float.
+ * \param &unsignedCouple Vector with correct probability, unsigned.
  * \return Vector with probability smoothed to avoid calculation errors.
- * \see encoding(), setOccurrences(), setProbability(), setRange(), headerCreation(),
- *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), setRange(), inputSize(), headerCreation(),
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
-void rounding(vector<coppia>& coppie, vector<coppia2>& coppie2);
+void rounding(vector<f_couple>& floatCouple, vector<u_couple>& unsignedCouple);
 
 /*!
  * \short Function SETRANGE
  * \details Assignment start of the range for each symbol.
- * \param &coppie Vector of symbols, probability and starting range.
- * \param &coppie2 Vector with correct probability.
+ * \param &floatCouple Vector of symbols, probability and starting range, float.
+ * \param &unsignedCouple Vector with correct probability, unsigned.
  * \return Vector with final correction value for up to 1 probability.
- * \see encoding(), setOccurrences(), setProbability(), rounding(), headerCreation(),
- *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), inputSize(), headerCreation(),
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
-void setRange(vector<coppia>& coppie, vector<coppia2>& coppie2);
+void setRange(vector<f_couple>& floatCouple, vector<u_couple>& unsignedCouple);
 
+/*!
+ * \short Function INPUTSIZE
+ * \details Calculate input file size.
+ * \param &is Input file.
+ * \return Number of bytes in the input file.
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(),
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
+ */
 uint_32 inputSize(ifstream& is);
+
 /*!
  * \short Function HEADERCREATION
  * \details Creating header for encoding.
- * \param &coppie2 Vector with correct probability.
- * \param &tot_symbol Total number of symbols read from the stream.
+ * \param &unsignedCouple Vector with correct probability, unsigned.
+ * \param &totInputSymbols Total number of symbols read from the stream.
  * \param &os Output file.
  * \return Write to output file initial length, number of ascii symbols with probability greater than zero, probability value without a decimal point.
- * \see encoding(), setOccurrences(), setProbability(), rounding(), setRange(), encode(), 
- *      emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(),
+ *      encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
-void headerCreation(vector<coppia2>& coppie2, uint_32& tot_symbol, ofstream& os);
+void headerCreation(vector<u_couple>& unsignedCouple, uint_32& totInputSymbols, ofstream& os);
 
 /*!
  * \short Function ENCODE
@@ -102,8 +115,8 @@ void headerCreation(vector<coppia2>& coppie2, uint_32& tot_symbol, ofstream& os)
  * \param &range Size of range.
  * \param &top Top range.
  * \return Range for encoding.
- * \see encoding(), setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(),
- *      emit_digit(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(), 
+ *       headerCreation(), emit_digit(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
 void encode(uint_32 start, uint_32 size, uint_32& low, uint_32& range, uint_32& top);
 
@@ -113,8 +126,8 @@ void encode(uint_32 start, uint_32 size, uint_32& low, uint_32& range, uint_32& 
  * \param &low Bottom range.
  * \param &bw Bit writer.
  * \return Bottom range adjusted.
- * \see encoding(), setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(),
- *      encode(), encode_symbol(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(), 
+ *      headerCreation(), encode(), encode_symbol(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
 void emit_digit(uint_32& low, bitwriter& bw);
 
@@ -122,30 +135,39 @@ void emit_digit(uint_32& low, bitwriter& bw);
  * \short Function ENCODE_SYMBOL
  * \details Core function for encoding algorithm, for each element manages the range.
  * \param b Unsigned char.
- * \param &x Vector of symbols, probability and starting range.
+ * \param &unsignedCouple Vector with correct probability, unsigned.
  * \param &low Bottom range.
  * \param &range Size of range.
  * \param &top Top range.
  * \param &os Output file.
  * \param &bw Bit writer.
  * \return Encoding symbol.
- * \see encoding(), setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(),
- *      encode(), emit_digit(), encodeAlgorithm(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(), 
+ *      headerCreation(), encode(), emit_digit(), encodeAlgorithm(), printCompressionRatio(), decoding()
  */
-void encode_symbol(byte b, vector<coppia2>& x, uint_32& low, uint_32& range, uint_32& top, ofstream& os, bitwriter& bw);
+void encode_symbol(byte b, vector<u_couple>& unsignedCouple, uint_32& low, uint_32& range, uint_32& top, ofstream& os, bitwriter& bw);
 
 /*!
  * \short Function ENCODEALGORITHM
  * \details Writing encoding on file.
  * \param &is Input file.
  * \param &os Output file.
- * \param &coppie2 Vector with correct probability.
+ * \param &unsignedCouple Vector with correct probability, unsigned.
  * \return Write the encoded input file to output file.
- * \see encoding(), setOccurrences(), setProbability(), rounding(), setRange(), headerCreation(),
- *      encode(), emit_digit(), encode_symbol(), syntax(), decodeAlgorithm()
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(), 
+ *      headerCreation(), encode(), emit_digit(), encode_symbol(), printCompressionRatio(), decoding()
  */
-void encodeAlgorithm(ifstream& is, ofstream& os, vector<coppia2>& coppie2);
+void encodeAlgorithm(ifstream& is, ofstream& os, vector<u_couple>& unsignedCouple);
 
+/*!
+ * \short Function INPUTSIZE
+ * \details Calculate decoded file size and compression ratio.
+ * \param &os Output file.
+ * \param &inputLength Size of input file.
+ * \return Number of bytes in the decoded file and % of compression ratio.
+ * \see syntax(), encoding(), setOccurrences(), setProbability(), rounding(), setRange(), inputSize(), 
+ *      headerCreation(), encode(), emit_digit(), encode_symbol(), encodeAlgorithm(), decoding()
+ */
 void printCompressionRatio(ofstream& os, uint_32& inputLength);
 
 #endif // ENCODINGFUNCTION_H

@@ -6,10 +6,10 @@ typedef unsigned int uint_32;
 typedef double float_64;
 
 /*!
- * \short Class coppia
+ * \short Class f_couple
  * \details Symbol, probability and starting range management - Double.
  */
-struct coppia {
+struct f_couple {
 	byte _b;	  /*!< Unsigned char. */
 	float_64 _fa; /*!< Double probability. */
 	float_64 _Fa; /*!< Double starting range. */
@@ -18,20 +18,20 @@ struct coppia {
 	 * \short Struct initialization
 	 * \details Allocation and initialization values - Double.
 	 */
-	coppia(byte b, float_64 prob, float_64 start = 0) : _b(b), _fa(prob), _Fa(start) {}
+	f_couple(byte b, float_64 prob, float_64 start = 0) : _b(b), _fa(prob), _Fa(start) {}
 
 	/*!
 	 * \short Operator >
 	 * \details Overloading operator >.
 	 */
-	bool operator> (const coppia& c) const { return _fa > c._fa; }
+	bool operator> (const f_couple& c) const { return _fa > c._fa; }
 };
 
 /*!
- * \short Class coppia2
+ * \short Class u_couple
  * \details Symbol, probability and starting range management - Unsigned.
  */
-struct coppia2 {
+struct u_couple {
 	byte _b;	 /*!< Unsigned char. */
 	uint_32 _fa; /*!< Unsigned probability. */
 	uint_32 _Fa; /*!< Unsigned starting range. */
@@ -40,13 +40,13 @@ struct coppia2 {
 	 * \short Struct initialization
 	 * \details Allocation and initialization values - Unsigned.
 	 */
-	coppia2(byte b, uint_32 prob, uint_32 start = 0) : _b(b), _fa(prob), _Fa(start) {}
+	u_couple(byte b, uint_32 prob, uint_32 start = 0) : _b(b), _fa(prob), _Fa(start) {}
 
 	/*!
 	 * \short Operator >
 	 * \details Overloading operator >.
 	 */
-	bool operator> (const coppia& c) const { return _fa > c._fa; }
+	bool operator> (const u_couple& c) const { return _fa > c._fa; }
 };
 
 #endif // COUPLE_H

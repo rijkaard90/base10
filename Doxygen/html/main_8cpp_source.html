@@ -30,7 +30,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Range Encoding Compression
+   &#160;<span id="projectnumber">Lodi Matteo - Moscardini Andrea - Rinaldini Riccardo</span>
    </div>
+   <div id="projectbrief">Encoding &amp; Decoding Algorithm</div>
   </td>
  </tr>
  </tbody>
@@ -108,50 +110,57 @@ $(document).ready(function(){initNavTree('main_8cpp_source.html','');});
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rangeencoding_8h.html">rangeencoding.h</a>&quot;</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
 <div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261">   63</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261">syntax</a>() {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Syntax:&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Range Encoding &lt;input filename&gt; &lt;output filename&gt;&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Syntax:&quot;</span> &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;Range Encoding &lt;type of file: t/o&gt; &lt;input filename&gt; &lt;output filename&gt;&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
 <div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   73</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]){</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> (argc != 3) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> (argc != 5) {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="code" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261">syntax</a>();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">string</span> InputFileName = argv[1];</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">string</span> OutputFileName = argv[2];</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        ifstream is(InputFileName, ifstream::binary);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">if</span> (!is) <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        ofstream os(OutputFileName, ofstream::binary);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (!os) <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd">encoding</a>(is, os);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    {   </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        ifstream is(OutputFileName, ifstream::binary);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">if</span> (!is) <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        ofstream os(<span class="stringliteral">&quot;decodifica.txt&quot;</span>, ofstream::binary);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">if</span> (!os) <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d">decoding</a>(is, os);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
-<div class="ttc" id="encoding_8cpp_html_a7f8dc47b94994ef07f4f3e8c4dd87fdd"><div class="ttname"><a href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd">encoding</a></div><div class="ttdeci">void encoding(ifstream &amp;is, ofstream &amp;os)</div><div class="ttdoc">Function ENCODING. </div><div class="ttdef"><b>Definition:</b> <a href="encoding_8cpp_source.html#l00004">encoding.cpp:4</a></div></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">char</span>* Type = argv[1];</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">string</span> InputFileName = argv[2];</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">string</span> EncodedFileName = argv[3];</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">string</span> DecodedFileName = argv[4];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> isTextFile = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="comment">// Controllo tipo di file</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (*Type == <span class="charliteral">&#39;t&#39;</span>)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        isTextFile = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        ifstream is(InputFileName, ifstream::binary);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> (!is) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        ofstream os(EncodedFileName, ofstream::binary);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">if</span> (!os) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="encoding_8cpp.html#a398ec1acb7e2bb6476463a3c9d192078">encoding</a>(is, os, isTextFile);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        ifstream is(EncodedFileName, ifstream::binary);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">if</span> (!is) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        ofstream os(DecodedFileName, ofstream::binary);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">if</span> (!os) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <a class="code" href="decoding_8cpp.html#ac3c9265497f61972bf7229dd587fb1f6">decoding</a>(is, os, isTextFile);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    } </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
 <div class="ttc" id="main_8cpp_html_aefeded708611e6e402e2258c60cb5261"><div class="ttname"><a href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261">syntax</a></div><div class="ttdeci">void syntax()</div><div class="ttdoc">Function SYNTAX. </div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00063">main.cpp:63</a></div></div>
 <div class="ttc" id="rangeencoding_8h_html"><div class="ttname"><a href="rangeencoding_8h.html">rangeencoding.h</a></div></div>
-<div class="ttc" id="decoding_8cpp_html_a6d7b2b2bfca40131d43c3764d152a70d"><div class="ttname"><a href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d">decoding</a></div><div class="ttdeci">void decoding(ifstream &amp;is, ofstream &amp;os)</div><div class="ttdoc">Function DECODING. </div><div class="ttdef"><b>Definition:</b> <a href="decoding_8cpp_source.html#l00004">decoding.cpp:4</a></div></div>
+<div class="ttc" id="decoding_8cpp_html_ac3c9265497f61972bf7229dd587fb1f6"><div class="ttname"><a href="decoding_8cpp.html#ac3c9265497f61972bf7229dd587fb1f6">decoding</a></div><div class="ttdeci">void decoding(ifstream &amp;is, ofstream &amp;os, bool isTextFile)</div><div class="ttdoc">Function DECODING. </div><div class="ttdef"><b>Definition:</b> <a href="decoding_8cpp_source.html#l00004">decoding.cpp:4</a></div></div>
 <div class="ttc" id="main_8cpp_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdoc">Function MAIN. </div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00073">main.cpp:73</a></div></div>
+<div class="ttc" id="encoding_8cpp_html_a398ec1acb7e2bb6476463a3c9d192078"><div class="ttname"><a href="encoding_8cpp.html#a398ec1acb7e2bb6476463a3c9d192078">encoding</a></div><div class="ttdeci">void encoding(ifstream &amp;is, ofstream &amp;os, bool isTextFile)</div><div class="ttdoc">Function ENCODING. </div><div class="ttdef"><b>Definition:</b> <a href="encoding_8cpp_source.html#l00004">encoding.cpp:4</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="main_8cpp.html">main.cpp</a></li>
-    <li class="footer">Generated on Wed Nov 12 2014 15:34:45 for Range Encoding Compression by
+    <li class="footer">Generated on Fri Nov 14 2014 16:04:19 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

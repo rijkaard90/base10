@@ -30,7 +30,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Range Encoding Compression
+   &#160;<span id="projectnumber">Lodi Matteo - Moscardini Andrea - Rinaldini Riccardo</span>
    </div>
+   <div id="projectbrief">Encoding &amp; Decoding Algorithm</div>
   </td>
  </tr>
  </tbody>
@@ -108,179 +110,195 @@ $(document).ready(function(){initNavTree('decodingfunction_8cpp_source.html','')
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a7df6b0079643fd33953cbd7c77ba65c4">    3</a></span>&#160;<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> <a class="code" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a>(ifstream&amp; is, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> nByte){</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> result = 0;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; nByte; i++)</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        result += static_cast&lt;uint_32&gt;(is.get() &lt;&lt; (8 * i));</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#ace557d4096f02157dc484fd1bdbdd8fa">   12</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#ace557d4096f02157dc484fd1bdbdd8fa">headerExtraction</a>(ifstream&amp; is, vector&lt;coppia2&gt;&amp; Dcoppie, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; n_caratteri){</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">//leggo quanti caratteri devo decodificare nel primo byte del file</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    n_caratteri = <a class="code" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a>(is, <span class="keyword">sizeof</span>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>));</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">//leggo numero totale di simboli presenti nell&#39;header con probabilità maggiore di zero</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> n_simboli = is.get();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">//controllo errore nel caso siano presenti tutti i valori del codice ascii.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">if</span> (n_simboli == 0) n_simboli = 256;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    cout &lt;&lt; endl &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;n_caratteri: &quot;</span> &lt;&lt; n_caratteri &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;n_simboli: &quot;</span> &lt;&lt; n_simboli &lt;&lt; endl;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">//leggo simboli con probabilità e ricreo array coppie</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; n_simboli; i++){</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> valore = is.get();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="comment">//leggo 3 byte per come è impostato l&#39;header</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> u_prob = <a class="code" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a>(is, 3);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        Dcoppie.push_back(<a class="code" href="structcoppia2.html">coppia2</a>(valore, u_prob));</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a9b5b0d382f8881532cf126a8c3846705">   31</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#a9b5b0d382f8881532cf126a8c3846705">setRangeValue</a>(vector&lt;coppia2&gt;&amp; Dcoppie){</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> prob = 0;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = Dcoppie.begin(); it != Dcoppie.end(); ++it){</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        it-&gt;_Fa = prob;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        prob += it-&gt;_fa;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;symbol: &quot;</span> &lt;&lt; (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)it-&gt;_b &lt;&lt; <span class="stringliteral">&quot;\t start_range: &quot;</span> &lt;&lt; it-&gt;_Fa &lt;&lt; <span class="stringliteral">&quot;\t probability: &quot;</span> &lt;&lt; it-&gt;_fa &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a84c367936046e405f26f3cc094d6d001">   40</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#a84c367936046e405f26f3cc094d6d001">setControl</a>(ifstream&amp; is, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; controllo, <a class="code" href="classbitreader.html">bitreader</a>&amp; br){</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; 9; ++i)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        controllo = controllo * 10 + br(4);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    cout &lt;&lt; endl &lt;&lt; <span class="stringliteral">&quot;controllo: &quot;</span> &lt;&lt; controllo &lt;&lt; endl;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#abfaf155f6b53d7268114a426379a11bd">   46</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd">shift_and_control</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; sotto, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; sopra, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; contacaratteri,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; rangecont, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; controllo, <a class="code" href="classbitreader.html">bitreader</a>&amp; br, <span class="keywordtype">bool</span>&amp; flagEndCode){</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//variabile d&#39;appoggio e uso del long long per non perdere precisione</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a> sottoP = sotto;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a> sopraP = sopra;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    sottoP *= 10;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    sopraP *= 10;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//calcolo modulo</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    sotto = sottoP % (<a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a>)(pow(10.0, contacaratteri + 1));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    sopra = sopraP % (<a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a>)(pow(10.0, contacaratteri + 1));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    rangecont = sopra - sotto;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    controllo = (controllo % (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(pow(10.0, contacaratteri))) * 10;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">//controllo fine codice</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> tmp = br(4);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (tmp &lt;= 9 &amp;&amp; !flagEndCode)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        controllo += tmp;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">else</span> flagEndCode = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a4d7cc9f31fdf49d48b83d05f1a0752dc">   68</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#a4d7cc9f31fdf49d48b83d05f1a0752dc">decodeAlgorithm</a>(ofstream&amp; os, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; n_caratteri, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; controllo, vector&lt;coppia2&gt;&amp; Dcoppie, <a class="code" href="classbitreader.html">bitreader</a>&amp; br){</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//valori per il decoding</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> rangecont = pow(10.0, 9.0);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> sopra = rangecont;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> sotto = 0;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; nByte; i++)</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        result += static_cast&lt;uint_32&gt;(is.get() &lt;&lt; (8 * i));</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a6403201c0840141a65fc7b21356aa03d">   11</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#a6403201c0840141a65fc7b21356aa03d">headerExtraction</a>(ifstream&amp; is, vector&lt;u_couple&gt;&amp; decodingCouple, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; numSymbolsFirstByte){</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="comment">// leggo quanti caratteri devo decodificare nel primo byte del file</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    numSymbolsFirstByte = <a class="code" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a>(is, <span class="keyword">sizeof</span>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>));</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// leggo numero totale di simboli presenti nell&#39;header con probabilità maggiore di zero</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> numSymbolsHeader = is.get();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">// controllo errore nel caso siano presenti tutti i valori del codice ascii.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">if</span> (numSymbolsHeader == 0) numSymbolsHeader = 256;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// cout &lt;&lt; endl &lt;&lt; endl &lt;&lt; &quot;n_simboli: &quot; &lt;&lt; n_simboli &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// leggo simboli con probabilità e ricreo array coppie</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; numSymbolsHeader; i++){</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> value = is.get();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="comment">// leggo 3 byte per come è impostato l&#39;header</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> uProb = <a class="code" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a>(is, 3);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        decodingCouple.push_back(<a class="code" href="structu__couple.html">u_couple</a>(value, uProb));</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#af43b6879cbf3fad5db6411b3aeeb6078">   30</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#af43b6879cbf3fad5db6411b3aeeb6078">setRangeValue</a>(vector&lt;u_couple&gt;&amp; decodingCouple){</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> prob = 0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = decodingCouple.begin(); it != decodingCouple.end(); ++it){</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        it-&gt;_Fa = prob;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        prob += it-&gt;_fa;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="comment">// cout &lt;&lt; &quot;symbol: &quot; &lt;&lt; (uint_32)it-&gt;_b &lt;&lt; &quot;\t start_range: &quot; &lt;&lt; it-&gt;_Fa &lt;&lt; &quot;\t probability: &quot; &lt;&lt; it-&gt;_fa &lt;&lt; &quot;\n&quot;;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#aec66f17dbf75713d7ccfe0d782f76f39">   39</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#aec66f17dbf75713d7ccfe0d782f76f39">setControl</a>(ifstream&amp; is, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; control, <a class="code" href="classbitreader.html">bitreader</a>&amp; br){</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> i = 0; i &lt; 9; ++i)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        control = control * 10 + br(4);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// cout &lt;&lt; endl &lt;&lt; &quot;Starting control: &quot; &lt;&lt; controllo &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a1f28731e394af7e63cb5f2403418e226">   45</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226">shift_and_control</a>(<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; below, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; over, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; contCharacter,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; rangeCont, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; control, <a class="code" href="classbitreader.html">bitreader</a>&amp; br, <span class="keywordtype">bool</span>&amp; flagEndCode){</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// variabile d&#39;appoggio e uso di 64bit per non perdere precisione</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a> belowTemp = below;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a> overTemp = over;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    belowTemp *= 10;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    overTemp *= 10;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">// calcolo modulo</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    below = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(belowTemp % (<a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a>)(pow(10.0, contCharacter + 1)));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    over = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(overTemp % (<a class="code" href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a>)(pow(10.0, contCharacter + 1)));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    rangeCont = over - below;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    control = (control % (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(pow(10.0, contCharacter))) * 10;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// controllo fine codice</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> tmp = br(4);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (tmp &lt;= 9 &amp;&amp; !flagEndCode)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        control += tmp;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">else</span> flagEndCode = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#abdd045a2670805be5789dab8711a5119">   67</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#abdd045a2670805be5789dab8711a5119">decodeAlgorithm</a>(ofstream&amp; os, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; numSymbolsFirstByte, <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>&amp; control,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    vector&lt;u_couple&gt;&amp; decodingCouple, <a class="code" href="classbitreader.html">bitreader</a>&amp; br, <a class="code" href="classbitwriter.html">bitwriter</a>&amp; bw, <span class="keywordtype">bool</span> isTextFile){</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// valori per il decoding</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> rangeCont = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(pow(10.0, 9.0));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> over = rangeCont;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> below = 0;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> flagEndCode = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> contacaratteri = 8;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> contCharacter = 8;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//ciclo per ogni carattere</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">while</span> (n_caratteri &gt; 0){</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// ciclo per ogni carattere</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">while</span> (numSymbolsFirstByte &gt; 0){</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">//calcolo della probabilità rispetto al range</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> prob = round((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(controllo - sotto) / (rangecont)* 100000);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">// calcolo della probabilità rispetto al range</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> prob = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(round((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(control - below) / (rangeCont)* 100000));</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">//ciclo per controllare a quale simbolo di riferisce la probabilità      for (auto it = Dcoppie.begin(); it != Dcoppie.end(); ++it){
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">// ciclo per controllare a quale simbolo di riferisce la probabilità         for (auto it = decodingCouple.begin(); it != decodingCouple.end(); ++it){
             if (prob &gt;= it-&gt;_Fa &amp;&amp; prob &lt; (it-&gt;_fa + it-&gt;_Fa)){
-                //cout &lt;&lt; it-&gt;_b;  //&lt;&lt; &quot;\t&quot;;
-                os &lt;&lt; it-&gt;_b;
-                //per riscrivere il ritorno a capo, necessaria aggiunta
-                if (it-&gt;_b == 0x0D){
-                    byte spazio = 0x0A;
-                    os &lt;&lt; spazio;
+                // cout &lt;&lt; it-&gt;_b;  //&lt;&lt; &quot;\t&quot;;
+                char out = it-&gt;_b;
+                bw(out, 8);
+                // per riscrivere il ritorno a capo, necessaria aggiunta
+                if (it-&gt;_b == 0x0D &amp;&amp; isTextFile){
+                    byte space = 0x0A;
+                    os &lt;&lt; space;
                 }
-                //aggiornamento valori
-                sotto = sotto + ceil((float_64)(it-&gt;_Fa)*((float_64)rangecont / 100000));
-                rangecont = ((float_64)(it-&gt;_fa)*((float_64)rangecont / 100000));
-                sopra = sotto + rangecont;
-                //cout &lt;&lt; sotto &lt;&lt; &quot;\t&quot; &lt;&lt; rangecont &lt;&lt; &quot;\t&quot; &lt;&lt; sopra &lt;&lt; endl;
+                // aggiornamento valori
+                below = uint_32(below + ceil((float_64)(it-&gt;_Fa)*((float_64)rangeCont / 100000)));
+                rangeCont = uint_32(((float_64)(it-&gt;_fa)*((float_64)rangeCont / 100000)));
+                over = below + rangeCont;
+                //cout &lt;&lt; below &lt;&lt; &quot;\t&quot; &lt;&lt; rangeCont &lt;&lt; &quot;\t&quot; &lt;&lt; over &lt;&lt; endl;
                 break;
             }
         }
 
-        //cout &lt;&lt; controllo &lt;&lt; &quot;\t&quot; &lt;&lt; sotto &lt;&lt; &quot;\t&quot; &lt;&lt; rangecont &lt;&lt; &quot;\t&quot; &lt;&lt; sopra &lt;&lt; &quot;\t&quot; &lt;&lt; n_caratteri &lt;&lt; endl;
+        // cout &lt;&lt; control &lt;&lt; &quot;\t&quot; &lt;&lt; below &lt;&lt; &quot;\t&quot; &lt;&lt; rangeCont &lt;&lt; &quot;\t&quot; &lt;&lt; over &lt;&lt; &quot;\t&quot; &lt;&lt; numSymbolsFirstByte &lt;&lt; endl;
 
-        //se c&#39;è da shiftare il top e low aggiorno
-        while (((sotto / (uint_32)(pow(10.0, contacaratteri))) == (sopra / (uint_32)(pow(10.0, contacaratteri)))))
-            shift_and_control(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
+        // se c&#39;è da shiftare il top e low aggiorno
+        while (((below / (uint_32)(pow(10.0, contCharacter))) == (over / (uint_32)(pow(10.0, contCharacter)))))
+            shift_and_control(below, over, contCharacter, rangeCont, control, br, flagEndCode);
 
-        //caso particolare nel caso di range piccoli
-        if (rangecont &lt; 1000){
-            //verifica quando entra nel caso particolare
-            //cout &lt;&lt; &quot;entra&quot;;
-            shift_and_control(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
-            shift_and_control(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);
-            rangecont = 1000000000 - sotto;
-            sopra = sotto + rangecont;
+        // caso particolare nel caso di range piccoli
+        if (rangeCont &lt; 1000){
+            // verifica quando entra nel caso particolare
+            // cout &lt;&lt; &quot;entra&quot;;
+            shift_and_control(below, over, contCharacter, rangeCont, control, br, flagEndCode);
+            shift_and_control(below, over, contCharacter, rangeCont, control, br, flagEndCode);
+            rangeCont = 1000000000 - below;
+            over = below + rangeCont;
         }
 
-        //cout &lt;&lt; controllo &lt;&lt; &quot;\t&quot; &lt;&lt; sotto &lt;&lt; &quot;\t&quot; &lt;&lt; rangecont &lt;&lt; &quot;\t&quot; &lt;&lt; sopra &lt;&lt; endl;
-        n_caratteri--;
+        // cout &lt;&lt; control &lt;&lt; &quot;\t&quot; &lt;&lt; below &lt;&lt; &quot;\t&quot; &lt;&lt; rangeCont &lt;&lt; &quot;\t&quot; &lt;&lt; over &lt;&lt; endl;
+        numSymbolsFirstByte--;
     }
+}
+
+void decodedSize(ofstream&amp; os){
+    os.seekp(0, ios::end);
+    uint_32 decodedLength = uint_32(os.tellp()); // calcolo dimensione file decodificato
+    cout &lt;&lt; &quot;Size of DecodedFile is:\t &quot; &lt;&lt; decodedLength &lt;&lt; &quot; bytes.&quot; &lt;&lt; endl &lt;&lt; endl &lt;&lt; endl;
 }</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = Dcoppie.begin(); it != Dcoppie.end(); ++it){</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = decodingCouple.begin(); it != decodingCouple.end(); ++it){</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">if</span> (prob &gt;= it-&gt;_Fa &amp;&amp; prob &lt; (it-&gt;_fa + it-&gt;_Fa)){</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="comment">//cout &lt;&lt; it-&gt;_b;  //&lt;&lt; &quot;\t&quot;;</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                os &lt;&lt; it-&gt;_b;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="comment">//per riscrivere il ritorno a capo, necessaria aggiunta</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="keywordflow">if</span> (it-&gt;_b == 0x0D){</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> spazio = 0x0A;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    os &lt;&lt; spazio;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="comment">//aggiornamento valori</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                sotto = sotto + ceil((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(it-&gt;_Fa)*((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)rangecont / 100000));</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                rangecont = ((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(it-&gt;_fa)*((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)rangecont / 100000));</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                sopra = sotto + rangecont;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="comment">//cout &lt;&lt; sotto &lt;&lt; &quot;\t&quot; &lt;&lt; rangecont &lt;&lt; &quot;\t&quot; &lt;&lt; sopra &lt;&lt; endl;</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="comment">//cout &lt;&lt; controllo &lt;&lt; &quot;\t&quot; &lt;&lt; sotto &lt;&lt; &quot;\t&quot; &lt;&lt; rangecont &lt;&lt; &quot;\t&quot; &lt;&lt; sopra &lt;&lt; &quot;\t&quot; &lt;&lt; n_caratteri &lt;&lt; endl;</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="comment">//se c&#39;è da shiftare il top e low aggiorno</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">while</span> (((sotto / (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(pow(10.0, contacaratteri))) == (sopra / (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(pow(10.0, contacaratteri)))))</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <a class="code" href="decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd">shift_and_control</a>(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="comment">//caso particolare nel caso di range piccoli</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">if</span> (rangecont &lt; 1000){</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="comment">//verifica quando entra nel caso particolare</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="comment">//cout &lt;&lt; &quot;entra&quot;;</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd">shift_and_control</a>(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <a class="code" href="decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd">shift_and_control</a>(sotto, sopra, contacaratteri, rangecont, controllo, br, flagEndCode);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            rangecont = 1000000000 - sotto;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            sopra = sotto + rangecont;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">//cout &lt;&lt; controllo &lt;&lt; &quot;\t&quot; &lt;&lt; sotto &lt;&lt; &quot;\t&quot; &lt;&lt; rangecont &lt;&lt; &quot;\t&quot; &lt;&lt; sopra &lt;&lt; endl;</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        n_caratteri--;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
-<div class="ttc" id="structcoppia2_html"><div class="ttname"><a href="structcoppia2.html">coppia2</a></div><div class="ttdoc">Class coppia2. </div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00034">couple.h:34</a></div></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="comment">// cout &lt;&lt; it-&gt;_b;  //&lt;&lt; &quot;\t&quot;;</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordtype">char</span> out = it-&gt;_b;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                bw(out, 8);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="comment">// per riscrivere il ritorno a capo, necessaria aggiunta</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="keywordflow">if</span> (it-&gt;_b == 0x0D &amp;&amp; isTextFile){</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> space = 0x0A;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    os &lt;&lt; space;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="comment">// aggiornamento valori</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                below = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(below + ceil((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(it-&gt;_Fa)*((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)rangeCont / 100000)));</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                rangeCont = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)(it-&gt;_fa)*((<a class="code" href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a>)rangeCont / 100000)));</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                over = below + rangeCont;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="comment">//cout &lt;&lt; below &lt;&lt; &quot;\t&quot; &lt;&lt; rangeCont &lt;&lt; &quot;\t&quot; &lt;&lt; over &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">// cout &lt;&lt; control &lt;&lt; &quot;\t&quot; &lt;&lt; below &lt;&lt; &quot;\t&quot; &lt;&lt; rangeCont &lt;&lt; &quot;\t&quot; &lt;&lt; over &lt;&lt; &quot;\t&quot; &lt;&lt; numSymbolsFirstByte &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// se c&#39;è da shiftare il top e low aggiorno</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">while</span> (((below / (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(pow(10.0, contCharacter))) == (over / (<a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>)(pow(10.0, contCharacter)))))</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <a class="code" href="decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226">shift_and_control</a>(below, over, contCharacter, rangeCont, control, br, flagEndCode);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// caso particolare nel caso di range piccoli</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> (rangeCont &lt; 1000){</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="comment">// verifica quando entra nel caso particolare</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="comment">// cout &lt;&lt; &quot;entra&quot;;</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <a class="code" href="decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226">shift_and_control</a>(below, over, contCharacter, rangeCont, control, br, flagEndCode);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <a class="code" href="decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226">shift_and_control</a>(below, over, contCharacter, rangeCont, control, br, flagEndCode);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            rangeCont = 1000000000 - below;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            over = below + rangeCont;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">// cout &lt;&lt; control &lt;&lt; &quot;\t&quot; &lt;&lt; below &lt;&lt; &quot;\t&quot; &lt;&lt; rangeCont &lt;&lt; &quot;\t&quot; &lt;&lt; over &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        numSymbolsFirstByte--;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="decodingfunction_8h.html#a5042f33ece2fbd27df6eee233fe8abc2">  123</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="decodingfunction_8cpp.html#a5042f33ece2fbd27df6eee233fe8abc2">decodedSize</a>(ofstream&amp; os){</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    os.seekp(0, ios::end);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a> decodedLength = <a class="code" href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a>(os.tellp()); <span class="comment">// calcolo dimensione file decodificato</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Size of DecodedFile is:\t &quot;</span> &lt;&lt; decodedLength &lt;&lt; <span class="stringliteral">&quot; bytes.&quot;</span> &lt;&lt; endl &lt;&lt; endl &lt;&lt; endl;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
 <div class="ttc" id="couple_8h_html_a2002b70582b90f0ba284df57216bad66"><div class="ttname"><a href="couple_8h.html#a2002b70582b90f0ba284df57216bad66">float_64</a></div><div class="ttdeci">double float_64</div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00006">couple.h:6</a></div></div>
-<div class="ttc" id="decodingfunction_8cpp_html_ace557d4096f02157dc484fd1bdbdd8fa"><div class="ttname"><a href="decodingfunction_8cpp.html#ace557d4096f02157dc484fd1bdbdd8fa">headerExtraction</a></div><div class="ttdeci">void headerExtraction(ifstream &amp;is, vector&lt; coppia2 &gt; &amp;Dcoppie, uint_32 &amp;n_caratteri)</div><div class="ttdoc">Function HEADEREXTRACTION. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00012">decodingfunction.cpp:12</a></div></div>
-<div class="ttc" id="decodingfunction_8cpp_html_a4d7cc9f31fdf49d48b83d05f1a0752dc"><div class="ttname"><a href="decodingfunction_8cpp.html#a4d7cc9f31fdf49d48b83d05f1a0752dc">decodeAlgorithm</a></div><div class="ttdeci">void decodeAlgorithm(ofstream &amp;os, uint_32 &amp;n_caratteri, uint_32 &amp;controllo, vector&lt; coppia2 &gt; &amp;Dcoppie, bitreader &amp;br)</div><div class="ttdoc">Function DECODEALGORITHM. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00068">decodingfunction.cpp:68</a></div></div>
+<div class="ttc" id="decodingfunction_8cpp_html_a1f28731e394af7e63cb5f2403418e226"><div class="ttname"><a href="decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226">shift_and_control</a></div><div class="ttdeci">void shift_and_control(uint_32 &amp;below, uint_32 &amp;over, uint_32 &amp;contCharacter, uint_32 &amp;rangeCont, uint_32 &amp;control, bitreader &amp;br, bool &amp;flagEndCode)</div><div class="ttdoc">Function SHIFT_AND_CONTROL. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00045">decodingfunction.cpp:45</a></div></div>
+<div class="ttc" id="decodingfunction_8cpp_html_abdd045a2670805be5789dab8711a5119"><div class="ttname"><a href="decodingfunction_8cpp.html#abdd045a2670805be5789dab8711a5119">decodeAlgorithm</a></div><div class="ttdeci">void decodeAlgorithm(ofstream &amp;os, uint_32 &amp;numSymbolsFirstByte, uint_32 &amp;control, vector&lt; u_couple &gt; &amp;decodingCouple, bitreader &amp;br, bitwriter &amp;bw, bool isTextFile)</div><div class="ttdoc">Function DECODEALGORITHM. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00067">decodingfunction.cpp:67</a></div></div>
+<div class="ttc" id="decodingfunction_8cpp_html_aec66f17dbf75713d7ccfe0d782f76f39"><div class="ttname"><a href="decodingfunction_8cpp.html#aec66f17dbf75713d7ccfe0d782f76f39">setControl</a></div><div class="ttdeci">void setControl(ifstream &amp;is, uint_32 &amp;control, bitreader &amp;br)</div><div class="ttdoc">Function SETCONTROL. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00039">decodingfunction.cpp:39</a></div></div>
+<div class="ttc" id="structu__couple_html"><div class="ttname"><a href="structu__couple.html">u_couple</a></div><div class="ttdoc">Class u_couple. </div><div class="ttdef"><b>Definition:</b> <a href="couple_8h_source.html#l00034">couple.h:34</a></div></div>
+<div class="ttc" id="decodingfunction_8cpp_html_af43b6879cbf3fad5db6411b3aeeb6078"><div class="ttname"><a href="decodingfunction_8cpp.html#af43b6879cbf3fad5db6411b3aeeb6078">setRangeValue</a></div><div class="ttdeci">void setRangeValue(vector&lt; u_couple &gt; &amp;decodingCouple)</div><div class="ttdoc">Function SETRANGEVALUE. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00030">decodingfunction.cpp:30</a></div></div>
 <div class="ttc" id="classbitreader_html"><div class="ttname"><a href="classbitreader.html">bitreader</a></div><div class="ttdoc">Class BitReader. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00056">bitstreams.h:56</a></div></div>
+<div class="ttc" id="decodingfunction_8cpp_html_a5042f33ece2fbd27df6eee233fe8abc2"><div class="ttname"><a href="decodingfunction_8cpp.html#a5042f33ece2fbd27df6eee233fe8abc2">decodedSize</a></div><div class="ttdeci">void decodedSize(ofstream &amp;os)</div><div class="ttdoc">Function DECODEDSIZE. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00123">decodingfunction.cpp:123</a></div></div>
+<div class="ttc" id="classbitwriter_html"><div class="ttname"><a href="classbitwriter.html">bitwriter</a></div><div class="ttdoc">Class BitWriter. </div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00014">bitstreams.h:14</a></div></div>
 <div class="ttc" id="bitstreams_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00006">bitstreams.h:6</a></div></div>
-<div class="ttc" id="decodingfunction_8cpp_html_a9b5b0d382f8881532cf126a8c3846705"><div class="ttname"><a href="decodingfunction_8cpp.html#a9b5b0d382f8881532cf126a8c3846705">setRangeValue</a></div><div class="ttdeci">void setRangeValue(vector&lt; coppia2 &gt; &amp;Dcoppie)</div><div class="ttdoc">Function SETRANGEVALUE. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00031">decodingfunction.cpp:31</a></div></div>
 <div class="ttc" id="typedef_8h_html_a24eb5dd35eb39b6fe90670c36d558499"><div class="ttname"><a href="typedef_8h.html#a24eb5dd35eb39b6fe90670c36d558499">uint_64</a></div><div class="ttdeci">unsigned long long uint_64</div><div class="ttdef"><b>Definition:</b> <a href="typedef_8h_source.html#l00016">typedef.h:16</a></div></div>
-<div class="ttc" id="decodingfunction_8cpp_html_a84c367936046e405f26f3cc094d6d001"><div class="ttname"><a href="decodingfunction_8cpp.html#a84c367936046e405f26f3cc094d6d001">setControl</a></div><div class="ttdeci">void setControl(ifstream &amp;is, uint_32 &amp;controllo, bitreader &amp;br)</div><div class="ttdoc">Function SETCONTROL. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00040">decodingfunction.cpp:40</a></div></div>
 <div class="ttc" id="decodingfunction_8h_html"><div class="ttname"><a href="decodingfunction_8h.html">decodingfunction.h</a></div></div>
-<div class="ttc" id="decodingfunction_8cpp_html_abfaf155f6b53d7268114a426379a11bd"><div class="ttname"><a href="decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd">shift_and_control</a></div><div class="ttdeci">void shift_and_control(uint_32 &amp;sotto, uint_32 &amp;sopra, uint_32 &amp;contacaratteri, uint_32 &amp;rangecont, uint_32 &amp;controllo, bitreader &amp;br, bool &amp;flagEndCode)</div><div class="ttdoc">Function SHIFT_AND_CONTROL. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00046">decodingfunction.cpp:46</a></div></div>
 <div class="ttc" id="bitstreams_8h_html_a64e458b61bddf0b87a3701578aa7a428"><div class="ttname"><a href="bitstreams_8h.html#a64e458b61bddf0b87a3701578aa7a428">uint_32</a></div><div class="ttdeci">unsigned int uint_32</div><div class="ttdef"><b>Definition:</b> <a href="bitstreams_8h_source.html#l00008">bitstreams.h:8</a></div></div>
 <div class="ttc" id="decodingfunction_8cpp_html_a7df6b0079643fd33953cbd7c77ba65c4"><div class="ttname"><a href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4">read_little_endian</a></div><div class="ttdeci">uint_32 read_little_endian(ifstream &amp;is, uint_32 nByte)</div><div class="ttdoc">Function READ_LITTLE_ENDIAN. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00003">decodingfunction.cpp:3</a></div></div>
+<div class="ttc" id="decodingfunction_8cpp_html_a6403201c0840141a65fc7b21356aa03d"><div class="ttname"><a href="decodingfunction_8cpp.html#a6403201c0840141a65fc7b21356aa03d">headerExtraction</a></div><div class="ttdeci">void headerExtraction(ifstream &amp;is, vector&lt; u_couple &gt; &amp;decodingCouple, uint_32 &amp;numSymbolsFirstByte)</div><div class="ttdoc">Function HEADEREXTRACTION. </div><div class="ttdef"><b>Definition:</b> <a href="decodingfunction_8cpp_source.html#l00011">decodingfunction.cpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="decodingfunction_8cpp.html">decodingfunction.cpp</a></li>
-    <li class="footer">Generated on Wed Nov 12 2014 15:34:45 for Range Encoding Compression by
+    <li class="footer">Generated on Fri Nov 14 2014 16:04:19 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['coppia',['coppia',['../structcoppia.html',1,'']]],
-  ['coppia2',['coppia2',['../structcoppia2.html',1,'']]]
+  ['f_5fcouple',['f_couple',['../structf__couple.html',1,'']]]
 ];

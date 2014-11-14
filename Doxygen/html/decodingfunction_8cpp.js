@@ -1,9 +1,10 @@
 var decodingfunction_8cpp =
 [
-    [ "decodeAlgorithm", "decodingfunction_8cpp.html#a4d7cc9f31fdf49d48b83d05f1a0752dc", null ],
-    [ "headerExtraction", "decodingfunction_8cpp.html#ace557d4096f02157dc484fd1bdbdd8fa", null ],
+    [ "decodeAlgorithm", "decodingfunction_8cpp.html#abdd045a2670805be5789dab8711a5119", null ],
+    [ "decodedSize", "decodingfunction_8cpp.html#a5042f33ece2fbd27df6eee233fe8abc2", null ],
+    [ "headerExtraction", "decodingfunction_8cpp.html#a6403201c0840141a65fc7b21356aa03d", null ],
     [ "read_little_endian", "decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4", null ],
-    [ "setControl", "decodingfunction_8cpp.html#a84c367936046e405f26f3cc094d6d001", null ],
-    [ "setRangeValue", "decodingfunction_8cpp.html#a9b5b0d382f8881532cf126a8c3846705", null ],
-    [ "shift_and_control", "decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd", null ]
+    [ "setControl", "decodingfunction_8cpp.html#aec66f17dbf75713d7ccfe0d782f76f39", null ],
+    [ "setRangeValue", "decodingfunction_8cpp.html#af43b6879cbf3fad5db6411b3aeeb6078", null ],
+    [ "shift_and_control", "decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226", null ]
 ];

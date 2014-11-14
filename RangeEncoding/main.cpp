@@ -61,10 +61,8 @@
  * \see encoding(), decoding()
  */
 void syntax() {
-	cout << "Syntax:" << endl;
-	//bisogna specificare se dobbiamo comprimere un file di testo o un altro tipo di file
-	//perchè l'interpretazione di alcuni valori è differente
-	cout << "Range Encoding <type of file: t/o> <input filename> <output filename>" << endl;
+	/*!< Specify if we have to compress a text file or another type, interpretation of some values is different. */
+	cout << "Syntax:" << endl << "Range Encoding <type of file: t/o> <input filename> <output filename>" << endl;
 }
 
 /*!
@@ -85,6 +83,7 @@ int main(int argc, char *argv[]){
 	string DecodedFileName = argv[4];
 	
 	bool isTextFile = false;
+
 	// Controllo tipo di file
 	if (*Type == 't')
 		isTextFile = true;

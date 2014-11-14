@@ -30,7 +30,9 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Range Encoding Compression
+   &#160;<span id="projectnumber">Lodi Matteo - Moscardini Andrea - Rinaldini Riccardo</span>
    </div>
+   <div id="projectbrief">Encoding &amp; Decoding Algorithm</div>
   </td>
  </tr>
  </tbody>
@@ -120,12 +122,12 @@ Include dependency graph for encoding.cpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7f8dc47b94994ef07f4f3e8c4dd87fdd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8cpp.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd">encoding</a> (ifstream &amp;is, ofstream &amp;os)</td></tr>
-<tr class="memdesc:a7f8dc47b94994ef07f4f3e8c4dd87fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function ENCODING.  <a href="#a7f8dc47b94994ef07f4f3e8c4dd87fdd">More...</a><br /></td></tr>
-<tr class="separator:a7f8dc47b94994ef07f4f3e8c4dd87fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a398ec1acb7e2bb6476463a3c9d192078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoding_8cpp.html#a398ec1acb7e2bb6476463a3c9d192078">encoding</a> (ifstream &amp;is, ofstream &amp;os, bool isTextFile)</td></tr>
+<tr class="memdesc:a398ec1acb7e2bb6476463a3c9d192078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function ENCODING.  <a href="#a398ec1acb7e2bb6476463a3c9d192078">More...</a><br /></td></tr>
+<tr class="separator:a398ec1acb7e2bb6476463a3c9d192078"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a7f8dc47b94994ef07f4f3e8c4dd87fdd"></a>
+<a class="anchor" id="a398ec1acb7e2bb6476463a3c9d192078"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -139,7 +141,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">ofstream &amp;&#160;</td>
-          <td class="paramname"><em>os</em>&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isTextFile</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -152,25 +160,28 @@ Functions</h2></td></tr>
 <p>Function ENCODING. </p>
 <p>List of RangeEncoding algorithm function:</p><ul>
 <li><code><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a></code> </li>
-<li><code><a class="el" href="encoding_8h.html#a7f8dc47b94994ef07f4f3e8c4dd87fdd" title="Function ENCODING. ">encoding()</a></code> <ol type="1">
-<li><a class="el" href="encodingfunction_8cpp.html#ab62da26561eb58b2304489d21584f9b8" title="Function SETOCCURRENCES. ">setOccurrences()</a></li>
-<li><a class="el" href="encodingfunction_8cpp.html#a9c8f82dd9b08cf58741224c0af815f02" title="Function SETPROBABILITY. ">setProbability()</a></li>
-<li><a class="el" href="encodingfunction_8cpp.html#a7d28d52b15497187c937db9ef460e632" title="Function ROUNDING. ">rounding()</a></li>
-<li><a class="el" href="encodingfunction_8cpp.html#aa604a84f5553ca826ae8e44e07891ed2" title="Function SETRANGE. ">setRange()</a></li>
-<li><a class="el" href="encodingfunction_8cpp.html#ad7c1a1e713831cdb739f86541a14f2e3" title="Function HEADERCREATION. ">headerCreation()</a></li>
+<li><code><a class="el" href="encoding_8h.html#a398ec1acb7e2bb6476463a3c9d192078" title="Function ENCODING. ">encoding()</a></code> <ol type="1">
+<li><a class="el" href="encodingfunction_8cpp.html#a8b38af76a79a8db5c6ebfe72e41d185c" title="Function SETOCCURRENCES. ">setOccurrences()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#ad8d7240fa2c9140452ec99a7b260cb28" title="Function SETPROBABILITY. ">setProbability()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a628fa75ccc8e5d1e1996bb70844a5ded" title="Function ROUNDING. ">rounding()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#afe2d3fde47488a3225f865f551db1382" title="Function SETRANGE. ">setRange()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a2e89b6e581a8e39c23f9fd6e57a76db5" title="Function INPUTSIZE. ">inputSize()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#ac29edf718014a7768fbcd2a357ee87c6" title="Function HEADERCREATION. ">headerCreation()</a></li>
 <li><a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a></li>
 <li><a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a></li>
-<li><a class="el" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a></li>
-<li><a class="el" href="encodingfunction_8cpp.html#af30b0eb70a20e95bbabc822451971cb1" title="Function ENCODEALGORITHM. ">encodeAlgorithm()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a8c02edee22d2418364eeefaaeea1ce86" title="Function ENCODE_SYMBOL. ">encode_symbol()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a7ac4bc52e51f7da375c97b54e4a63b49" title="Function ENCODEALGORITHM. ">encodeAlgorithm()</a></li>
+<li><a class="el" href="encodingfunction_8cpp.html#a39d491ea4ebdd3e95df11999a41291a5" title="Function INPUTSIZE. ">printCompressionRatio()</a></li>
 </ol>
 </li>
-<li><code><a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a></code> <ol type="1">
+<li><code><a class="el" href="decoding_8cpp.html#ac3c9265497f61972bf7229dd587fb1f6" title="Function DECODING. ">decoding()</a></code> <ol type="1">
 <li><a class="el" href="decodingfunction_8cpp.html#a7df6b0079643fd33953cbd7c77ba65c4" title="Function READ_LITTLE_ENDIAN. ">read_little_endian()</a></li>
-<li><a class="el" href="decodingfunction_8cpp.html#ace557d4096f02157dc484fd1bdbdd8fa" title="Function HEADEREXTRACTION. ">headerExtraction()</a></li>
-<li><a class="el" href="decodingfunction_8cpp.html#a9b5b0d382f8881532cf126a8c3846705" title="Function SETRANGEVALUE. ">setRangeValue()</a></li>
-<li><a class="el" href="decodingfunction_8cpp.html#a84c367936046e405f26f3cc094d6d001" title="Function SETCONTROL. ">setControl()</a></li>
-<li><a class="el" href="decodingfunction_8cpp.html#abfaf155f6b53d7268114a426379a11bd" title="Function SHIFT_AND_CONTROL. ">shift_and_control()</a></li>
-<li><a class="el" href="decodingfunction_8cpp.html#a4d7cc9f31fdf49d48b83d05f1a0752dc" title="Function DECODEALGORITHM. ">decodeAlgorithm()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#a6403201c0840141a65fc7b21356aa03d" title="Function HEADEREXTRACTION. ">headerExtraction()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#af43b6879cbf3fad5db6411b3aeeb6078" title="Function SETRANGEVALUE. ">setRangeValue()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#aec66f17dbf75713d7ccfe0d782f76f39" title="Function SETCONTROL. ">setControl()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#a1f28731e394af7e63cb5f2403418e226" title="Function SHIFT_AND_CONTROL. ">shift_and_control()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#abdd045a2670805be5789dab8711a5119" title="Function DECODEALGORITHM. ">decodeAlgorithm()</a></li>
+<li><a class="el" href="decodingfunction_8cpp.html#a5042f33ece2fbd27df6eee233fe8abc2" title="Function DECODEDSIZE. ">decodedSize()</a></li>
 </ol>
 </li>
 </ul>
@@ -179,11 +190,12 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">&amp;is</td><td>Input file. </td></tr>
     <tr><td class="paramname">&amp;os</td><td>Output file. </td></tr>
+    <tr><td class="paramname">isTextFile</td><td>Specify if we have to compress a text file or another type. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The encoded input file. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="encodingfunction_8cpp.html#ab62da26561eb58b2304489d21584f9b8" title="Function SETOCCURRENCES. ">setOccurrences()</a>, <a class="el" href="encodingfunction_8cpp.html#a9c8f82dd9b08cf58741224c0af815f02" title="Function SETPROBABILITY. ">setProbability()</a>, <a class="el" href="encodingfunction_8cpp.html#a7d28d52b15497187c937db9ef460e632" title="Function ROUNDING. ">rounding()</a>, <a class="el" href="encodingfunction_8cpp.html#aa604a84f5553ca826ae8e44e07891ed2" title="Function SETRANGE. ">setRange()</a>, <a class="el" href="encodingfunction_8cpp.html#ad7c1a1e713831cdb739f86541a14f2e3" title="Function HEADERCREATION. ">headerCreation()</a>, <a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="encodingfunction_8cpp.html#a78461e855e3d0e16dd688790991d70be" title="Function ENCODE_SYMBOL. ">encode_symbol()</a>, <a class="el" href="encodingfunction_8cpp.html#af30b0eb70a20e95bbabc822451971cb1" title="Function ENCODEALGORITHM. ">encodeAlgorithm()</a>, <a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="decoding_8cpp.html#a6d7b2b2bfca40131d43c3764d152a70d" title="Function DECODING. ">decoding()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="main_8cpp.html#aefeded708611e6e402e2258c60cb5261" title="Function SYNTAX. ">syntax()</a>, <a class="el" href="encodingfunction_8cpp.html#a8b38af76a79a8db5c6ebfe72e41d185c" title="Function SETOCCURRENCES. ">setOccurrences()</a>, <a class="el" href="encodingfunction_8cpp.html#ad8d7240fa2c9140452ec99a7b260cb28" title="Function SETPROBABILITY. ">setProbability()</a>, <a class="el" href="encodingfunction_8cpp.html#a628fa75ccc8e5d1e1996bb70844a5ded" title="Function ROUNDING. ">rounding()</a>, <a class="el" href="encodingfunction_8cpp.html#afe2d3fde47488a3225f865f551db1382" title="Function SETRANGE. ">setRange()</a>, <a class="el" href="encodingfunction_8cpp.html#a2e89b6e581a8e39c23f9fd6e57a76db5" title="Function INPUTSIZE. ">inputSize()</a>, <a class="el" href="encodingfunction_8cpp.html#ac29edf718014a7768fbcd2a357ee87c6" title="Function HEADERCREATION. ">headerCreation()</a>, <a class="el" href="encodingfunction_8cpp.html#adc00fa15f2cc9c0883ea1cd4535f7574" title="Function ENCODE. ">encode()</a>, <a class="el" href="encodingfunction_8cpp.html#ab6013d45cbd3006d127bd7ed72a6e3bc" title="Function EMIT_DIGIT. ">emit_digit()</a>, <a class="el" href="encodingfunction_8cpp.html#a8c02edee22d2418364eeefaaeea1ce86" title="Function ENCODE_SYMBOL. ">encode_symbol()</a>, <a class="el" href="encodingfunction_8cpp.html#a7ac4bc52e51f7da375c97b54e4a63b49" title="Function ENCODEALGORITHM. ">encodeAlgorithm()</a>, <a class="el" href="encodingfunction_8cpp.html#a39d491ea4ebdd3e95df11999a41291a5" title="Function INPUTSIZE. ">printCompressionRatio()</a>, <a class="el" href="decoding_8cpp.html#ac3c9265497f61972bf7229dd587fb1f6" title="Function DECODING. ">decoding()</a> </dd></dl>
 
 <p>Definition at line <a class="el" href="encoding_8cpp_source.html#l00004">4</a> of file <a class="el" href="encoding_8cpp_source.html">encoding.cpp</a>.</p>
 
@@ -195,7 +207,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="encoding_8cpp.html">encoding.cpp</a></li>
-    <li class="footer">Generated on Wed Nov 12 2014 15:34:45 for Range Encoding Compression by
+    <li class="footer">Generated on Fri Nov 14 2014 16:04:19 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

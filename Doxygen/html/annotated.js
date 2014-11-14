@@ -2,6 +2,6 @@ var annotated =
 [
     [ "bitreader", "classbitreader.html", "classbitreader" ],
     [ "bitwriter", "classbitwriter.html", "classbitwriter" ],
-    [ "coppia", "structcoppia.html", "structcoppia" ],
-    [ "coppia2", "structcoppia2.html", "structcoppia2" ]
+    [ "f_couple", "structf__couple.html", "structf__couple" ],
+    [ "u_couple", "structu__couple.html", "structu__couple" ]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_5fb',['_b',['../structcoppia.html#a6b3378e282d1e65dfee496e9bfc247eb',1,'coppia::_b()'],['../structcoppia2.html#a3c7484f13868b4ca73d3fd6f33aa73cc',1,'coppia2::_b()']]],
-  ['_5ffa',['_fa',['../structcoppia.html#a968a7751586241ccaab6371f4a29218a',1,'coppia::_fa()'],['../structcoppia2.html#a86f8ae128846fda7bd59fc3883a973d5',1,'coppia2::_fa()'],['../structcoppia.html#ad98acd56191b78815673f6f20951e390',1,'coppia::_Fa()'],['../structcoppia2.html#af9acae5e48db3631d0b0af761fad9e27',1,'coppia2::_Fa()']]]
+  ['_5fb',['_b',['../structf__couple.html#aa25115883ab066f241a4262fffb64b5b',1,'f_couple::_b()'],['../structu__couple.html#a8cc0be1676c5d63daa872cb4fbcd52f0',1,'u_couple::_b()']]],
+  ['_5ffa',['_fa',['../structf__couple.html#a23563e8a8acca904974ed170398538b6',1,'f_couple::_fa()'],['../structu__couple.html#a7f053553b135a4f722a1ce9c63bb7306',1,'u_couple::_fa()'],['../structf__couple.html#a4e980beb9200ed9b325979eac8f2a49b',1,'f_couple::_Fa()'],['../structu__couple.html#a646c9741e3680b611a360b2ccba121af',1,'u_couple::_Fa()']]]
 ];
