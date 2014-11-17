@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Range Encoding Compression
-   &#160;<span id="projectnumber">Lodi Matteo - Moscardini Andrea - Rinaldini Riccardo</span>
+   &#160;<span id="projectnumber">Lodi Matteo - Moscardini Andrea - Rinaldini Riccardo ©</span>
    </div>
    <div id="projectbrief">Encoding &amp; Decoding Algorithm</div>
   </td>
@@ -192,7 +192,7 @@ $(document).ready(function(){initNavTree('decodingfunction_8cpp_source.html','')
                 // cout &lt;&lt; it-&gt;_b;  //&lt;&lt; &quot;\t&quot;;
                 char out = it-&gt;_b;
                 bw(out, 8);
-                // per riscrivere il ritorno a capo, necessaria aggiunta
+                // per riscrivere il ritorno a capo, necessaria aggiunta (file di testo)
                 if (it-&gt;_b == 0x0D &amp;&amp; isTextFile){
                     byte space = 0x0A;
                     os &lt;&lt; space;
@@ -237,7 +237,7 @@ void decodedSize(ofstream&amp; os){
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="comment">// cout &lt;&lt; it-&gt;_b;  //&lt;&lt; &quot;\t&quot;;</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordtype">char</span> out = it-&gt;_b;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                bw(out, 8);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="comment">// per riscrivere il ritorno a capo, necessaria aggiunta</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="comment">// per riscrivere il ritorno a capo, necessaria aggiunta (file di testo)</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="keywordflow">if</span> (it-&gt;_b == 0x0D &amp;&amp; isTextFile){</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <a class="code" href="bitstreams_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> space = 0x0A;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    os &lt;&lt; space;</div>
@@ -298,7 +298,7 @@ void decodedSize(ofstream&amp; os){
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d522931ffa1371640980b621734a4381.html">Users</a></li><li class="navelem"><a class="el" href="dir_ceb3e00c6a0c56a4ba89fed4cdd365eb.html">Mosca</a></li><li class="navelem"><a class="el" href="dir_e2a3ce17134652e6aff4780dc2b61050.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_c7871f24e0f4d12d03230356d093b473.html">SDEM</a></li><li class="navelem"><a class="el" href="dir_05914d3df544febdd6ecda506231ca66.html">RangeEncoding</a></li><li class="navelem"><a class="el" href="decodingfunction_8cpp.html">decodingfunction.cpp</a></li>
-    <li class="footer">Generated on Fri Nov 14 2014 16:04:19 for Range Encoding Compression by
+    <li class="footer">Generated on Mon Nov 17 2014 13:09:04 for Range Encoding Compression by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
